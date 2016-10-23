@@ -13,11 +13,11 @@ Class2=CMyDlg
 Class3=CAboutDlg
 
 ResourceCount=5
-Resource1=IDD_Set
+Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
-Resource3=IDD_ABOUTBOX
+Resource3=IDD_MY_DIALOG
 Class4=CSet
-Resource4=IDD_MY_DIALOG
+Resource4=IDD_Set
 Class5=CSection
 Resource5=IDD_DIALOG_SECTION
 

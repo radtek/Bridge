@@ -30,6 +30,27 @@ struct threadInfo
 	CProgressCtrl* pctrlProgress;
 	//CWnd* pCWnd;
 };
+struct fline
+{
+	float xs;
+	float ys;
+	float zs;
+	float xe;
+	float ye;
+	float ze;
+};
+struct element
+{
+	int qd;
+	int zd;
+	//int unit;//1,2,3,4,5,6分别代表x向y向z向杆件及xy面xz面yz面剪刀撑
+	float xs;
+	float ys;
+	float zs;
+	float xe;
+	float ye;
+	float ze;
+};
 //UINT ThreadFunc(LPVOID lpParam);
 threadInfo Info;
 int Process=0;
@@ -885,10 +906,10 @@ void CSet::Deal_BuJu_Z()
 		////////////////////////////////////////////////////
 		BuJuCountSave[m++] = 1;
 		BuJuDataSave[n++]=XiaBuTuoChengGaoDu;
+		//BuJuCountSave[m++] = 1;
+		//BuJuDataSave[n++]=SaoDiGanGaoDu-XiaBuTuoChengGaoDu;
 		BuJuCountSave[m++] = 1;
-		BuJuDataSave[n++]=SaoDiGanGaoDu-XiaBuTuoChengGaoDu;
-		BuJuCountSave[m++] = 1;
-		BuJuDataSave[n++]=0.3+XiaBuTuoChengGaoDu-SaoDiGanGaoDu;
+		BuJuDataSave[n++]=0.3;
 		Editstr = tempstr+" ";
 		char Strbuf[30];
 		char Countbuf[10];
@@ -1016,9 +1037,17 @@ void CSet::OnOutput()
 	int n=0;
 	CString str;
 	init();
+	GetDlgItemText(IDE_SaoDiGanGaoDu,str);
+	SaoDiGanGaoDu=atof(str);
+	GetDlgItemText(IDE_DingCengXuanBi,str);
+	DingCengXuanBiChangDu=atof(str);
+	GetDlgItemText(IDE_XiaTuoChengGaoDu,str);
+	XiaBuTuoChengGaoDu=atof(str);
     Deal_PaiJu_Y();
     Deal_ZhuJu_X();
     Deal_BuJu_Z();
+	
+	
 	if(BuJuGeShu_Z==0)
 	{
 		AfxMessageBox("步距输入无效，当前个数为0");
@@ -1055,6 +1084,8 @@ void CSet::OnOutput()
 	//File.Open(filename,CFile::modeCreate|CFile::modeReadWrite);//如果文件事先不存在的话，就需要CFile::modeCreate，否则就不需要。
 	//CString TxtStr="";
 	float CurZVal = 0.0;
+	float CurYVal = 0.0;
+	float CurXVal = 0.0;
 	for(BB=-1;BB<Count_Z;BB++)
 	{
 		if(BB==-1)
@@ -1067,7 +1098,7 @@ void CSet::OnOutput()
 				CurZVal=0.0;
 			else
 				CurZVal=CurZVal+BuJuDataSave[BB];
-			float CurXVal = 0.0;
+			CurXVal = 0.0;
 			for(ZZ=-1;ZZ<Count_X;ZZ++)
 			{
 				if(ZZ==-1)
@@ -1080,7 +1111,7 @@ void CSet::OnOutput()
 						CurXVal=0.0;
 					else
 						CurXVal=CurXVal+ZhuJuDataSave[ZZ];
-					float CurYVal=0.0;
+					CurYVal=0.0;
 					for(PP=-1;PP<Count_Y;PP++)
 					{
 						if(PP==-1)
@@ -1105,8 +1136,220 @@ void CSet::OnOutput()
 			}
 		}
 	}
+	////////////////////////扫地杆节点生成//////////////
+	float maxX=CurXVal;
+	float maxY=CurYVal;
+	float maxZ=CurZVal;
+	CurZVal=SaoDiGanGaoDu;
+	CurXVal = 0.0;
+	int saodiStart=num;
+	int saodiEnd;
+	for(ZZ=-1;ZZ<Count_X;ZZ++)
+	{
+		if(ZZ==-1)
+			tempZhu=1;
+		else
+			tempZhu=ZhuJuCountSave[ZZ];
+		for(ZZ1=0;ZZ1<tempZhu;ZZ1++)
+		{
+			if(ZZ==-1)
+				CurXVal=0.0;
+			else
+				CurXVal=CurXVal+ZhuJuDataSave[ZZ];
+			CurYVal=0.0;
+			for(PP=-1;PP<Count_Y;PP++)
+			{
+				if(PP==-1)
+					tempPai=1;
+				else
+					tempPai=PaiJuCountSave[PP];
+				for(PP1=0;PP1<tempPai;PP1++)
+				{
+					if(PP==-1)
+						CurYVal=0.0;
+					else
+						CurYVal=CurYVal+PaiJuDataSave[PP];
+					if((CurXVal==0.0)||(CurXVal==maxX)||(CurYVal==0.0)||(CurYVal==maxY))
+					{
+						NodeZong[num].Num=num;
+						NodeZong[num].x=CurXVal;
+						NodeZong[num].y=CurYVal;
+						NodeZong[num++].z=CurZVal;
+					}
+				}
+			}
+		}
+	}
+	saodiEnd=num-1;
 	//File.Close();
-	
+	fline XZline[10][30];
+	memset(XZline,0,sizeof(XZline)/sizeof(XZline[0][0])*sizeof(fline));
+	float tempZ=0.0;
+	for(i=0;i<Count_Z;i++)
+	{
+		for(j=0;j<BuJuCountSave[i];j++)
+		{
+			tempZ=tempZ+BuJuDataSave[i];
+		}
+	}
+	float tempY=0.0;
+	for(i=0;i<Count_Y;i++)
+	{
+		for(j=0;j<PaiJuCountSave[i];j++)
+		{
+			tempY=tempY+PaiJuDataSave[i];
+		}
+	}
+	float tempX=0.0;
+	for(i=0;i<Count_X;i++)
+	{
+		for(j=0;j<ZhuJuCountSave[i];j++)
+		{
+			tempX=tempX+ZhuJuDataSave[i];
+		}
+	}
+	int countline=0;
+	for(i=0;i<1;i++)
+	{
+		XZline[i][countline].xs=0.0;
+		XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu;
+		if(tempX+XZline[i][countline].zs>tempZ)
+		{
+			XZline[i][countline].xe=tempZ-XZline[i][countline].zs;
+			XZline[i][countline++].ze=tempZ;
+		}
+		else
+		{
+			XZline[i][countline].ze=XZline[i][countline].zs+tempX;
+			XZline[i][countline++].xe=tempX;
+		}
+		//int abc=(tempZ-0.3-XiaBuTuoChengGaoDu)/4.5;
+		for(j=0;j<(tempZ-0.3-XiaBuTuoChengGaoDu)/4.5-1;j++)
+		{//xz面正向中斜线及其以上斜线
+			XZline[i][countline].xs=0.0;
+			XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+j*4.5+4.5;
+			if(tempX+XZline[i][countline].zs>tempZ)
+			{
+				XZline[i][countline].xe=tempZ-XZline[i][countline].zs;
+				XZline[i][countline++].ze=tempZ;
+			}
+			else
+			{
+				XZline[i][countline].ze=XZline[i][countline].zs+tempX;
+				XZline[i][countline++].xe=tempX;
+			}
+		}
+		int GettempStart=countline;
+		for(j=1;j<tempX/4.5;j++)
+		{//xz面正向中斜线以下斜线
+			XZline[i][countline].zs=0.0;
+			XZline[i][countline].xs=j*4.5;
+			if(tempX-XZline[i][countline].xs>tempZ)
+			{
+				XZline[i][countline].xe=tempZ+XZline[i][countline].xs;
+				XZline[i][countline++].ze=tempZ;
+			}
+			else
+			{
+				XZline[i][countline].ze=tempX-XZline[i][countline].xs+0.3+XiaBuTuoChengGaoDu;
+				XZline[i][countline++].xe=tempX;
+			}
+		}
+		int GettempEnd=countline;
+		for(j=GettempStart;j<GettempEnd;j++)
+		{//xz面反向中斜线以下斜线
+			XZline[i][countline].xs=XZline[i][j].xs;
+			XZline[i][countline].zs=XZline[i][j].zs;
+			if(XZline[i][countline].xs+XZline[i][countline].zs<tempZ)
+			{
+				XZline[i][countline].ze=XZline[i][countline].xs+XZline[i][countline].zs;
+				XZline[i][countline++].xe=0.0;
+			}
+			else
+			{
+				XZline[i][countline].xe=XZline[i][countline].xs-tempY+0.3+XiaBuTuoChengGaoDu;
+				XZline[i][countline++].ze=tempZ;
+			}
+		}
+		float tempfloat=XZline[i][countline-1].xs;
+		if(tempfloat==0.0)
+		{
+			XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu;
+			XZline[i][countline].xs=tempX;
+		}
+		else
+		{
+			XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+(4.5-(tempX-tempfloat));
+			XZline[i][countline].xs=tempX;
+			if(tempZ-XZline[i][countline].zs<tempX)
+			{
+				XZline[i][countline].xe=tempX-(tempZ-XZline[i][countline].zs);
+				XZline[i][countline++].ze=tempZ;
+			}
+			else
+			{
+				XZline[i][countline].ze=XZline[i][countline].zs+tempX;
+				XZline[i][countline++].xe=0.0;
+			}
+		}
+		for(j=0;j<(tempZ-0.3-XiaBuTuoChengGaoDu-(4.5-(tempX-tempfloat)))/4.5-1;j++)
+		{//xz面反向中斜线以上斜线
+			XZline[i][countline].xs=tempX;
+			XZline[i][countline].zs=XZline[i][countline-1].zs+4.5;
+			if(tempZ-XZline[i][countline].zs<tempX)
+			{
+				XZline[i][countline].xe=tempX-(tempZ-XZline[i][countline].zs);
+				XZline[i][countline++].ze=tempZ;
+			}
+			else
+			{
+				XZline[i][countline].ze=XZline[i][countline].zs+tempX;
+				XZline[i][countline++].xe=0.0;
+			}
+		}
+	}
+	int jiandaoStart=num;
+	Node XZNode[400];//从1开始填充，存储剪刀撑新生节点
+	memset(XZNode,0,sizeof(XZNode)/sizeof(XZNode[0])*sizeof(Node));
+	for(i=0;i<countline;i++)
+	{
+	tempX=0.0;
+		for(j=0;j<Count_X;j++)
+		{
+			for(k=0;k<ZhuJuCountSave[j];k++)
+			{
+				if(((XZline[0][i].xs<=tempX)&&(tempX<=XZline[0][i].xe))||((XZline[0][i].xs>=tempX)&&(tempX>=XZline[0][i].xe)))
+				{
+					XZNode[num-jiandaoStart+1].Num=num;
+					XZNode[num-jiandaoStart+1].x=tempX;
+					XZNode[num-jiandaoStart+1].y=0.0;
+					XZNode[num-jiandaoStart+1].z=(tempX-XZline[0][i].xs)/(XZline[0][i].xe-XZline[0][i].xs)*(XZline[0][i].ze-XZline[0][i].zs)+XZline[0][i].zs;
+					NodeZong[num].Num=num;
+					NodeZong[num].x=tempX;
+					NodeZong[num].y=0.0;
+					NodeZong[num++].z=(tempX-XZline[0][i].xs)/(XZline[0][i].xe-XZline[0][i].xs)*(XZline[0][i].ze-XZline[0][i].zs)+XZline[0][i].zs;
+				}
+				tempX=tempX+ZhuJuDataSave[j];
+				if(tempX==maxX)
+				{
+					if(((XZline[0][i].xs<=tempX)&&(tempX<=XZline[0][i].xe))||((XZline[0][i].xs>=tempX)&&(tempX>=XZline[0][i].xe)))
+					{
+						XZNode[num-jiandaoStart+1].Num=num;
+						XZNode[num-jiandaoStart+1].x=tempX;
+						XZNode[num-jiandaoStart+1].y=0.0;
+						XZNode[num-jiandaoStart+1].z=(tempX-XZline[0][i].xs)/(XZline[0][i].xe-XZline[0][i].xs)*(XZline[0][i].ze-XZline[0][i].zs)+XZline[0][i].zs;
+						NodeZong[num].Num=num;
+						NodeZong[num].x=tempX;
+						NodeZong[num].y=0.0;
+						NodeZong[num++].z=(tempX-XZline[0][i].xs)/(XZline[0][i].xe-XZline[0][i].xs)*(XZline[0][i].ze-XZline[0][i].zs)+XZline[0][i].zs;
+						if(XZline[0][i].xe-XZline[0][i].xs==0)
+							num--;
+					}
+				}
+			}
+		}
+	}
+	int jiandaoEnd=num-1;
 	
 	
 	
@@ -1137,7 +1380,7 @@ void CSet::OnOutput()
 		return;
 	}
 	
-	filename1=filename+".mct";
+	filename1=filename;
 	File1.Open(filename1,CFile::modeCreate|CFile::modeReadWrite);//如果文件事先不存在的话，就需要CFile::modeCreate，否则就不需要。
 	// str=_T("     计算结果如下:         ");
 	// File1.WriteString(str);
@@ -1167,7 +1410,7 @@ void CSet::OnOutput()
 	str=_T("; iNO, X, Y, Z");
 	File1.WriteString(str);
 	File1.WriteString("\n");
-	for(int h=1;h<NodeZongShu+1;h++)
+	for(int h=1;h<num;h++)
 	{
 		str.Format("%d,  %7.2f , %7.2f , %7.2f",NodeZong[h].Num,NodeZong[h].x,NodeZong[h].y,NodeZong[h].z);
 		File1.WriteString(str);
@@ -1175,11 +1418,21 @@ void CSet::OnOutput()
 	}
 	File1.WriteString("\n");
 	File1.WriteString("\n");
+	str.Format("剪刀撑节点,%dto%d,0\n",jiandaoStart,jiandaoEnd);
+	str="*GROUP    ; Group\n; NAME, NODE_LIST, ELEM_LIST, PLANE_TYPE\n"+str;
+	File1.WriteString(str);
+
+	
 	//***************************非斜向单元输出*************************//
 	str=_T("*ELEMENT ");
 	File1.WriteString(str);
 	File1.WriteString("\n");
 	File1.WriteString("\n");
+
+	
+	//File1.Close();
+	//AfxMessageBox("success");
+	//return;
 	
 	/*
 	Dim dy, dc, qd, zd As Integer
@@ -1461,6 +1714,9 @@ void CSet::OnOutput()
 	/////////////////////////////////////////////////////////////////////////////////
 	dy=0;
 	//横杆1/2
+	element Yelement[2000];
+	memset(Yelement,0,sizeof(Yelement)/sizeof(Yelement[0])*sizeof(element));
+	int tempcount=1;//临时单元计数器，1开始
 	for(vc=2;vc<=c+1;vc++)
 	{
 		for(va=1;va<=a+1;va++)
@@ -1470,20 +1726,28 @@ void CSet::OnOutput()
 				zd=qd+1;
 				dy=dy+1;
 				str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+				Yelement[tempcount].qd=qd;
+				Yelement[tempcount++].zd=zd;
 				File1.WriteString(str);
 				File1.WriteString("\n");
 			}
 		}
 		
 	}
+
 	//横杆2/2
+	element Xelement[2000];
+	memset(Xelement,0,sizeof(Xelement)/sizeof(Xelement[0])*sizeof(element));
+	tempcount=1;
 	for(vc=2;vc<=c+1;vc++)
-	{ 
+	{
 		for(qd=1+dc*vc;qd<=a*(b+1)+dc*vc;qd++)
 		{
 			zd=qd+b+1;
 			dy=dy+1;
 			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+			Xelement[tempcount].qd=qd;
+			Xelement[tempcount++].zd=zd;
 			File1.WriteString(str);
 			File1.WriteString("\n");
 		}
@@ -1491,6 +1755,9 @@ void CSet::OnOutput()
 	}
 	HorizPoleNum = dy;
 	//立杆
+	element Zelement[2000];
+	memset(Zelement,0,sizeof(Zelement)/sizeof(Zelement[0])*sizeof(element));
+	tempcount=1;
 	for(vc=0;vc<=c+1;vc++)
 	{ 
 		for(qd=1+dc*vc;qd<=(a+1)*(b+1)+dc*vc;qd++)
@@ -1498,14 +1765,174 @@ void CSet::OnOutput()
 			zd=qd+dc;
 			dy=dy+1;
 			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+			Zelement[tempcount].qd=qd;
+			Zelement[tempcount++].zd=zd;
 			File1.WriteString(str);
 			File1.WriteString("\n");
 		}
 		
 	}
+	for(i=1;;i++)
+	{
+		if(Yelement[i].qd==0)
+			break;
+		for(j=1;j<jiandaoStart;j++)
+		{
+			if(Yelement[i].qd==NodeZong[j].Num)
+			{
+				Yelement[i].xs=NodeZong[j].x;
+				Yelement[i].ys=NodeZong[j].y;
+				Yelement[i].zs=NodeZong[j].z;
+			}
+			if(Yelement[i].zd==NodeZong[j].Num)
+			{
+				Yelement[i].xe=NodeZong[j].x;
+				Yelement[i].ye=NodeZong[j].y;
+				Yelement[i].ze=NodeZong[j].z;
+			}
+		}
+	}
+	for(i=1;;i++)
+	{
+		if(Xelement[i].qd==0)
+			break;
+		for(j=1;j<jiandaoStart;j++)
+		{
+			if(Xelement[i].qd==NodeZong[j].Num)
+			{
+				Xelement[i].xs=NodeZong[j].x;
+				Xelement[i].ys=NodeZong[j].y;
+				Xelement[i].zs=NodeZong[j].z;
+			}
+			if(Xelement[i].zd==NodeZong[j].Num)
+			{
+				Xelement[i].xe=NodeZong[j].x;
+				Xelement[i].ye=NodeZong[j].y;
+				Xelement[i].ze=NodeZong[j].z;
+			}
+		}
+	}
+	for(i=1;;i++)
+	{
+		if(Zelement[i].qd==0)
+			break;
+		for(j=1;j<jiandaoStart;j++)
+		{
+			if(Zelement[i].qd==NodeZong[j].Num)
+			{
+				Zelement[i].xs=NodeZong[j].x;
+				Zelement[i].ys=NodeZong[j].y;
+				Zelement[i].zs=NodeZong[j].z;
+			}
+			if(Zelement[i].zd==NodeZong[j].Num)
+			{
+				Zelement[i].xe=NodeZong[j].x;
+				Zelement[i].ye=NodeZong[j].y;
+				Zelement[i].ze=NodeZong[j].z;
+			}
+		}
+	}
 	//File1.Close();
 	//AfxMessageBox("success");
 	//return;
+	//扫地杆
+	////////////////y方向
+	element SDelement[200];
+	memset(SDelement,0,sizeof(SDelement)/sizeof(SDelement[0])*sizeof(element));
+	tempcount=1;
+	qd=saodiStart;
+	for(i=1;i<PaiJuGeShu_Y;i++)
+	{
+		zd=qd+1;
+		dy=dy+1;
+		str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+		SDelement[tempcount].qd=qd;
+		SDelement[tempcount++].zd=zd;
+		File1.WriteString(str);
+		File1.WriteString("\n");
+		qd=zd;
+	}
+	qd=saodiStart+PaiJuGeShu_Y+2*(ZhuJuGeShu_X-2);
+	for(i=1;i<PaiJuGeShu_Y;i++)
+	{
+		zd=qd+1;
+		dy=dy+1;
+		str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+		SDelement[tempcount].qd=qd;
+		SDelement[tempcount++].zd=zd;
+		File1.WriteString(str);
+		File1.WriteString("\n");
+		qd=zd;
+	}
+	/////////////////x方向
+	qd=saodiStart;
+	for(i=1;i<ZhuJuGeShu_X;i++)
+	{
+		if(i==1)
+			zd=qd+PaiJuGeShu_Y;
+		else
+			zd=qd+2;
+		dy=dy+1;
+		str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+		SDelement[tempcount].qd=qd;
+		SDelement[tempcount++].zd=zd;
+		File1.WriteString(str);
+		File1.WriteString("\n");
+		qd=zd;
+	}
+	qd=saodiStart+PaiJuGeShu_Y-1;
+	for(i=1;i<ZhuJuGeShu_X;i++)
+	{
+		if(i==ZhuJuGeShu_X-1)
+			zd=qd+PaiJuGeShu_Y;
+		else
+			zd=qd+2;
+		dy=dy+1;
+		str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+		SDelement[tempcount].qd=qd;
+		SDelement[tempcount++].zd=zd;
+		File1.WriteString(str);
+		File1.WriteString("\n");
+		qd=zd;
+	}
+	for(i=0;i<countline;i++)
+	{
+		for(j=1;;j++)
+		{
+			//写算法判断两单元是否相交，并返回交点；
+		}
+	}
+	//File1.Close();
+	//AfxMessageBox("success");
+	//return;
+
+	/*for(i=0;i<countline;i++)
+	{
+		int temps=0,tempe=0;
+		for(j=1;j<=num;j++)
+		{
+			if((NodeZong[j].y=0.0)&&(NodeZong[j].x==XZline[0][i].xs)&&(NodeZong[j].z==XZline[0][i].zs))
+			{
+				temps=NodeZong[j].Num;
+			}
+			if((NodeZong[j].y=0.0)&&(NodeZong[j].x==XZline[0][i].xe)&&(NodeZong[j].z==XZline[0][i].ze))
+			{
+				tempe=NodeZong[j].Num;
+			}
+		}
+		if(temps!=0&&tempe!=0)
+		{
+		dy=dy+1;
+		str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,temps,tempe,0);
+		File1.WriteString(str);
+		File1.WriteString("\n");
+		}
+	}*/
+	//str.Format("countline=%d,tempZ-%.2f,tempY-%.2f,tempX-%.2f",countline,tempZ,tempY,tempX);
+	//AfxMessageBox(str);
+	File1.Close();
+	AfxMessageBox("success");
+	return;
 	/*int ZCount=0;
 	int ZNum[20];
 	float tempZDate=0.0;
@@ -1518,15 +1945,15 @@ void CSet::OnOutput()
 	tempZDate=tempZDate+BuJuDataSave[i];
 	if(tempZDate>=4.8)
 	{
-				ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*tempZNum;
-				tempZDate=BuJuDataSave[i];
-				}
-				tempZNum++;
-				}
-				}
-				if(ZNum[ZCount-1]!=1+ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z-1))
-				{
-				ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z-2);
+		ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*tempZNum;
+		tempZDate=BuJuDataSave[i];
+		}
+		tempZNum++;
+		}
+		}
+		if(ZNum[ZCount-1]!=1+ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z-1))
+		{
+		ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z-2);
 	}*/
 	//////////////////////水平剪刀撑///////////////////////////
 	for(i=0;i<ZCount;i++)
@@ -4844,6 +5271,7 @@ void CSet::OnBtnSection()
 
 void CSet::InitVal()
 {
+	SudoINI();
 	SectionFlag=0;
 	Count_X=0;
 	Count_Y=0;
@@ -4918,4 +5346,41 @@ void CSet::InitVal()
 	SectionVal[i++]=30;
 	SectionVal[i++]=30;
 	SectionVal[i++]=30;
+}
+
+void CSet::SudoINI()
+{
+//获取exe路径
+    CString  strPath;   
+	GetModuleFileName(NULL,strPath.GetBufferSetLength(MAX_PATH+1),MAX_PATH);     
+	strPath.ReleaseBuffer();     
+	int nPos = strPath.ReverseFind('\\');     
+	strPath=strPath.Left(nPos);     
+	strPath += "\\initval.ini";
+    //向INI文件中添加键值 
+	CString tempstr;
+	GetPrivateProfileString("初始edit值", "IDE_ZhuJu_X1", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath); 
+	SetDlgItemText(IDE_ZhuJu_X1, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_PaiJu_Y", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath); 
+	SetDlgItemText(IDE_PaiJu_Y, tempstr); 
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_BuJu_Z", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath); 
+	SetDlgItemText(IDE_BuJu_Z, tempstr); 
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_DingCengXuanBi", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath); 
+	SetDlgItemText(IDE_DingCengXuanBi, tempstr); 
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_SaoDiGanGaoDu", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath); 
+	SetDlgItemText(IDE_SaoDiGanGaoDu, tempstr); 
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_XiaTuoChengGaoDu", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath); 
+	SetDlgItemText(IDE_XiaTuoChengGaoDu, tempstr); 
+	tempstr.ReleaseBuffer();
+   /*WritePrivateProfileString ("初始edit值", "IDE_ZhuJu_X1", "8@1.2 7@1.6", strPath); 
+    WritePrivateProfileString ("初始edit值",  "IDE_PaiJu_Y", "3@2",strPath); 
+    WritePrivateProfileString ("初始edit值",  "IDE_BuJu_Z", "9@1.1 8@1.6",strPath); 
+    WritePrivateProfileString ("初始edit值",  "IDE_DingCengXuanBi", "0.35",strPath); 
+    WritePrivateProfileString ("初始edit值",  "IDE_SaoDiGanGaoDu", "0.30",strPath); 
+    WritePrivateProfileString ("初始edit值", "IDE_XiaTuoChengGaoDu", "0.15", strPath); */
 }

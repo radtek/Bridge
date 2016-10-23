@@ -16,6 +16,7 @@ class CSet : public CDialog
 {
 // Construction
 public:
+	void SudoINI();
 	void InitVal();
 	BOOL AddDeviation();
 	void SetProcess(int process);
