@@ -1,5 +1,5 @@
 
-class Node 
+/*class Node 
 {
 public:
 	Node();
@@ -10,6 +10,6 @@ public:
 	float YuanXin_Y;
 	int Num;
 };
-extern Node myGlobal;
+extern Node myGlobal;*/
 
 

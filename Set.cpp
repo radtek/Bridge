@@ -39,6 +39,16 @@ struct fline
 	float ye;
 	float ze;
 };
+struct Node 
+{
+	float x;
+	float y;
+	float z;
+	float YuanXin_X;
+	float YuanXin_Y;
+	int Num;
+};
+
 struct element
 {
 	int qd;
@@ -1320,10 +1330,10 @@ void CSet::OnOutput()
 			{
 				if(((XZline[0][i].xs<=tempX)&&(tempX<=XZline[0][i].xe))||((XZline[0][i].xs>=tempX)&&(tempX>=XZline[0][i].xe)))
 				{
-					XZNode[num-jiandaoStart+1].Num=num;
-					XZNode[num-jiandaoStart+1].x=tempX;
-					XZNode[num-jiandaoStart+1].y=0.0;
-					XZNode[num-jiandaoStart+1].z=(tempX-XZline[0][i].xs)/(XZline[0][i].xe-XZline[0][i].xs)*(XZline[0][i].ze-XZline[0][i].zs)+XZline[0][i].zs;
+					//XZNode[num-jiandaoStart+1].Num=num;
+					//XZNode[num-jiandaoStart+1].x=tempX;
+					//XZNode[num-jiandaoStart+1].y=0.0;
+					//XZNode[num-jiandaoStart+1].z=(tempX-XZline[0][i].xs)/(XZline[0][i].xe-XZline[0][i].xs)*(XZline[0][i].ze-XZline[0][i].zs)+XZline[0][i].zs;
 					NodeZong[num].Num=num;
 					NodeZong[num].x=tempX;
 					NodeZong[num].y=0.0;
@@ -1334,10 +1344,10 @@ void CSet::OnOutput()
 				{
 					if(((XZline[0][i].xs<=tempX)&&(tempX<=XZline[0][i].xe))||((XZline[0][i].xs>=tempX)&&(tempX>=XZline[0][i].xe)))
 					{
-						XZNode[num-jiandaoStart+1].Num=num;
-						XZNode[num-jiandaoStart+1].x=tempX;
-						XZNode[num-jiandaoStart+1].y=0.0;
-						XZNode[num-jiandaoStart+1].z=(tempX-XZline[0][i].xs)/(XZline[0][i].xe-XZline[0][i].xs)*(XZline[0][i].ze-XZline[0][i].zs)+XZline[0][i].zs;
+						//XZNode[num-jiandaoStart+1].Num=num;
+						//XZNode[num-jiandaoStart+1].x=tempX;
+						//XZNode[num-jiandaoStart+1].y=0.0;
+						//XZNode[num-jiandaoStart+1].z=(tempX-XZline[0][i].xs)/(XZline[0][i].xe-XZline[0][i].xs)*(XZline[0][i].ze-XZline[0][i].zs)+XZline[0][i].zs;
 						NodeZong[num].Num=num;
 						NodeZong[num].x=tempX;
 						NodeZong[num].y=0.0;
@@ -1350,8 +1360,6 @@ void CSet::OnOutput()
 		}
 	}
 	int jiandaoEnd=num-1;
-	
-	
 	
 	//**********************单元************************/
 	int MeiCengDanYuanShu=0;
@@ -1423,7 +1431,7 @@ void CSet::OnOutput()
 	File1.WriteString(str);
 
 	
-	//***************************非斜向单元输出*************************//
+	//***************************非斜向单元输出************************//
 	str=_T("*ELEMENT ");
 	File1.WriteString(str);
 	File1.WriteString("\n");
@@ -1895,16 +1903,127 @@ void CSet::OnOutput()
 		File1.WriteString("\n");
 		qd=zd;
 	}
+	tempcount=1;
 	for(i=0;i<countline;i++)
 	{
+		float tempres[2];
 		for(j=1;;j++)
-		{
-			//写算法判断两单元是否相交，并返回交点；
+		{//写算法判断两单元是否相交，并返回交点
+			if(Zelement[j].qd==0)
+				break;
+			tempres[0]=0.0;
+			tempres[1]=0.0;
+			JudgeCross(Zelement[j].xs,Zelement[j].zs,Zelement[j].xe,Zelement[j].ze,
+				XZline[0][i].xs,XZline[0][i].zs,XZline[0][i].xe,XZline[0][i].ze,tempres);
+			if(tempres[0]==-1.0)
+				continue;
+			int flag=0;
+			for(k=1;k<tempcount;k++)
+			{
+				if((XZNode[k].x==tempres[0])&&(XZNode[k].z==tempres[1]))
+				{
+					flag=1;
+					break;
+				}
+			}
+			if(0==flag)
+			{
+				XZNode[tempcount].x=tempres[0];
+				XZNode[tempcount].z=tempres[1];
+				XZNode[tempcount].Num=num+tempcount;
+				tempcount++;
+			}
 		}
 	}
-	//File1.Close();
-	//AfxMessageBox("success");
-	//return;
+		str.Format(";///////////////////////////////////////我是分割线\n");
+		File1.WriteString(str);
+	for(i=1;i<tempcount;i++)
+	{
+		str.Format("%d,  %7.2f , %7.2f , %7.2f",XZNode[i].Num,XZNode[i].x,XZNode[i].y,XZNode[i].z);
+		File1.WriteString(str);
+		File1.WriteString("\n");
+	}
+		str.Format(";///////////////////////////////////////我是分割线\n");
+		File1.WriteString(str);
+	
+	
+	element XZscielement[2000];
+	memset(XZscielement,0,sizeof(XZscielement)/sizeof(XZscielement[0])*sizeof(element));
+	Node tempNode[50];
+	memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
+	Node tempNode1[50];
+	memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
+
+	int Node1count=1;
+	int scicount=1;
+	/*Node tempstart;
+	tempcount=1; 
+	tempNode.y=0.0;
+	tempstart.y=0.0;*/
+	for(i=0;i<countline;i++)
+	{
+		tempcount=1;
+		memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
+		for(j=1;;j++)
+		{
+			if(XZNode[j].Num==0)
+				break;
+			float res=(XZNode[j].x-XZline[0][i].xs)*(XZline[0][i].zs-XZline[0][i].ze)/(XZline[0][i].xs-XZline[0][i].xe)+XZline[0][i].zs-XZNode[j].z;
+			if(fabs(res)<=0.000002&&(XZNode[j].z-XZline[0][i].ze)*(XZNode[j].z-XZline[0][i].zs)<=0.0)
+			{
+				tempNode[tempcount++]=XZNode[j];
+			}
+		}//此处按顺序找到所有应该连线的剪刀撑坐标，待连接，睡了。。。
+		Node tempsingleNode;
+		float tempz=tempNode[1].z;
+		Node1count=1;
+		memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
+		float tempmin=0.0;
+		for(j=1;j<tempcount;j++)
+		{
+			if(j==1)
+				tempmin=-1.0;
+			else
+				tempmin=tempz;
+			tempz=200.0;
+			for(k=1;k<tempcount;k++)
+			{
+				if(tempNode[k].z>tempmin)
+				{
+					if(tempNode[k].z<tempz)
+					{
+						tempsingleNode=tempNode[k];
+						tempz=tempNode[k].z;
+					}
+				}
+			}
+			tempNode1[Node1count++]=tempsingleNode;
+		}
+		for(j=1;j<Node1count-1;j++)
+		{
+			XZscielement[scicount].qd=tempNode1[j].Num;
+			XZscielement[scicount].xs=tempNode1[j].x;
+			XZscielement[scicount].ys=tempNode1[j].y;
+			XZscielement[scicount].zs=tempNode1[j].z;
+			XZscielement[scicount].zd=tempNode1[j+1].Num;
+			XZscielement[scicount].xe=tempNode1[j+1].x;
+			XZscielement[scicount].ye=tempNode1[j+1].y;
+			XZscielement[scicount++].ze=tempNode1[j+1].z;
+		}
+	}
+	for(i=1;i<scicount;i++)
+	{
+		//dy=dy+1;
+		str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d\n",i+dy,"BEAM",1,1,XZscielement[i].qd,XZscielement[i].zd,0);
+		//Yelement[tempcount].qd=qd;
+		//Yelement[tempcount++].zd=zd;
+		File1.WriteString(str);
+	}
+	str.Format("scicount=%d",scicount-1);
+	AfxMessageBox(str);
+	File1.Close();
+	AfxMessageBox("success");
+	return;
 
 	/*for(i=0;i<countline;i++)
 	{
@@ -5383,4 +5502,29 @@ void CSet::SudoINI()
     WritePrivateProfileString ("初始edit值",  "IDE_DingCengXuanBi", "0.35",strPath); 
     WritePrivateProfileString ("初始edit值",  "IDE_SaoDiGanGaoDu", "0.30",strPath); 
     WritePrivateProfileString ("初始edit值", "IDE_XiaTuoChengGaoDu", "0.15", strPath); */
+}
+
+void CSet::JudgeCross(float x1, float y1, float x2, float y2, float a1, float b1, float a2, float b2,float res[])
+{//该函数前四个数为单元坐标，后四个数为剪刀撑坐标
+	//sciNode cross;
+	//cross.Num=-1;
+	res[0]=-1.0;
+	res[1]=-1.0;
+	if(((b1-y1)*(x1-x2)-(y1-y2)*(a1-x1))*((b2-y1)*(x1-x2)-(y1-y2)*(a2-x1))<=0&&
+		((y1-b1)*(a1-a2)-(b1-b2)*(x1-a1))*((y2-b1)*(a1-a2)-(b1-b2)*(x2-a1))<=0)
+	{
+		if(x1==x2)
+		{
+			res[0]=x1;
+			res[1]=(b1-b2)*(x1-a1)/(a1-a2)+b1;
+		}
+		else if(y1==y2)
+		{
+			res[1]=y1;
+			res[0]=a1+(y1-b1)*(a1-a2)/(b1-b2);
+		}
+		else
+			res[0]=(x1*(y1-y2)*(a1-a2)-a1*(b1-b2)*(x1-x2)-y1+b1)/((y1-y2)*(a1-a2)-(b1-b2)*(x1-x2));
+			res[1]=(b1-b2)*(res[0]-a1)/(a1-a2)+b1;
+	}
 }

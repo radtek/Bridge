@@ -1,6 +1,7 @@
 #if !defined(AFX_SET_H__3AE714E3_5792_4870_B807_E4F3B81B45FA__INCLUDED_)
 #define AFX_SET_H__3AE714E3_5792_4870_B807_E4F3B81B45FA__INCLUDED_
 
+#include "MyNode.h"	// Added by ClassView
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
@@ -11,11 +12,11 @@ using namespace std;
 
 /////////////////////////////////////////////////////////////////////////////
 // CSet dialog
-
 class CSet : public CDialog
 {
 // Construction
 public:
+	void JudgeCross(float x1,float y1,float x2,float y2,float a1,float b1,float a2,float b2,float res[]);
 	void SudoINI();
 	void InitVal();
 	BOOL AddDeviation();
