@@ -1192,175 +1192,697 @@ void CSet::OnOutput()
 	}
 	saodiEnd=num-1;
 	//File.Close();
-	fline XZline[10][30];
-	memset(XZline,0,sizeof(XZline)/sizeof(XZline[0][0])*sizeof(fline));
+	float XZVal[3][10];//一序号012分别表示垂直于xz,yz,xy方向,，二序号表示第几层面，
+	memset(XZVal,0,sizeof(XZVal)/sizeof(XZVal[0][0])*sizeof(float));
 	float tempZ=0.0;
-	for(i=0;i<Count_Z;i++)
+	int Numcount=0;
+	int tempcount=0;
+	XZVal[2][Numcount++]=0.3+XiaBuTuoChengGaoDu;
+	for(i=2;i<Count_Z-1;i++)
 	{
 		for(j=0;j<BuJuCountSave[i];j++)
 		{
+			if(tempcount==5)
+			{
+				XZVal[2][Numcount++]=tempZ+0.3+XiaBuTuoChengGaoDu;
+				//tempZ=0.0;
+				tempcount=0;
+			}
 			tempZ=tempZ+BuJuDataSave[i];
+			tempcount++;
 		}
 	}
+	if(XZVal[2][Numcount-1]!=maxZ-DingCengXuanBiChangDu)
+		XZVal[2][Numcount]=maxZ-DingCengXuanBiChangDu;
 	float tempY=0.0;
+	tempcount=0;
+	Numcount=0;
+	XZVal[0][Numcount++]=0.0;
 	for(i=0;i<Count_Y;i++)
 	{
 		for(j=0;j<PaiJuCountSave[i];j++)
 		{
+			if(tempcount==5)
+			{
+				XZVal[0][Numcount++]=tempY;
+				//tempZ=0.0;
+				tempcount=0;
+			}
 			tempY=tempY+PaiJuDataSave[i];
+			tempcount++;
 		}
 	}
+	if(XZVal[0][Numcount-1]!=maxY)
+		XZVal[0][Numcount]=maxY;
 	float tempX=0.0;
+	tempcount=0;
+	Numcount=0;
+	XZVal[1][Numcount++]=0.0;
 	for(i=0;i<Count_X;i++)
 	{
 		for(j=0;j<ZhuJuCountSave[i];j++)
 		{
+			if(tempcount==5)
+			{
+				XZVal[1][Numcount++]=tempX;
+				//tempZ=0.0;
+				tempcount=0;
+			}
 			tempX=tempX+ZhuJuDataSave[i];
+			tempcount++;
 		}
 	}
+	if(XZVal[1][Numcount-1]!=maxX)
+		XZVal[1][Numcount]=maxX;
+	fline XZline[10][30];//三维数组，一序号012分别表示垂直于xz,yz,xy方向，二序号表示第几层面，3序号表示某面斜线
+	memset(XZline,0,sizeof(XZline)/sizeof(XZline[0][0])*sizeof(fline));
 	int countline=0;
-	for(i=0;i<1;i++)
+	for(i=0;;i++)
 	{
+		if(i!=0&&XZVal[0][i]==0.0)
+			break;
+		countline=0;
 		XZline[i][countline].xs=0.0;
+		XZline[i][countline].ys=XZVal[0][i];
 		XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu;
-		if(tempX+XZline[i][countline].zs>tempZ)
+		if(maxX+XZline[i][countline].zs>maxZ)
 		{
-			XZline[i][countline].xe=tempZ-XZline[i][countline].zs;
-			XZline[i][countline++].ze=tempZ;
+			XZline[i][countline].xe=maxZ-XZline[i][countline].zs;
+			XZline[i][countline].ye=XZVal[0][i];
+			XZline[i][countline++].ze=maxZ;
 		}
 		else
 		{
-			XZline[i][countline].ze=XZline[i][countline].zs+tempX;
-			XZline[i][countline++].xe=tempX;
+			XZline[i][countline].ze=XZline[i][countline].zs+maxX;
+			XZline[i][countline].ye=XZVal[0][i];
+			XZline[i][countline++].xe=maxX;
 		}
-		//int abc=(tempZ-0.3-XiaBuTuoChengGaoDu)/4.5;
-		for(j=0;j<(tempZ-0.3-XiaBuTuoChengGaoDu)/4.5-1;j++)
+		//int abc=(maxZ-0.3-XiaBuTuoChengGaoDu)/4.5;
+		for(j=0;j<(maxZ-0.3-XiaBuTuoChengGaoDu)/4.5-1;j++)
 		{//xz面正向中斜线及其以上斜线
 			XZline[i][countline].xs=0.0;
+			XZline[i][countline].ys=XZVal[0][i];
 			XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+j*4.5+4.5;
-			if(tempX+XZline[i][countline].zs>tempZ)
+			if(maxX+XZline[i][countline].zs>maxZ)
 			{
-				XZline[i][countline].xe=tempZ-XZline[i][countline].zs;
-				XZline[i][countline++].ze=tempZ;
+				XZline[i][countline].xe=maxZ-XZline[i][countline].zs;
+				XZline[i][countline].ye=XZVal[0][i];
+				XZline[i][countline++].ze=maxZ;
 			}
 			else
 			{
-				XZline[i][countline].ze=XZline[i][countline].zs+tempX;
-				XZline[i][countline++].xe=tempX;
+				XZline[i][countline].ze=XZline[i][countline].zs+maxX;
+				XZline[i][countline].ye=XZVal[0][i];
+				XZline[i][countline++].xe=maxX;
 			}
 		}
 		int GettempStart=countline;
-		for(j=1;j<tempX/4.5;j++)
+		for(j=1;j<maxX/4.5;j++)
 		{//xz面正向中斜线以下斜线
 			XZline[i][countline].zs=0.0;
+			XZline[i][countline].ys=XZVal[0][i];
 			XZline[i][countline].xs=j*4.5;
-			if(tempX-XZline[i][countline].xs>tempZ)
+			if(maxX-XZline[i][countline].xs>maxZ)
 			{
-				XZline[i][countline].xe=tempZ+XZline[i][countline].xs;
-				XZline[i][countline++].ze=tempZ;
+				XZline[i][countline].xe=maxZ+XZline[i][countline].xs;
+				XZline[i][countline].ye=XZVal[0][i];
+				XZline[i][countline++].ze=maxZ;
 			}
 			else
 			{
-				XZline[i][countline].ze=tempX-XZline[i][countline].xs+0.3+XiaBuTuoChengGaoDu;
-				XZline[i][countline++].xe=tempX;
+				XZline[i][countline].ze=maxX-XZline[i][countline].xs+0.3+XiaBuTuoChengGaoDu;
+				XZline[i][countline].ye=XZVal[0][i];
+				XZline[i][countline++].xe=maxX;
 			}
 		}
 		int GettempEnd=countline;
 		for(j=GettempStart;j<GettempEnd;j++)
 		{//xz面反向中斜线以下斜线
 			XZline[i][countline].xs=XZline[i][j].xs;
+			XZline[i][countline].ys=XZVal[0][i];
 			XZline[i][countline].zs=XZline[i][j].zs;
-			if(XZline[i][countline].xs+XZline[i][countline].zs<tempZ)
+			if(XZline[i][countline].xs+XZline[i][countline].zs<maxZ)
 			{
 				XZline[i][countline].ze=XZline[i][countline].xs+XZline[i][countline].zs;
+				XZline[i][countline].ye=XZVal[0][i];
 				XZline[i][countline++].xe=0.0;
 			}
 			else
 			{
-				XZline[i][countline].xe=XZline[i][countline].xs-tempY+0.3+XiaBuTuoChengGaoDu;
-				XZline[i][countline++].ze=tempZ;
+				XZline[i][countline].xe=XZline[i][countline].xs-maxY+0.3+XiaBuTuoChengGaoDu;
+				XZline[i][countline].ye=XZVal[0][i];
+				XZline[i][countline++].ze=maxZ;
 			}
 		}
 		float tempfloat=XZline[i][countline-1].xs;
 		if(tempfloat==0.0)
 		{
 			XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu;
-			XZline[i][countline].xs=tempX;
+			XZline[i][countline].ys=XZVal[0][i];
+			XZline[i][countline].xs=maxX;
 		}
 		else
 		{
-			XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+(4.5-(tempX-tempfloat));
-			XZline[i][countline].xs=tempX;
-			if(tempZ-XZline[i][countline].zs<tempX)
+			XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+(4.5-(maxX-tempfloat));
+			XZline[i][countline].ys=XZVal[0][i];
+			XZline[i][countline].xs=maxX;
+			if(maxZ-XZline[i][countline].zs<maxX)
 			{
-				XZline[i][countline].xe=tempX-(tempZ-XZline[i][countline].zs);
-				XZline[i][countline++].ze=tempZ;
+				XZline[i][countline].xe=maxX-(maxZ-XZline[i][countline].zs);
+				XZline[i][countline].ye=XZVal[0][i];
+				XZline[i][countline++].ze=maxZ;
 			}
 			else
 			{
-				XZline[i][countline].ze=XZline[i][countline].zs+tempX;
+				XZline[i][countline].ze=XZline[i][countline].zs+maxX;
+				XZline[i][countline].ye=XZVal[0][i];
 				XZline[i][countline++].xe=0.0;
 			}
 		}
-		for(j=0;j<(tempZ-0.3-XiaBuTuoChengGaoDu-(4.5-(tempX-tempfloat)))/4.5-1;j++)
+		for(j=0;j<(maxZ-0.3-XiaBuTuoChengGaoDu-(4.5-(maxX-tempfloat)))/4.5-1;j++)
 		{//xz面反向中斜线以上斜线
-			XZline[i][countline].xs=tempX;
+			XZline[i][countline].xs=maxX;
+			XZline[i][countline].ys=XZVal[0][i];
 			XZline[i][countline].zs=XZline[i][countline-1].zs+4.5;
-			if(tempZ-XZline[i][countline].zs<tempX)
+			if(maxZ-XZline[i][countline].zs<maxX)
 			{
-				XZline[i][countline].xe=tempX-(tempZ-XZline[i][countline].zs);
-				XZline[i][countline++].ze=tempZ;
+				XZline[i][countline].xe=maxX-(maxZ-XZline[i][countline].zs);
+				XZline[i][countline].ye=XZVal[0][i];
+				XZline[i][countline++].ze=maxZ;
 			}
 			else
 			{
-				XZline[i][countline].ze=XZline[i][countline].zs+tempX;
+				XZline[i][countline].ze=XZline[i][countline].zs+maxX;
+				XZline[i][countline].ye=XZVal[0][i];
 				XZline[i][countline++].xe=0.0;
 			}
 		}
 	}
 	int jiandaoStart=num;
-	Node XZNode[400];//从1开始填充，存储剪刀撑新生节点
-	memset(XZNode,0,sizeof(XZNode)/sizeof(XZNode[0])*sizeof(Node));
-	for(i=0;i<countline;i++)
+//////////////////YZ方向剪刀撑轨迹线生成/////////////////
+	fline YZline[10][30];//三维数组，一序号012分别表示垂直于xz,yz,xy方向，二序号表示第几层面，3序号表示某面斜线
+	memset(YZline,0,sizeof(YZline)/sizeof(YZline[0][0])*sizeof(fline));
+	countline=0;
+	for(i=0;;i++)
 	{
-	tempX=0.0;
-		for(j=0;j<Count_X;j++)
+		if(i!=0&&XZVal[1][i]==0.0)
+			break;
+		countline=0;
+		YZline[i][countline].ys=0.0;
+		YZline[i][countline].xs=XZVal[1][i];
+		YZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu;
+		if(maxY+YZline[i][countline].zs>maxZ)
 		{
-			for(k=0;k<ZhuJuCountSave[j];k++)
+			YZline[i][countline].ye=maxZ-YZline[i][countline].zs;
+			YZline[i][countline].xe=XZVal[1][i];
+			YZline[i][countline++].ze=maxZ;
+		}
+		else
+		{
+			YZline[i][countline].ze=YZline[i][countline].zs+maxY;
+			YZline[i][countline].xe=XZVal[1][i];
+			YZline[i][countline++].ye=maxY;
+		}
+		//int abc=(maxZ-0.3-XiaBuTuoChengGaoDu)/4.5;
+		for(j=0;j<(maxZ-0.3-XiaBuTuoChengGaoDu)/4.5-1;j++)
+		{//xz面正向中斜线及其以上斜线
+			YZline[i][countline].ys=0.0;
+			YZline[i][countline].xs=XZVal[1][i];
+			YZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+j*4.5+4.5;
+			if(maxY+YZline[i][countline].zs>maxZ)
 			{
-				if(((XZline[0][i].xs<=tempX)&&(tempX<=XZline[0][i].xe))||((XZline[0][i].xs>=tempX)&&(tempX>=XZline[0][i].xe)))
+				YZline[i][countline].ye=maxZ-YZline[i][countline].zs;
+				YZline[i][countline].xe=XZVal[1][i];
+				YZline[i][countline++].ze=maxZ;
+			}
+			else
+			{
+				YZline[i][countline].ze=YZline[i][countline].zs+maxY;
+				YZline[i][countline].xe=XZVal[1][i];
+				YZline[i][countline++].ye=maxY;
+			}
+		}
+		int GettempStart=countline;
+		for(j=1;j<maxY/4.5;j++)
+		{//xz面正向中斜线以下斜线
+			YZline[i][countline].zs=0.0;
+			YZline[i][countline].xs=XZVal[1][i];
+			YZline[i][countline].ys=j*4.5;
+			if(maxY-YZline[i][countline].ys>maxZ)
+			{
+				YZline[i][countline].ye=maxZ+YZline[i][countline].ys;
+				YZline[i][countline].xe=XZVal[1][i];
+				YZline[i][countline++].ze=maxZ;
+			}
+			else
+			{
+				YZline[i][countline].ze=maxY-YZline[i][countline].ys+0.3+XiaBuTuoChengGaoDu;
+				YZline[i][countline].xe=XZVal[1][i];
+				YZline[i][countline++].ye=maxY;
+			}
+		}
+		int GettempEnd=countline;
+		for(j=GettempStart;j<GettempEnd;j++)
+		{//xz面反向中斜线以下斜线
+			YZline[i][countline].ys=YZline[i][j].ys;
+			YZline[i][countline].xs=XZVal[1][i];
+			YZline[i][countline].zs=YZline[i][j].zs;
+			if(YZline[i][countline].ys+YZline[i][countline].zs<maxZ)
+			{
+				YZline[i][countline].ze=YZline[i][countline].ys+YZline[i][countline].zs;
+				YZline[i][countline].xe=XZVal[1][i];
+				YZline[i][countline++].ye=0.0;
+			}
+			else
+			{
+				YZline[i][countline].ye=YZline[i][countline].ys-maxY+0.3+XiaBuTuoChengGaoDu;
+				YZline[i][countline].xe=XZVal[1][i];
+				YZline[i][countline++].ze=maxZ;
+			}
+		}
+		float tempfloat=YZline[i][countline-1].ys;
+		if(tempfloat==0.0)
+		{
+			YZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu;
+			YZline[i][countline].xs=XZVal[1][i];
+			YZline[i][countline].ys=maxY;
+		}
+		else
+		{
+			YZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+(4.5-(maxY-tempfloat));
+			YZline[i][countline].xs=XZVal[1][i];
+			YZline[i][countline].ys=maxY;
+			if(maxZ-YZline[i][countline].zs<maxY)
+			{
+				YZline[i][countline].ye=maxY-(maxZ-YZline[i][countline].zs);
+				YZline[i][countline].xe=XZVal[1][i];
+				YZline[i][countline++].ze=maxZ;
+			}
+			else
+			{
+				YZline[i][countline].ze=YZline[i][countline].zs+maxY;
+				YZline[i][countline].xe=XZVal[1][i];
+				YZline[i][countline++].ye=0.0;
+			}
+		}
+		for(j=0;j<(maxZ-0.3-XiaBuTuoChengGaoDu-(4.5-(maxY-tempfloat)))/4.5-1;j++)
+		{//xz面反向中斜线以上斜线
+			YZline[i][countline].ys=maxY;
+			YZline[i][countline].xs=XZVal[1][i];
+			YZline[i][countline].zs=YZline[i][countline-1].zs+4.5;
+			if(maxZ-YZline[i][countline].zs<maxY)
+			{
+				YZline[i][countline].ye=maxY-(maxZ-YZline[i][countline].zs);
+				YZline[i][countline].xe=XZVal[1][i];
+				YZline[i][countline++].ze=maxZ;
+			}
+			else
+			{
+				YZline[i][countline].ze=YZline[i][countline].zs+maxY;
+				YZline[i][countline].xe=XZVal[1][i];
+				YZline[i][countline++].ye=0.0;
+			}
+		}
+	}
+	//int jiandaoEnd=num-1;
+	a=ZhuJuGeShu_X-1;
+	b=PaiJuGeShu_Y-1;
+	c=BuJuGeShu_Z-3;//-3;田海涛20:00 2016/9/8
+	float z=BuJu_Z;
+	int HorizPoleNum=0;//记录横向杆总个数
+	dy=1;
+	dc=(a+1)*(b+1);
+	int vc=0;
+	int va=0;
+	dy=0;
+	//横杆1/2
+	element Yelement[4000];
+	memset(Yelement,0,sizeof(Yelement)/sizeof(Yelement[0])*sizeof(element));
+	tempcount=1;//临时单元计数器，1开始
+	for(vc=2;vc<=c+1;vc++)
+	{
+		for(va=1;va<=a+1;va++)
+		{
+			for(qd=(va-1)*b+va+vc*dc;qd<=va-1+va*b+vc*dc;qd++)
+			{
+				zd=qd+1;
+				dy=dy+1;
+				//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+				Yelement[tempcount].qd=qd;
+				Yelement[tempcount++].zd=zd;
+				//File1.WriteString(str);
+				//File1.WriteString("\n");
+			}
+		}
+	}
+
+	//横杆2/2
+	element Xelement[4000];
+	memset(Xelement,0,sizeof(Xelement)/sizeof(Xelement[0])*sizeof(element));
+	tempcount=1;
+	for(vc=2;vc<=c+1;vc++)
+	{
+		for(qd=1+dc*vc;qd<=a*(b+1)+dc*vc;qd++)
+		{
+			zd=qd+b+1;
+			dy=dy+1;
+			//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+			Xelement[tempcount].qd=qd;
+			Xelement[tempcount++].zd=zd;
+			//File1.WriteString(str);
+			//File1.WriteString("\n");
+		}
+		
+	}
+	HorizPoleNum = dy;
+	//立杆
+	element Zelement[4000];
+	memset(Zelement,0,sizeof(Zelement)/sizeof(Zelement[0])*sizeof(element));
+	tempcount=1;
+	for(vc=0;vc<=c+1;vc++)
+	{ 
+		for(qd=1+dc*vc;qd<=(a+1)*(b+1)+dc*vc;qd++)
+		{
+			zd=qd+dc;
+			dy=dy+1;
+			//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+			Zelement[tempcount].qd=qd;
+			Zelement[tempcount++].zd=zd;
+			//File1.WriteString(str);
+			//File1.WriteString("\n");
+		}
+		
+	}
+	for(i=1;;i++)
+	{
+		if(Yelement[i].qd==0)
+			break;
+		for(j=1;j<num;j++)
+		{
+			if(Yelement[i].qd==NodeZong[j].Num)
+			{
+				Yelement[i].xs=NodeZong[j].x;
+				Yelement[i].ys=NodeZong[j].y;
+				Yelement[i].zs=NodeZong[j].z;
+			}
+			if(Yelement[i].zd==NodeZong[j].Num)
+			{
+				Yelement[i].xe=NodeZong[j].x;
+				Yelement[i].ye=NodeZong[j].y;
+				Yelement[i].ze=NodeZong[j].z;
+			}
+		}
+	}
+	for(i=1;;i++)
+	{
+		if(Xelement[i].qd==0)
+			break;
+		for(j=1;j<num;j++)
+		{
+			if(Xelement[i].qd==NodeZong[j].Num)
+			{
+				Xelement[i].xs=NodeZong[j].x;
+				Xelement[i].ys=NodeZong[j].y;
+				Xelement[i].zs=NodeZong[j].z;
+			}
+			if(Xelement[i].zd==NodeZong[j].Num)
+			{
+				Xelement[i].xe=NodeZong[j].x;
+				Xelement[i].ye=NodeZong[j].y;
+				Xelement[i].ze=NodeZong[j].z;
+			}
+		}
+	}
+	for(i=1;;i++)
+	{
+		if(Zelement[i].qd==0)
+			break;
+		for(j=1;j<num;j++)
+		{
+			if(Zelement[i].qd==NodeZong[j].Num)
+			{
+				Zelement[i].xs=NodeZong[j].x;
+				Zelement[i].ys=NodeZong[j].y;
+				Zelement[i].zs=NodeZong[j].z;
+			}
+			if(Zelement[i].zd==NodeZong[j].Num)
+			{
+				Zelement[i].xe=NodeZong[j].x;
+				Zelement[i].ye=NodeZong[j].y;
+				Zelement[i].ze=NodeZong[j].z;
+			}
+		}
+	}
+	//File1.Close();
+	//AfxMessageBox("success");
+	//return;
+	//扫地杆
+	////////////////y方向
+	element SDelement[200];
+	memset(SDelement,0,sizeof(SDelement)/sizeof(SDelement[0])*sizeof(element));
+	tempcount=1;
+	qd=saodiStart;
+	for(i=1;i<PaiJuGeShu_Y;i++)
+	{
+		zd=qd+1;
+		dy=dy+1;
+		//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+		SDelement[tempcount].qd=qd;
+		SDelement[tempcount++].zd=zd;
+		//File1.WriteString(str);
+		//File1.WriteString("\n");
+		qd=zd;
+	}
+	qd=saodiStart+PaiJuGeShu_Y+2*(ZhuJuGeShu_X-2);
+	for(i=1;i<PaiJuGeShu_Y;i++)
+	{
+		zd=qd+1;
+		dy=dy+1;
+		//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+		SDelement[tempcount].qd=qd;
+		SDelement[tempcount++].zd=zd;
+		//File1.WriteString(str);
+		//File1.WriteString("\n");
+		qd=zd;
+	}
+	/////////////////x方向
+	qd=saodiStart;
+	for(i=1;i<ZhuJuGeShu_X;i++)
+	{
+		if(i==1)
+			zd=qd+PaiJuGeShu_Y;
+		else
+			zd=qd+2;
+		dy=dy+1;
+		//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+		SDelement[tempcount].qd=qd;
+		SDelement[tempcount++].zd=zd;
+		//File1.WriteString(str);
+		//File1.WriteString("\n");
+		qd=zd;
+	}
+	qd=saodiStart+PaiJuGeShu_Y-1;
+	for(i=1;i<ZhuJuGeShu_X;i++)
+	{
+		if(i==ZhuJuGeShu_X-1)
+			zd=qd+PaiJuGeShu_Y;
+		else
+			zd=qd+2;
+		dy=dy+1;
+		//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+		SDelement[tempcount].qd=qd;
+		SDelement[tempcount++].zd=zd;
+		//File1.WriteString(str);
+		//File1.WriteString("\n");
+		qd=zd;
+	}
+	Node XZNode[10][400];//从1开始填充，存储剪刀撑新生节点
+	memset(XZNode,0,sizeof(XZNode)/sizeof(XZNode[0][0])*sizeof(Node));
+	int JDNode[10];
+	memset(JDNode,0,sizeof(JDNode)/sizeof(JDNode[0])*sizeof(int));
+	int totalcount=0;
+	for(l=0;;l++)
+	{
+		if((l!=0)&&(XZVal[0][l]==0.0))
+			break;
+		tempcount=1;
+		for(i=0;;i++)
+		{
+			if((XZline[l][i].zs==0.0)&&(XZline[l][i].xs==0.0))
+				break;
+			float tempres[2];
+			for(j=1;;j++)
+			{//写算法判断两单元是否相交，并返回交点
+				if(Zelement[j].qd==0)
+					break;
+				tempres[0]=0.0;
+				tempres[1]=0.0;
+				if(Zelement[j].ys!=XZVal[0][l])
+					continue;
+				JudgeCross(Zelement[j].xs,Zelement[j].zs,Zelement[j].xe,Zelement[j].ze,
+					XZline[l][i].xs,XZline[l][i].zs,XZline[l][i].xe,XZline[l][i].ze,tempres);
+				if(tempres[0]==-1.0)
+					continue;
+				int flag=0;
+				for(k=1;k<tempcount;k++)
 				{
-					//XZNode[num-jiandaoStart+1].Num=num;
-					//XZNode[num-jiandaoStart+1].x=tempX;
-					//XZNode[num-jiandaoStart+1].y=0.0;
-					//XZNode[num-jiandaoStart+1].z=(tempX-XZline[0][i].xs)/(XZline[0][i].xe-XZline[0][i].xs)*(XZline[0][i].ze-XZline[0][i].zs)+XZline[0][i].zs;
-					NodeZong[num].Num=num;
-					NodeZong[num].x=tempX;
-					NodeZong[num].y=0.0;
-					NodeZong[num++].z=(tempX-XZline[0][i].xs)/(XZline[0][i].xe-XZline[0][i].xs)*(XZline[0][i].ze-XZline[0][i].zs)+XZline[0][i].zs;
-				}
-				tempX=tempX+ZhuJuDataSave[j];
-				if(tempX==maxX)
-				{
-					if(((XZline[0][i].xs<=tempX)&&(tempX<=XZline[0][i].xe))||((XZline[0][i].xs>=tempX)&&(tempX>=XZline[0][i].xe)))
+					if((XZNode[l][k].x==tempres[0])&&(XZNode[l][k].z==tempres[1]))
 					{
-						//XZNode[num-jiandaoStart+1].Num=num;
-						//XZNode[num-jiandaoStart+1].x=tempX;
-						//XZNode[num-jiandaoStart+1].y=0.0;
-						//XZNode[num-jiandaoStart+1].z=(tempX-XZline[0][i].xs)/(XZline[0][i].xe-XZline[0][i].xs)*(XZline[0][i].ze-XZline[0][i].zs)+XZline[0][i].zs;
-						NodeZong[num].Num=num;
-						NodeZong[num].x=tempX;
-						NodeZong[num].y=0.0;
-						NodeZong[num++].z=(tempX-XZline[0][i].xs)/(XZline[0][i].xe-XZline[0][i].xs)*(XZline[0][i].ze-XZline[0][i].zs)+XZline[0][i].zs;
-						if(XZline[0][i].xe-XZline[0][i].xs==0)
-							num--;
+						flag=1;
+						break;
 					}
+				}
+				if(0==flag)
+				{
+					int temp=JDNode[l];
+					XZNode[l][temp].x=tempres[0];
+					XZNode[l][temp].y=XZVal[0][l];
+					XZNode[l][temp].z=tempres[1];
+					XZNode[l][temp].Num=num+totalcount;
+					JDNode[l]=temp+1;
+					totalcount++;
+					tempcount++;
 				}
 			}
 		}
 	}
-	int jiandaoEnd=num-1;
+	num=num+totalcount;
+	Node YZNode[10][400];//从1开始填充，存储剪刀撑新生节点
+	memset(YZNode,0,sizeof(YZNode)/sizeof(YZNode[0][0])*sizeof(Node));
+	//int JDNode[10];
+	memset(JDNode,0,sizeof(JDNode)/sizeof(JDNode[0])*sizeof(int));
+	totalcount=0;
+	for(l=0;;l++)
+	{
+		if((l!=0)&&(XZVal[1][l]==0.0))
+			break;
+		tempcount=1;
+		for(i=0;;i++)
+		{
+			if((YZline[l][i].zs==0.0)&&(YZline[l][i].ys==0.0))
+				break;
+			float tempres[2];
+			for(j=1;;j++)
+			{//写算法判断两单元是否相交，并返回交点
+				if(Zelement[j].qd==0)
+					break;
+				tempres[0]=0.0;
+				tempres[1]=0.0;
+				if(Zelement[j].xs!=XZVal[1][l])
+					continue;
+				JudgeCross(Zelement[j].ys,Zelement[j].zs,Zelement[j].ye,Zelement[j].ze,
+					YZline[l][i].ys,YZline[l][i].zs,YZline[l][i].ye,YZline[l][i].ze,tempres);
+				if(tempres[0]==-1.0)
+					continue;
+				int flag=0;
+				for(k=1;k<tempcount;k++)
+				{
+					if((YZNode[l][k].y==tempres[0])&&(YZNode[l][k].z==tempres[1]))
+					{
+						flag=1;
+						break;
+					}
+				}
+				if(0==flag)
+				{
+					int temp=JDNode[l];
+					YZNode[l][temp].y=tempres[0];
+					YZNode[l][temp].x=XZVal[1][l];
+					YZNode[l][temp].z=tempres[1];
+					YZNode[l][temp].Num=num+totalcount;
+					JDNode[l]=temp+1;
+					totalcount++;
+					tempcount++;
+				}
+			}
+		}
+	}
+	//str.Format(";///////////////////////////////////////我是分割线\n");
+		//File1.WriteString(str);
+	//for(i=1;i<tempcount;i++)
+	//{
+		//str.Format("%d,  %7.2f , %7.2f , %7.2f",XZNode[i].Num,XZNode[i].x,XZNode[i].y,XZNode[i].z);
+		//File1.WriteString(str);
+		//File1.WriteString("\n");
+	//}
+		//str.Format(";///////////////////////////////////////我是分割线\n");
+		//File1.WriteString(str);
 	
+	
+	element XZscielement[10][200];
+	memset(XZscielement,0,sizeof(XZscielement)/sizeof(XZscielement[0][0])*sizeof(element));
+	Node tempNode[50];
+	memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
+	Node tempNode1[50];
+	memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
+
+	int Node1count=1;
+	int scicount=1;
+	/*Node tempstart;
+	tempcount=1;
+	tempNode.y=0.0;
+	tempstart.y=0.0;*/
+	for(l=0;;l++)
+	{
+		if(l!=0&&XZVal[0][l]==0.0)
+			break;
+		scicount=1;
+		for(i=0;;i++)
+		{
+			if(XZline[l][i].zs==0.0&&XZline[l][i].xs==0.0)
+				break;
+			tempcount=1;
+			memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
+			for(j=1;;j++)
+			{
+				if(XZNode[l][j].Num==0)
+					break;
+				float res=(XZNode[l][j].x-XZline[l][i].xs)*(XZline[l][i].zs-XZline[l][i].ze)/(XZline[l][i].xs-XZline[l][i].xe)+XZline[l][i].zs-XZNode[l][j].z;
+				if(fabs(res)<=0.000002&&(XZNode[l][j].z-XZline[l][i].ze)*(XZNode[l][j].z-XZline[l][i].zs)<=0.0)
+				{
+					tempNode[tempcount++]=XZNode[l][j];
+				}
+			}//此处按顺序找到所有应该连线的剪刀撑坐标，待连接，睡了。。。
+			Node tempsingleNode;
+			float tempmaxZ=tempNode[1].z;
+			Node1count=1;
+			memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
+			float tempmin=0.0;
+			for(j=1;j<tempcount;j++)
+			{
+				if(j==1)
+					tempmin=-1.0;
+				else
+					tempmin=tempmaxZ;
+				tempmaxZ=200.0;
+				for(k=1;k<tempcount;k++)
+				{
+					if(tempNode[k].z>tempmin)
+					{
+						if(tempNode[k].z<tempmaxZ)
+						{
+							tempsingleNode=tempNode[k];
+							tempmaxZ=tempNode[k].z;
+						}
+					}
+				}
+				tempNode1[Node1count++]=tempsingleNode;
+			}
+			for(j=1;j<Node1count-1;j++)
+			{
+				XZscielement[l][scicount].qd=tempNode1[j].Num;
+				XZscielement[l][scicount].xs=tempNode1[j].x;
+				XZscielement[l][scicount].ys=tempNode1[j].y;
+				XZscielement[l][scicount].zs=tempNode1[j].z;
+				XZscielement[l][scicount].zd=tempNode1[j+1].Num;
+				XZscielement[l][scicount].xe=tempNode1[j+1].x;
+				XZscielement[l][scicount].ye=tempNode1[j+1].y;
+				XZscielement[l][scicount++].ze=tempNode1[j+1].z;
+			}
+		}
+	}
+	
+
 	//**********************单元************************/
 	int MeiCengDanYuanShu=0;
 	int ZongDanYuanShu=0;
@@ -1420,15 +1942,53 @@ void CSet::OnOutput()
 	File1.WriteString("\n");
 	for(int h=1;h<num;h++)
 	{
+		if(NodeZong[h].Num==0)
+		{
+			num=h-1;
+			break;
+		}
 		str.Format("%d,  %7.2f , %7.2f , %7.2f",NodeZong[h].Num,NodeZong[h].x,NodeZong[h].y,NodeZong[h].z);
 		File1.WriteString(str);
 		File1.WriteString("\n");
 	}
 	File1.WriteString("\n");
 	File1.WriteString("\n");
-	str.Format("剪刀撑节点,%dto%d,0\n",jiandaoStart,jiandaoEnd);
-	str="*GROUP    ; Group\n; NAME, NODE_LIST, ELEM_LIST, PLANE_TYPE\n"+str;
+	str=";XZ剪刀撑节点生成开始\n";
 	File1.WriteString(str);
+	tempcount=0;
+	for(i=0;;i++)
+	{
+		if(XZNode[i][1].Num==0)
+			break;
+		for(j=1;;j++)
+		{
+			if(XZNode[i][j].Num==0)
+				break;
+			str.Format("%d,  %7.2f , %7.2f , %7.2f\n",XZNode[i][j].Num,XZNode[i][j].x,XZNode[i][j].y,XZNode[i][j].z);
+			File1.WriteString(str);
+			tempcount++;
+		}
+	}
+	int XZJDNodeStart=num;
+	int XZJDNodeEnd=num+tempcount;
+	str=";YZ剪刀撑节点生成开始\n";
+	File1.WriteString(str);
+	tempcount=0;
+	for(i=0;;i++)
+	{
+		if(YZNode[i][1].Num==0)
+			break;
+		for(j=1;;j++)
+		{
+			if(YZNode[i][j].Num==0)
+				break;
+			str.Format("%d,  %7.2f , %7.2f , %7.2f\n",YZNode[i][j].Num,YZNode[i][j].x,YZNode[i][j].y,YZNode[i][j].z);
+			File1.WriteString(str);
+			tempcount++;
+		}
+	}
+	int YZJDNodeStart=XZJDNodeEnd+1;
+	int YZJDNodeEnd=YZJDNodeStart+tempcount;
 
 	
 	//***************************非斜向单元输出************************//
@@ -1436,11 +1996,63 @@ void CSet::OnOutput()
 	File1.WriteString(str);
 	File1.WriteString("\n");
 	File1.WriteString("\n");
-
+	//XZscielement[l][scicount].qd=tempNode1[j].Num;
+	tempcount=0;
+	for(i=1;;i++)
+	{
+		if(Yelement[i].qd==0)
+			break;
+		str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d\n",dy+tempcount,"BEAM",1,1,Yelement[i].qd,Yelement[i].zd,0);
+		File1.WriteString(str);
+		tempcount++;
+	}
+	dy=dy+tempcount;
+	tempcount=0;
+	for(i=1;;i++)
+	{
+		if(Xelement[i].qd==0)
+			break;
+		str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d\n",dy+tempcount,"BEAM",1,1,Xelement[i].qd,Xelement[i].zd,0);
+		File1.WriteString(str);
+		tempcount++;
+	}
+	dy=dy+tempcount;
+	tempcount=0;
+	for(i=1;;i++)
+	{
+		if(Zelement[i].qd==0)
+			break;
+		str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d\n",dy+tempcount,"BEAM",1,1,Zelement[i].qd,Zelement[i].zd,0);
+		File1.WriteString(str);
+		tempcount++;
+	}
+	dy=dy+tempcount;
+	tempcount=0;
+	for(i=0;;i++)
+	{
+		if(XZscielement[i][1].qd==0)
+			break;
+		for(j=1;;j++)
+		{
+			if(XZscielement[i][j].qd==0)
+				break;
+			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d\n",dy+tempcount,"BEAM",1,1,XZscielement[i][j].qd,XZscielement[i][j].zd,0);
+			File1.WriteString(str);
+			tempcount++;
+		}
+	}
+	str="*GROUP    ; Group\n; NAME, NODE_LIST, ELEM_LIST, PLANE_TYPE\n";
+	File1.WriteString(str);
+	str.Format("XZ剪刀撑节点,%dto%d,,0\n",XZJDNodeStart,XZJDNodeEnd);
+	File1.WriteString(str);
+	str.Format("YZ剪刀撑节点,%dto%d,,0\n",YZJDNodeStart,YZJDNodeEnd);
+	File1.WriteString(str);
+	str.Format("XZ剪刀撑单元,,%dto%d,0\n",dy,dy+tempcount);
+	File1.WriteString(str);
 	
-	//File1.Close();
-	//AfxMessageBox("success");
-	//return;
+	File1.Close();
+	AfxMessageBox("success");
+	return;
 	
 	/*
 	Dim dy, dc, qd, zd As Integer
@@ -1449,7 +2061,7 @@ void CSet::OnOutput()
 	dc = (a + 1) * (b + 1)
 	*/
 	
-	a=ZhuJuGeShu_X-1;
+	/*a=ZhuJuGeShu_X-1;
 	b=PaiJuGeShu_Y-1;
 	c=BuJuGeShu_Z-3;//-3;田海涛20:00 2016/9/8
 	float z=BuJu_Z;
@@ -1457,7 +2069,7 @@ void CSet::OnOutput()
 	dy=0;
 	dc=(a+1)*(b+1);
 	int vc=0;
-	int va=0;
+	int va=0;*/
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////首次执行整个单元建模过程以计算总单元数////////////////////////////////////
@@ -1495,20 +2107,20 @@ void CSet::OnOutput()
 	}
 	int ZCount=0;
 	int ZNum[20];
-	float tempZDate=0.0;
-	int tempZNum=2;
-	ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*tempZNum;
+	float maxZDate=0.0;
+	int maxZNum=2;
+	ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*maxZNum;
 	for(i=2;i<Count_Z-1;i++)
 	{
 		for(j=0;j<BuJuCountSave[i];j++)
 		{
-			tempZDate=tempZDate+BuJuDataSave[i];
-			if(tempZDate>=4.8)
+			maxZDate=maxZDate+BuJuDataSave[i];
+			if(maxZDate>=4.8)
 			{
-				ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*tempZNum;
-				tempZDate=BuJuDataSave[i];
+				ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*maxZNum;
+				maxZDate=BuJuDataSave[i];
 			}
-			tempZNum++;
+			maxZNum++;
 		}
 	}
 	if(ZNum[ZCount-1]!=1+ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z-1))
@@ -1720,11 +2332,11 @@ void CSet::OnOutput()
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
-	dy=0;
+	/*dy=0;
 	//横杆1/2
 	element Yelement[2000];
 	memset(Yelement,0,sizeof(Yelement)/sizeof(Yelement[0])*sizeof(element));
-	int tempcount=1;//临时单元计数器，1开始
+	tempcount=1;//临时单元计数器，1开始
 	for(vc=2;vc<=c+1;vc++)
 	{
 		for(va=1;va<=a+1;va++)
@@ -1904,6 +2516,8 @@ void CSet::OnOutput()
 		qd=zd;
 	}
 	tempcount=1;
+	Node XZNode[10][400];//从1开始填充，存储剪刀撑新生节点
+	memset(XZNode,0,sizeof(XZNode)/sizeof(XZNode[0][0])*sizeof(Node));
 	for(i=0;i<countline;i++)
 	{
 		float tempres[2];
@@ -1960,7 +2574,7 @@ void CSet::OnOutput()
 	tempcount=1; 
 	tempNode.y=0.0;
 	tempstart.y=0.0;*/
-	for(i=0;i<countline;i++)
+	/*for(i=0;i<countline;i++)
 	{
 		tempcount=1;
 		memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
@@ -1975,7 +2589,7 @@ void CSet::OnOutput()
 			}
 		}//此处按顺序找到所有应该连线的剪刀撑坐标，待连接，睡了。。。
 		Node tempsingleNode;
-		float tempz=tempNode[1].z;
+		float maxZ=tempNode[1].z;
 		Node1count=1;
 		memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
 		float tempmin=0.0;
@@ -1984,16 +2598,16 @@ void CSet::OnOutput()
 			if(j==1)
 				tempmin=-1.0;
 			else
-				tempmin=tempz;
-			tempz=200.0;
+				tempmin=maxZ;
+			maxZ=200.0;
 			for(k=1;k<tempcount;k++)
 			{
 				if(tempNode[k].z>tempmin)
 				{
-					if(tempNode[k].z<tempz)
+					if(tempNode[k].z<maxZ)
 					{
 						tempsingleNode=tempNode[k];
-						tempz=tempNode[k].z;
+						maxZ=tempNode[k].z;
 					}
 				}
 			}
@@ -2010,15 +2624,15 @@ void CSet::OnOutput()
 			XZscielement[scicount].ye=tempNode1[j+1].y;
 			XZscielement[scicount++].ze=tempNode1[j+1].z;
 		}
-	}
-	for(i=1;i<scicount;i++)
+	}*/
+	/*for(i=1;i<scicount;i++)
 	{
 		//dy=dy+1;
 		str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d\n",i+dy,"BEAM",1,1,XZscielement[i].qd,XZscielement[i].zd,0);
 		//Yelement[tempcount].qd=qd;
 		//Yelement[tempcount++].zd=zd;
 		File1.WriteString(str);
-	}
+	}*/
 	str.Format("scicount=%d",scicount-1);
 	AfxMessageBox(str);
 	File1.Close();
