@@ -1045,6 +1045,7 @@ void CSet::OnOutput()
 	int l=0;
 	int m=0;
 	int n=0;
+	int o=0;
 	CString str;
 	init();
 	GetDlgItemText(IDE_SaoDiGanGaoDu,str);
@@ -1066,8 +1067,10 @@ void CSet::OnOutput()
 	//BuJuGeShu_Z=BuJuGeShu_Z+4;
 	
 	NodeZongShu=BuJuGeShu_Z*ZhuJuGeShu_X*PaiJuGeShu_Y;
-    //NodeZong=new Node[NodeZongShu+1];
-	vector < Node > NodeZong;
+
+    Node NodeZong[10000];
+	memset(NodeZong,0,sizeof(NodeZong)/sizeof(NodeZong[0])*sizeof(Node));
+	/*vector < Node > NodeZong;
 	NodeZong.resize(NodeZongShu*3);
 	for(i=0;i<NodeZongShu*3;i++)
 	{
@@ -1075,7 +1078,7 @@ void CSet::OnOutput()
 		NodeZong[i].x=0;
 		NodeZong[i].y=0;
 		NodeZong[i].z=0;
-	}
+	}*/
 	
 	
 	
@@ -1146,14 +1149,15 @@ void CSet::OnOutput()
 			}
 		}
 	}
+	int NormalNodeEnd=num-1;
 	////////////////////////扫地杆节点生成//////////////
 	float maxX=CurXVal;
 	float maxY=CurYVal;
 	float maxZ=CurZVal;
 	CurZVal=SaoDiGanGaoDu;
 	CurXVal = 0.0;
-	int saodiStart=num;
-	int saodiEnd;
+	int SDNodeStart=num;
+
 	for(ZZ=-1;ZZ<Count_X;ZZ++)
 	{
 		if(ZZ==-1)
@@ -1190,7 +1194,19 @@ void CSet::OnOutput()
 			}
 		}
 	}
-	saodiEnd=num-1;
+	for(i=1;;i++)
+	{
+		break;
+		if(NodeZong[i].Num==0)
+			break;
+		str.Format("%.2f",NodeZong[i].x);
+		NodeZong[i].x=atof(str);
+		str.Format("%.2f",NodeZong[i].y);
+		NodeZong[i].y=atof(str);
+		str.Format("%.2f",NodeZong[i].z);
+		NodeZong[i].z=atof(str);
+	}
+	int SDNodeEnd=num-1;
 	//File.Close();
 	float XZVal[3][10];//一序号012分别表示垂直于xz,yz,xy方向,，二序号表示第几层面，
 	memset(XZVal,0,sizeof(XZVal)/sizeof(XZVal[0][0])*sizeof(float));
@@ -1573,6 +1589,7 @@ void CSet::OnOutput()
 		}
 		
 	}
+
 	for(i=1;;i++)
 	{
 		if(Yelement[i].qd==0)
@@ -1641,7 +1658,7 @@ void CSet::OnOutput()
 	element SDelement[200];
 	memset(SDelement,0,sizeof(SDelement)/sizeof(SDelement[0])*sizeof(element));
 	tempcount=1;
-	qd=saodiStart;
+	qd=SDNodeStart;
 	for(i=1;i<PaiJuGeShu_Y;i++)
 	{
 		zd=qd+1;
@@ -1653,7 +1670,7 @@ void CSet::OnOutput()
 		//File1.WriteString("\n");
 		qd=zd;
 	}
-	qd=saodiStart+PaiJuGeShu_Y+2*(ZhuJuGeShu_X-2);
+	qd=SDNodeStart+PaiJuGeShu_Y+2*(ZhuJuGeShu_X-2);
 	for(i=1;i<PaiJuGeShu_Y;i++)
 	{
 		zd=qd+1;
@@ -1666,7 +1683,7 @@ void CSet::OnOutput()
 		qd=zd;
 	}
 	/////////////////x方向
-	qd=saodiStart;
+	qd=SDNodeStart;
 	for(i=1;i<ZhuJuGeShu_X;i++)
 	{
 		if(i==1)
@@ -1681,7 +1698,7 @@ void CSet::OnOutput()
 		//File1.WriteString("\n");
 		qd=zd;
 	}
-	qd=saodiStart+PaiJuGeShu_Y-1;
+	qd=SDNodeStart+PaiJuGeShu_Y-1;
 	for(i=1;i<ZhuJuGeShu_X;i++)
 	{
 		if(i==ZhuJuGeShu_X-1)
@@ -1696,11 +1713,12 @@ void CSet::OnOutput()
 		//File1.WriteString("\n");
 		qd=zd;
 	}
-	Node XZNode[10][400];//从1开始填充，存储剪刀撑新生节点
+	Node XZNode[10][400];//从0开始填充，存储剪刀撑新生节点
 	memset(XZNode,0,sizeof(XZNode)/sizeof(XZNode[0][0])*sizeof(Node));
 	int JDNode[10];
 	memset(JDNode,0,sizeof(JDNode)/sizeof(JDNode[0])*sizeof(int));
 	int totalcount=0;
+	int XZNodeStart=num;
 	for(l=0;;l++)
 	{
 		if((l!=0)&&(XZVal[0][l]==0.0))
@@ -1738,7 +1756,8 @@ void CSet::OnOutput()
 					XZNode[l][temp].x=tempres[0];
 					XZNode[l][temp].y=XZVal[0][l];
 					XZNode[l][temp].z=tempres[1];
-					XZNode[l][temp].Num=num+totalcount;
+					XZNode[l][temp].Num=num;
+					num++;
 					JDNode[l]=temp+1;
 					totalcount++;
 					tempcount++;
@@ -1746,12 +1765,13 @@ void CSet::OnOutput()
 			}
 		}
 	}
-	num=num+totalcount;
-	Node YZNode[10][400];//从1开始填充，存储剪刀撑新生节点
+	int XZNodeEnd=num-1;
+	Node YZNode[10][400];//从0开始填充，存储剪刀撑新生节点
 	memset(YZNode,0,sizeof(YZNode)/sizeof(YZNode[0][0])*sizeof(Node));
 	//int JDNode[10];
 	memset(JDNode,0,sizeof(JDNode)/sizeof(JDNode[0])*sizeof(int));
 	totalcount=0;
+	int YZNodeStart=num;
 	for(l=0;;l++)
 	{
 		if((l!=0)&&(XZVal[1][l]==0.0))
@@ -1786,10 +1806,17 @@ void CSet::OnOutput()
 				if(0==flag)
 				{
 					int temp=JDNode[l];
+					/*str.Format("%.2f",tempres[0]);
+					YZNode[l][temp].x=atof(str);
+					str.Format("%.2f",XZVal[1][l]);
+					YZNode[l][temp].y=atof(str);
+					str.Format("%.2f",tempres[1]);
+					YZNode[l][temp].z=atof(str);*/
 					YZNode[l][temp].y=tempres[0];
 					YZNode[l][temp].x=XZVal[1][l];
 					YZNode[l][temp].z=tempres[1];
-					YZNode[l][temp].Num=num+totalcount;
+					YZNode[l][temp].Num=num;
+					num++;
 					JDNode[l]=temp+1;
 					totalcount++;
 					tempcount++;
@@ -1797,7 +1824,214 @@ void CSet::OnOutput()
 			}
 		}
 	}
-	//str.Format(";///////////////////////////////////////我是分割线\n");
+	int YZNodeEnd=num-1;
+/////////////////////////通过循环对比找出normalNode与XZNode和YZNode的重复节点//////////////////
+	int tempcount1=0;
+	tempcount=0;
+	Node XZEqualNormal[2][200];//[0][200]中表示Normal节点信息，[1][200]中表示XZNode节点信息
+	memset(XZEqualNormal,0,sizeof(XZEqualNormal)/sizeof(XZEqualNormal[0][0])*sizeof(Node));
+	Node YZEqualNormal[2][200];//[0][200]中表示Normal节点信息，[1][200]中表示YZNode节点信息
+	memset(YZEqualNormal,0,sizeof(YZEqualNormal)/sizeof(YZEqualNormal[0][0])*sizeof(Node));
+	for(i=1;;i++)
+	{
+		if(NodeZong[i].Num==0)
+			break;
+		for(j=0;;j++)
+		{
+			if(XZNode[j][0].Num==0)
+				break;
+			for(k=0;;k++)
+			{
+				if(XZNode[j][k].Num==0)
+					break;
+				if(XZNode[j][k].x==NodeZong[i].x&&XZNode[j][k].y==NodeZong[i].y&&XZNode[j][k].z==NodeZong[i].z)
+				{
+					XZEqualNormal[0][tempcount]=NodeZong[i];
+					XZEqualNormal[1][tempcount++]=XZNode[j][k];
+				}
+			}
+		}
+		for(j=0;;j++)
+		{
+			if(YZNode[j][0].Num==0)
+				break;
+			for(k=0;;k++)
+			{
+				if(YZNode[j][k].Num==0)
+					break;
+				if(YZNode[j][k].x==NodeZong[i].x&&YZNode[j][k].y==NodeZong[i].y&&YZNode[j][k].z==NodeZong[i].z)
+				{
+					YZEqualNormal[0][tempcount1]=NodeZong[i];
+					YZEqualNormal[1][tempcount1++]=YZNode[j][k];
+				}
+			}
+		}
+	}
+///////////////重新计算生成立杆单元///////////////////////
+	memset(Zelement,0,sizeof(Zelement)/sizeof(Zelement[0])*sizeof(element));
+	tempcount=1;
+	tempX=0.0;
+	tempY=0.0;
+	float tempval=0.0;
+	float tempstart=0.0;
+	Node tempnode;
+	memset(&tempnode,0,sizeof(Node));
+	int tempnodeNum=0;
+	for(i=0;i<Count_X;i++)
+	{
+		for(j=0;j<ZhuJuCountSave[i];j++)
+		{
+			tempX=tempX+ZhuJuDataSave[i];
+			tempY=0.0;
+			for(k=0;k<Count_Y;k++)
+			{
+				for(l=0;l<PaiJuCountSave[k];l++)
+				{
+					tempstart=0.0;
+					tempY=tempY+PaiJuDataSave[k];
+					for(o=0;;o++)
+					{
+						if(tempstart==maxZ)
+							break;
+						tempval=maxZ;
+						memset(&tempnode,0,sizeof(Node));
+						tempnode.z=maxZ;
+						for(m=1;m<num;m++)
+						{
+							if(o==0)
+							{
+								if(NodeZong[m].x==tempX&&NodeZong[m].y==tempY
+									&&NodeZong[m].z>=tempstart&&NodeZong[m].z<=maxZ)
+								{
+									if(tempval>=NodeZong[m].z)
+									{
+										tempval=NodeZong[m].z;
+										tempnode=NodeZong[m];
+									}
+								}
+							}
+							else
+							{
+								if(NodeZong[m].x==tempX&&NodeZong[m].y==tempY
+									&&NodeZong[m].z>tempstart&&NodeZong[m].z<=maxZ)
+								{
+									if(tempval>=NodeZong[m].z)
+									{
+										tempval=NodeZong[m].z;
+										tempnode=NodeZong[m];
+									}
+								}
+							}
+						}
+						for(n=0;;n++)
+						{
+							if((n!=0)&&(XZNode[n][1].z==0.0))
+								break;
+							if(tempY!=XZNode[n][1].y)
+								continue;
+							for(m=0;;m++)
+							{
+								if(XZNode[n][m].z==0.0)
+									break;
+								if(o==0)
+								{
+									if(XZNode[n][m].x==tempX&&XZNode[n][m].y==tempY
+										&&XZNode[n][m].z>=tempstart&&XZNode[n][m].z<=maxZ)
+									{
+										if(tempval>=XZNode[n][m].z)
+										{
+											tempval=XZNode[n][m].z;
+											tempnode=XZNode[n][m];
+										}
+									}
+								}
+								else
+								{
+									if(XZNode[n][m].x==tempX&&XZNode[n][m].y==tempY
+										&&XZNode[n][m].z>tempstart&&XZNode[n][m].z<=maxZ)
+									{
+										if(tempval>=XZNode[n][m].z)
+										{
+											tempval=XZNode[n][m].z;
+											tempnode=XZNode[n][m];
+										}
+									}
+								}
+							}
+						}
+						for(n=0;;n++)
+						{
+							if((n!=0)&&(YZNode[n][1].z==0.0))
+								break;
+							if(tempX!=YZNode[n][1].x)
+								break;
+							for(m=0;;m++)
+							{
+								if(YZNode[n][m].z==0.0)
+									break;
+								if(o==0)
+								{
+									if(YZNode[n][m].x==tempX&&YZNode[n][m].y==tempY
+										&&YZNode[n][m].z>=tempstart&&YZNode[n][m].z<=maxZ)
+									{
+										if(tempval>=YZNode[n][m].z)
+										{
+											tempval=YZNode[n][m].z;
+											tempnode=YZNode[n][m];
+										}
+									}
+								}
+								else
+								{
+									if(YZNode[n][m].x==tempX&&YZNode[n][m].y==tempY
+										&&YZNode[n][m].z>tempstart&&YZNode[n][m].z<=maxZ)
+									{
+										if(tempval>=YZNode[n][m].z)
+										{
+											tempval=YZNode[n][m].z;
+											tempnode=YZNode[n][m];
+										}
+									}
+								}
+							}
+						}
+						tempstart=tempval;
+						if(o==0)
+						{
+							Zelement[tempcount].qd=tempnode.Num;
+							Zelement[tempcount].xs=tempnode.x;
+							Zelement[tempcount].ys=tempnode.y;
+							Zelement[tempcount].zs=tempnode.z;
+							continue;
+						}
+						if(o==1)
+						{
+							Zelement[tempcount].zd=tempnode.Num;
+							Zelement[tempcount].xe=tempnode.x;
+							Zelement[tempcount].ye=tempnode.y;
+							Zelement[tempcount++].ze=tempnode.z;
+							continue;
+						}
+						Zelement[tempcount].qd=Zelement[tempcount-1].zd;
+						Zelement[tempcount].zd=tempnode.Num;
+						Zelement[tempcount].xs=Zelement[tempcount-1].xe;
+						Zelement[tempcount].ys=Zelement[tempcount-1].ye;
+						Zelement[tempcount].zs=Zelement[tempcount-1].ze;
+						Zelement[tempcount].xe=tempnode.x;
+						Zelement[tempcount].ye=tempnode.y;
+						Zelement[tempcount].ze=tempnode.z;
+						if(fabs(Zelement[tempcount].xs-Zelement[tempcount].xe)<0.005&&fabs(Zelement[tempcount].ys-Zelement[tempcount].ye)<0.005
+							&&fabs(Zelement[tempcount].zs-Zelement[tempcount].ze)<0.005);
+						else
+							tempcount++;
+					}
+				}
+			}
+		}
+	}
+	/////////////////////////////////////////////////	
+	str.Format("Zelement共有%d个",tempcount-1);
+	MessageBox(str);
 		//File1.WriteString(str);
 	//for(i=1;i<tempcount;i++)
 	//{
@@ -1998,6 +2232,8 @@ void CSet::OnOutput()
 	File1.WriteString("\n");
 	//XZscielement[l][scicount].qd=tempNode1[j].Num;
 	tempcount=0;
+	str.Format(";Y单元开始生成\n");
+	File1.WriteString(str);
 	for(i=1;;i++)
 	{
 		if(Yelement[i].qd==0)
@@ -2008,6 +2244,8 @@ void CSet::OnOutput()
 	}
 	dy=dy+tempcount;
 	tempcount=0;
+	str.Format(";X单元开始生成\n");
+	File1.WriteString(str);
 	for(i=1;;i++)
 	{
 		if(Xelement[i].qd==0)
@@ -2018,9 +2256,11 @@ void CSet::OnOutput()
 	}
 	dy=dy+tempcount;
 	tempcount=0;
+	str.Format(";Z单元开始生成\n");
+	File1.WriteString(str);
 	for(i=1;;i++)
 	{
-		if(Zelement[i].qd==0)
+		if(Zelement[i].zd==0)
 			break;
 		str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d\n",dy+tempcount,"BEAM",1,1,Zelement[i].qd,Zelement[i].zd,0);
 		File1.WriteString(str);
