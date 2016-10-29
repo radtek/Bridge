@@ -94,6 +94,10 @@ SOURCE=.\DanYuan.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\element.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\excel.cpp
 # End Source File
 # Begin Source File
@@ -102,7 +106,7 @@ SOURCE=.\msword.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\MyNode.cpp
+SOURCE=.\Node.cpp
 # End Source File
 # Begin Source File
 
@@ -155,6 +159,10 @@ SOURCE=.\DanYuan.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\element.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\excel.h
 # End Source File
 # Begin Source File
@@ -163,7 +171,7 @@ SOURCE=.\msword.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\MyNode.h
+SOURCE=.\Node.h
 # End Source File
 # Begin Source File
 

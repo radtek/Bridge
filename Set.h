@@ -1,7 +1,7 @@
 #if !defined(AFX_SET_H__3AE714E3_5792_4870_B807_E4F3B81B45FA__INCLUDED_)
 #define AFX_SET_H__3AE714E3_5792_4870_B807_E4F3B81B45FA__INCLUDED_
 
-#include "MyNode.h"	// Added by ClassView
+//#include "Node.h"	// Added by ClassView
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
