@@ -2,15 +2,15 @@
 #include "element.h"
 element::element()
 {
-	int qd;
-	int zd;
+	qd=0;
+	zd=0;
 	//int unit;//1,2,3,4,5,6分别代表x向y向z向杆件及xy面xz面yz面剪刀撑
-	float xs;
-	float ys;
-	float zs;
-	float xe;
-	float ye;
-	float ze;
+	xs=0.0;
+	ys=0.0;
+	zs=0.0;
+	xe=0.0;
+	ye=0.0;
+	ze=0.0;
 }
 void element::operator=(element &n)
 {
