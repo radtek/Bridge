@@ -40,7 +40,7 @@ struct fline
 	float ye;
 	float ze;
 };
-/*struct Node 
+/*struct Node
 {
 	float x;
 	float y;
@@ -136,7 +136,7 @@ int k4=0;
 int xx=0;     //专业循环变量
 int yy=0;     //专业循环变量
 int zz=0;     //专业循环变量
-int rr=0; 
+int rr=0;
 int tt=0;
 int kk=0;
 int yj1=0;
@@ -303,7 +303,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CSet message handlers
 
-void CSet::OnSelchangeBuJuZ() 
+void CSet::OnSelchangeBuJuZ()
 {
 	// TODO: Add your control notification handler code here
 	CString str;
@@ -323,7 +323,7 @@ void CSet::OnSelchangeBuJuZ()
 	}
 }
 
-void CSet::OnSelchangeZhuJuX() 
+void CSet::OnSelchangeZhuJuX()
 {
 	// TODO: Add your control notification handler code here
 	CString str;
@@ -369,7 +369,7 @@ void CSet::OnSelchangeDanWeiFuJiaGouJian()           //附加构建
 	CString str;
 	//int i;
     Sort=m_Control_DanWei_FuJiaGouJian.GetCurSel();
-	
+
 	if(Sort==0)                                        //kg
 	{
 		//	AfxMessageBox("1");
@@ -408,7 +408,7 @@ void CSet::OnSelchangeDanWeiGangJinHunNingTu()       //钢筋
         GangJinHunNingTu=9.8*GangJinHunNingTu/1000;
 		str.Format("%f",GangJinHunNingTu);
 		AfxMessageBox(str);
-		
+
 	}
 	if(Sort==1)                                        //kN
 	{
@@ -417,7 +417,7 @@ void CSet::OnSelchangeDanWeiGangJinHunNingTu()       //钢筋
 		GangJinHunNingTu=GangJinHunNingTu;
 		str.Format("%f",GangJinHunNingTu);
 		AfxMessageBox(str);
-		
+
 	}
 	if(Sort==2)                                        //m3
 	{
@@ -431,7 +431,7 @@ void CSet::OnSelchangeDanWeiGangJinHunNingTu()       //钢筋
 	{
 		//	AfxMessageBox("4");
 		GangJinHunNingTu=ini_GangJinHunNingTu;
-		GangJinHunNingTu=9.8*GangJinHunNingTu;		
+		GangJinHunNingTu=9.8*GangJinHunNingTu;
 		str.Format("%f",GangJinHunNingTu);
 		AfxMessageBox(str);
 	}
@@ -474,7 +474,7 @@ void CSet::OnSelchangeDanWeiMoBanFangLeng()     //模版方愣
 		MoBanFangLeng=ini_MoBanFangLeng;
 		MoBanFangLeng=9.8*MoBanFangLeng/1000;
 		*/
-		
+
 	}
 	if(Sort==1)                                        //kN
 	{
@@ -489,7 +489,7 @@ void CSet::OnSelchangeDanWeiMoBanFangLeng()     //模版方愣
 			Length_Y+=(PaiJuDataSave[oo]*PaiJuCountSave[oo]);
 		}
 		MoBanFangLeng=MoBanFangLeng*a*ZhuJu_X*Length_Y;
-		
+
 	}
 	if(Sort==3)                                        //t
 	{
@@ -524,7 +524,7 @@ void CSet::OnSelchangeDanWeiRenChaiJi()           //人材机
 	}
 	if(Sort==2)                                        //kN/(m*m)
 	{
-		
+
 		//	AfxMessageBox("3");
 		/*
 		Deal_PaiJu_Y();
@@ -540,7 +540,7 @@ void CSet::OnSelchangeDanWeiRenChaiJi()           //人材机
 	}
 	if(Sort==3)                                        //t
 	{
-		
+
 		//	AfxMessageBox("4");
         /*
         RenChaiJi=ini_RenChaiJi;
@@ -551,108 +551,108 @@ void CSet::OnSelchangeDanWeiRenChaiJi()           //人材机
 	}
 }
 
-void CSet::OnChangeGangJinHunNingTu() 
+void CSet::OnChangeGangJinHunNingTu()
 {
-	CString str; 
+	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_GangJinHunNingTu,str);
 	GangJinHunNingTu=atof(str);
 	ini_GangJinHunNingTu=GangJinHunNingTu;
-	
-	
+
+
 }
 
-void CSet::OnChangeJiaoZhuZhenDao() 
+void CSet::OnChangeJiaoZhuZhenDao()
 {
-	CString str; 
+	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_JiaoZhuZhenDao,str);
 	JiaoZhuZhenDao=atof(str);
 	ini_JiaoZhuZhenDao=JiaoZhuZhenDao;
 }
 
-void CSet::OnChangeMoBanFangLeng() 
+void CSet::OnChangeMoBanFangLeng()
 {
-	CString str; 
+	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_MoBanFangLeng,str);
-	MoBanFangLeng=atof(str);	
+	MoBanFangLeng=atof(str);
 	ini_MoBanFangLeng=MoBanFangLeng;
 }
 
-void CSet::OnChangeFuJiaGouJian() 
+void CSet::OnChangeFuJiaGouJian()
 {
-	CString str; 
+	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_FuJiaGouJian,str);
 	FuJiaGouJian=atof(str);
 	ini_FuJiaGouJian=FuJiaGouJian;
 }
 
-void CSet::OnChangeRenChaiJi() 
+void CSet::OnChangeRenChaiJi()
 {
-    CString str; 
+    CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_RenChaiJi,str);
 	RenChaiJi=atof(str);
 	ini_RenChaiJi=RenChaiJi;
 }
 
-void CSet::OnChangeFengHeZai() 
+void CSet::OnChangeFengHeZai()
 {
-	CString str; 
+	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_FengHeZai,str);
 	FengHeZai=atof(str);
 	ini_FengHeZai=FengHeZai;
 }
 
-void CSet::OnChangeDiYiCiJiaoZhu() 
+void CSet::OnChangeDiYiCiJiaoZhu()
 {
-    CString str; 
+    CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_DiYiCiJiaoZhu,str);
 	DiYiCiJiaoZhu=atof(str);
 	UpdateData(TRUE);
 	DiErCiJiaoZhu=1-DiYiCiJiaoZhu;
-	
+
 	m_DiErCiJiaoZhu.Format("%f",DiErCiJiaoZhu);
 	UpdateData(FALSE);
-	
-	
+
+
 }
 
 
 
-void CSet::OnChangeDiYiCiYuYa() 
+void CSet::OnChangeDiYiCiYuYa()
 {
-	CString str; 
+	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_DiYiCiYuYa,str);
 	DiYiCiYuYa=atof(str);
-	
+
 }
 
-void CSet::OnChangeDiErCiYuYa() 
+void CSet::OnChangeDiErCiYuYa()
 {
-	CString str; 
+	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_DiErCiYuYa,str);
 	DiErCiYuYa=atof(str);
 }
 
-void CSet::OnChangeDiSanCiYuYa() 
+void CSet::OnChangeDiSanCiYuYa()
 {
-	CString str; 
+	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_DiSanCiYuYa,str);
 	DiSanCiYuYa=atof(str);
 }
 
-void CSet::OnChangeDiErCiJiaoZhu() 
+void CSet::OnChangeDiErCiJiaoZhu()
 {
 /*
-CString str; 
+CString str;
 UpdateData(TRUE);
 GetDlgItemText(IDE_DiErCiJiaoZhu,str);
 DiErCiJiaoZhu=atof(str);
@@ -661,9 +661,9 @@ DiErCiJiaoZhu=atof(str);
 
 void CSet::Deal_PaiJu_Y()
 {
-	CStdioFile File;	
+	CStdioFile File;
    	CString str;
-	string segment;	
+	string segment;
 	string paijusave;
 	CString strtmp1;            //把用户输入的单词从txt文件中读出。
 	CString strtmp2;
@@ -677,17 +677,17 @@ void CSet::Deal_PaiJu_Y()
 	int q=0;
 	int n=0;
 	int j=0;					//容器中的单词计数
-    int i=0;                    //检测位 
+    int i=0;                    //检测位
 	int k=0;
 	int l=0;
 	int m=0;
-	
+
 	int iiii=0;
 	int jjjj=0;
-	
-	
-	
-	
+
+
+
+
 	//*********************************分跨方案******************************//
     UpdateData(TRUE);
 	CEdit *pEdit=(CEdit *)GetDlgItem(IDE_PaiJu_Y);
@@ -696,10 +696,10 @@ void CSet::Deal_PaiJu_Y()
 	UpdateData(TRUE);
 	if(m_PaiJu_Y.IsEmpty())
 	{
-		AfxMessageBox("输入排距不能为空!",MB_ICONSTOP);	
-		
+		AfxMessageBox("输入排距不能为空!",MB_ICONSTOP);
+
 	}
-    else 
+    else
 	{
 		////////////////////////////////////////////////////
 		CString Editstr = "";
@@ -770,8 +770,8 @@ void CSet::Deal_PaiJu_Y()
 	Length=sentence.GetLength();
 	str.Format("%d",Length);
 	//	AfxMessageBox(str);
-	
-	  paijusave= LPCSTR(sentence); 
+
+	  paijusave= LPCSTR(sentence);
 	  for(i=1;i<=Length;i++)
 	  {
 	  if(paijusave[i]=='@')
@@ -779,14 +779,14 @@ void CSet::Deal_PaiJu_Y()
 	  paijusave[i]=' ';
 	  }
 	  }
-	  
+
 		str.Format("%s",paijusave.c_str());
 		sentence=str;
 		//AfxMessageBox(str);
-		
-		  
-			
-			  File.Open("Sentence.txt",CFile::modeReadWrite); 
+
+
+
+			  File.Open("Sentence.txt",CFile::modeReadWrite);
 			  File.WriteString(sentence);                 //把"Sentence.txt"里的内容赋值给string变量sentence
 			  File.Close();
 			  ifstream fileout("Sentence.txt");
@@ -809,11 +809,11 @@ void CSet::Deal_PaiJu_Y()
 			  i++;
 			  PaiJuCount++;
 			  }
-			  
-				
-				  
+
+
+
 					}
-					
+
 					  for(int iii=0;iii<(PaiJuCount/2);iii++)
 					  {
 					  PaiJuGeShu_Y=PaiJuGeShu_Y+PaiJuCountSave[iii];
@@ -837,10 +837,10 @@ void CSet::Deal_ZhuJu_X()
 	pEdit->GetWindowText(tempstr);
 	if(tempstr.IsEmpty())
 	{
-		AfxMessageBox("输入柱距不能为空!",MB_ICONSTOP);	
-		
+		AfxMessageBox("输入柱距不能为空!",MB_ICONSTOP);
+
 	}
-    else 
+    else
 	{
 		////////////////////////////////////////////////////
 		Editstr = tempstr+" ";
@@ -909,10 +909,10 @@ void CSet::Deal_BuJu_Z()
 	pEdit->GetWindowText(tempstr);
 	if(tempstr.IsEmpty())
 	{
-		AfxMessageBox("输入步距不能为空!",MB_ICONSTOP);	
-		
+		AfxMessageBox("输入步距不能为空!",MB_ICONSTOP);
+
 	}
-    else 
+    else
 	{
 		////////////////////////////////////////////////////
 		BuJuCountSave[m++] = 1;
@@ -972,24 +972,24 @@ void CSet::Deal_BuJu_Z()
 		}
 		BuJuGeShu_Z=BuJuGeShu_Z+1;
 	}
-	return;	
+	return;
 }
-void CSet::Ontest() 
+void CSet::Ontest()
 {
 	// TODO: Add your control notification handler code here
 	CString str;
 	//	init();
 	//	Deal_PaiJu_Y();
-	
+
 	str.Format("a:%d,b:%d,c:%d,dc:%d",a,b,c,dc);
 	AfxMessageBox(str);
 }
 
 
 
-void CSet::OnChangeZhuJuX() 
+void CSet::OnChangeZhuJuX()
 {
-	CString str; 
+	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_ZhuJuX,str);
 	ZhuJuGeShu_X=atoi(str);
@@ -997,20 +997,20 @@ void CSet::OnChangeZhuJuX()
 	Length_X=ZhuJuGeShu_X*ZhuJu_X;
 }
 
-void CSet::OnChangeBuJuZ() 
+void CSet::OnChangeBuJuZ()
 {
 	return;
-   	CString str; 
+   	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_BuJuZ,str);
 	BuJuGeShu_Z=atoi(str);
 	Length_Z=BuJuGeShu_Z*BuJu_Z;
-	
+
 }
 
-void CSet::OnChangeSaoDiGanGaoDu() 
+void CSet::OnChangeSaoDiGanGaoDu()
 {
-	CString str; 
+	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_SaoDiGanGaoDu,str);
 	SaoDiGanGaoDu=atof(str);
@@ -1018,12 +1018,12 @@ void CSet::OnChangeSaoDiGanGaoDu()
 	{
 		MessageBox("扫地杆距离地面高度应小于等于0.35m","提示:", MB_ICONEXCLAMATION);
 	}
-	
+
 }
 
-void CSet::OnChangeDingCengXuanBi() 
+void CSet::OnChangeDingCengXuanBi()
 {
-	CString str; 
+	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_DingCengXuanBi,str);
 	DingCengXuanBiChangDu=atof(str);
@@ -1033,7 +1033,7 @@ void CSet::OnChangeDingCengXuanBi()
 	}
 }
 
-void CSet::OnOutput() 
+void CSet::OnOutput()
 {
 	// TODO: Add your control notification handler code here
 	if(FALSE==AddDeviation())
@@ -1058,17 +1058,17 @@ void CSet::OnOutput()
     Deal_PaiJu_Y();
     Deal_ZhuJu_X();
     Deal_BuJu_Z();
-	
-	
+
+
 	if(BuJuGeShu_Z==0)
 	{
 		AfxMessageBox("步距输入无效，当前个数为0");
 		return ;
 	}
 	//BuJuGeShu_Z=BuJuGeShu_Z+4;
-	
+
 	NodeZongShu=BuJuGeShu_Z*ZhuJuGeShu_X*PaiJuGeShu_Y;
-	
+
     Node *NodeZong = new Node[10000];
 	memset(NodeZong,0,sizeof(NodeZong)/sizeof(NodeZong[0])*sizeof(Node));
 	/*vector < Node > NodeZong;
@@ -1080,10 +1080,10 @@ void CSet::OnOutput()
 	NodeZong[i].y=0;
 	NodeZong[i].z=0;
 }*/
-	
-	
-	
-	
+
+
+
+
 	////////////////////////////////////////////////////////////////////////////////
 	int BB,BB1,ZZ,ZZ1,PP,PP1;
     //Deal_PaiJu_Y();
@@ -1158,7 +1158,7 @@ void CSet::OnOutput()
 	CurZVal=SaoDiGanGaoDu;
 	CurXVal = 0.0;
 	int SDNodeStart=num;
-	
+
 	for(ZZ=-1;ZZ<Count_X;ZZ++)
 	{
 		if(ZZ==-1)
@@ -1510,7 +1510,7 @@ void CSet::OnOutput()
 		}
 	}
 
-	
+
 	fline XYline[10][30];//三维数组，一序号012分别表示垂直于xz,yz,xy方向，二序号表示第几层面，3序号表示某面斜线
 	memset(XYline,0,sizeof(XYline)/sizeof(XYline[0][0])*sizeof(fline));
 	countline=0;
@@ -1612,7 +1612,7 @@ void CSet::OnOutput()
 			else
 			{
 				XYline[i][countline].ye=XYline[i][countline].ys+maxX;
-				XYline[i][countline].ze=XZVal[2][i]; 
+				XYline[i][countline].ze=XZVal[2][i];
 				XYline[i][countline++].xe=0.0;
 			}
 		}
@@ -1680,7 +1680,7 @@ void CSet::OnOutput()
 			}
 		}
 	}*/
-	
+
 	//横杆2/2
 	element *Xelement = new element[4000];
 	memset(Xelement,0,sizeof(Xelement)/sizeof(Xelement[0])*sizeof(element));
@@ -1711,7 +1711,7 @@ void CSet::OnOutput()
 			//File1.WriteString(str);
 			//File1.WriteString("\n");
 		}
-		
+
 	}*/
 	HorizPoleNum = dy;
 	//立杆
@@ -1719,7 +1719,7 @@ void CSet::OnOutput()
 	memset(Zelement,0,sizeof(Zelement)/sizeof(Zelement[0])*sizeof(element));
 	tempcount=1;
 	for(vc=0;vc<=c+1;vc++)
-	{ 
+	{
 		for(qd=1+dc*vc;qd<=(a+1)*(b+1)+dc*vc;qd++)
 		{
 			zd=qd+dc;
@@ -1730,9 +1730,9 @@ void CSet::OnOutput()
 			//File1.WriteString(str);
 			//File1.WriteString("\n");
 		}
-		
+
 	}
-	
+
 	for(i=1;;i++)
 	{
 		if(Yelement[i].qd==0)
@@ -2451,7 +2451,7 @@ void CSet::OnOutput()
 			}
 		}
 	}
-	/////////////////////////////////////////////////	
+	/////////////////////////////////////////////////
 	///////////////重新计算生成X方向杆单元///////////////////////
 	memset(Xelement,0,sizeof(Xelement)/sizeof(Xelement[0])*sizeof(element));
 	tempcount=1;
@@ -2855,14 +2855,14 @@ void CSet::OnOutput()
 	NodeZong[SDNodeEnd+1].x=0.0;
 	NodeZong[SDNodeEnd+1].y=0.0;
 	NodeZong[SDNodeEnd+1].z=0.0;
-	
+
 	element XZscielement[10][200];
 	memset(XZscielement,0,sizeof(XZscielement)/sizeof(XZscielement[0][0])*sizeof(element));
 	Node tempNode[50];
 	memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
 	Node tempNode1[50];
 	memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
-	
+
 	int Node1count=1;
 	int scicount=1;
 	/*Node tempstart;
@@ -2930,12 +2930,12 @@ void CSet::OnOutput()
 			}
 		}
 	}
-	
+
 	element YZscielement[10][200];
 	memset(YZscielement,0,sizeof(YZscielement)/sizeof(YZscielement[0][0])*sizeof(element));
 	memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
 	memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
-	
+
 	Node1count=1;
 	scicount=1;
 	for(l=0;;l++)
@@ -2999,12 +2999,12 @@ void CSet::OnOutput()
 			}
 		}
 	}
-		
+
 	element XYscielement[10][200];
 	memset(XYscielement,0,sizeof(XYscielement)/sizeof(XYscielement[0][0])*sizeof(element));
 	memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
 	memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
-	
+
 	Node1count=1;
 	scicount=1;
 	for(l=0;;l++)
@@ -3071,35 +3071,35 @@ void CSet::OnOutput()
 	//**********************单元************************/
 	int MeiCengDanYuanShu=0;
 	int ZongDanYuanShu=0;
-	
-	
-	
+
+
+
 	//***********************文件输出****************//
-	
+
 	CStdioFile  File1;
 	CString filename;
 	CString filename1;
 	CString fileext;//文件扩展名
 	CString filepathname;
 	CFileDialog fpdlg(FALSE,  NULL,  NULL,OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,"(文件类型)(*.mct)|*.mct|(文件类型)(*.txt)|*.txt|所有文件(*.*)|*.*||",NULL);
-	
+
 	if(fpdlg.DoModal() == IDOK)
 	{
 		filename = fpdlg.GetFileName();
 		fileext = fpdlg.GetFileExt();//文件扩展名
-		filepathname = fpdlg.GetPathName(); 
+		filepathname = fpdlg.GetPathName();
 	}
 	else if (fpdlg.DoModal() == IDCANCEL)
 	{
 		AfxMessageBox("没有读取sgy文件");
 		return;
 	}
-	
+
 	filename1=filename;
 	File1.Open(filename1,CFile::modeCreate|CFile::modeReadWrite);//如果文件事先不存在的话，就需要CFile::modeCreate，否则就不需要。
 	// str=_T("     计算结果如下:         ");
 	// File1.WriteString(str);
-	// File1.WriteString("\n");	   
+	// File1.WriteString("\n");
 	str.Format(";---------------------------------------------------------------------------\n");
 	File1.WriteString(str);
 	str.Format(";  MIDAS/Civil Text(MCT) File.\n");
@@ -3113,15 +3113,15 @@ void CSet::OnOutput()
 	File1.WriteString(str);
 	str.Format("*UNIT    ; Unit System\n; FORCE, LENGTH, HEAT, TEMPER\n   KN   , M, KJ, C\n\n");
 	File1.WriteString(str);
-	
-	
-	
-	
+
+
+
+
 	//***************************节点输出前缀*************************//
 	str=_T("*NODE    ; Nodes");
 	File1.WriteString(str);
 	File1.WriteString("\n");
-	
+
 	str=_T("; iNO, X, Y, Z");
 	File1.WriteString(str);
 	File1.WriteString("\n");
@@ -3207,7 +3207,7 @@ void CSet::OnOutput()
 		}
 	}
 	int XYJDNodeEnd=XYJDNodeStart+tempcount;
-	
+
 	//***************************非斜向单元输出************************//
 	str=_T("*ELEMENT ");
 	File1.WriteString(str);
@@ -3356,24 +3356,20 @@ void CSet::OnOutput()
 	File1.WriteString(str);
 	str.Format("XY剪刀撑节点,%dto%d,,0\n",XYJDNodeStart,XYJDNodeEnd);
 	File1.WriteString(str);
-	
-	delete NodeZong;
-	delete Xelement;
-	delete Yelement;
-	delete Zelement;
-	delete SDelement;
 
-	File1.Close();
-	AfxMessageBox("success");
-	return;
-	
+
+
+	//File1.Close();
+	//AfxMessageBox("success");
+	//return;
+
 	/*
 	Dim dy, dc, qd, zd As Integer
 	' dy单元编号 dc单层节点数，qd单元起点节点号，zd单元重点节点号
 	dy = 0
 	dc = (a + 1) * (b + 1)
 	*/
-	
+
 	/*a=ZhuJuGeShu_X-1;
 	b=PaiJuGeShu_Y-1;
 	c=BuJuGeShu_Z-3;//-3;田海涛20:00 2016/9/8
@@ -3388,7 +3384,7 @@ void CSet::OnOutput()
 	/////////////////////首次执行整个单元建模过程以计算总单元数////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
-	for(vc=2;vc<=c+1;vc++)
+	/*for(vc=2;vc<=c+1;vc++)
 	{
 		for(va=1;va<=a+1;va++)
 		{
@@ -3397,26 +3393,26 @@ void CSet::OnOutput()
 				dy=dy+1;
 			}
 		}
-		
+
 	}
 	//横杆2/2
 	for(vc=2;vc<=c+1;vc++)
-	{ 
+	{
 		for(qd=1+dc*vc;qd<=a*(b+1)+dc*vc;qd++)
 		{
 			dy=dy+1;
 		}
-		
+
 	}
 	HorizPoleNum = dy;
 	//立杆
 	for(vc=0;vc<=c+1;vc++)
-	{ 
+	{
 		for(qd=1+dc*vc;qd<=(a+1)*(b+1)+dc*vc;qd++)
 		{
 			dy=dy+1;
 		}
-		
+
 	}
 	int ZCount=0;
 	int ZNum[20];
@@ -3501,7 +3497,7 @@ void CSet::OnOutput()
 	//AfxMessageBox("success");
 	//return;
 	//File1.WriteString(";;横桥向剪刀撑\n");
-	
+
 	//////////////////////////////////////////////////////////
 	///////////////////////横桥向剪刀撑//////////////////////////////
 	for(i=0;i<=(ZhuJuGeShu_X-1-1)/5+1;i++)
@@ -3570,7 +3566,7 @@ void CSet::OnOutput()
 			}
 		}
 	}
-	
+
 	///////////////////////顺桥向剪刀撑//////////////////////////////
 	for(i=0;i<=(PaiJuGeShu_Y-1-1)/5+1;i++)
 	{
@@ -3637,8 +3633,8 @@ void CSet::OnOutput()
 					break;
 			}
 		}
-	}
-	
+	}*/
+
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	////////////////////////以下过程才开始执行整个单元建模过程//////////////////////////
@@ -3665,9 +3661,9 @@ void CSet::OnOutput()
 				File1.WriteString("\n");
 				}
 				}
-				
+
 				  }
-				  
+
 					//横杆2/2
 					element Xelement[2000];
 					memset(Xelement,0,sizeof(Xelement)/sizeof(Xelement[0])*sizeof(element));
@@ -3684,7 +3680,7 @@ void CSet::OnOutput()
 					File1.WriteString(str);
 					File1.WriteString("\n");
 					}
-					
+
 					  }
 					  HorizPoleNum = dy;
 					  //立杆
@@ -3692,7 +3688,7 @@ void CSet::OnOutput()
 					  memset(Zelement,0,sizeof(Zelement)/sizeof(Zelement[0])*sizeof(element));
 					  tempcount=1;
 					  for(vc=0;vc<=c+1;vc++)
-					  { 
+					  {
 					  for(qd=1+dc*vc;qd<=(a+1)*(b+1)+dc*vc;qd++)
 					  {
 					  zd=qd+dc;
@@ -3703,7 +3699,7 @@ void CSet::OnOutput()
 					  File1.WriteString(str);
 					  File1.WriteString("\n");
 					  }
-					  
+
 						}
 						for(i=1;;i++)
 						{
@@ -3872,19 +3868,19 @@ void CSet::OnOutput()
 						}
 						str.Format(";///////////////////////////////////////我是分割线\n");
 						File1.WriteString(str);
-						
-						  
+
+
 							element XZscielement[2000];
 							memset(XZscielement,0,sizeof(XZscielement)/sizeof(XZscielement[0])*sizeof(element));
 							Node tempNode[50];
 							memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
 							Node tempNode1[50];
 							memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
-							
+
 							  int Node1count=1;
 							  int scicount=1;
 							  /*Node tempstart;
-							  tempcount=1; 
+							  tempcount=1;
 							  tempNode.y=0.0;
 tempstart.y=0.0;*/
 /*for(i=0;i<countline;i++)
@@ -3945,13 +3941,13 @@ XZscielement[scicount++].ze=tempNode1[j+1].z;
 	//Yelement[tempcount].qd=qd;
 	//Yelement[tempcount++].zd=zd;
 	File1.WriteString(str);
-	}*/
+	}
 str.Format("scicount=%d",scicount-1);
 AfxMessageBox(str);
 File1.Close();
 AfxMessageBox("success");
 return;
-
+*/
 /*for(i=0;i<countline;i++)
 {
 int temps=0,tempe=0;
@@ -3973,12 +3969,12 @@ str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,temps,tem
 File1.WriteString(str);
 File1.WriteString("\n");
 }
-	}*/
+	}
 //str.Format("countline=%d,tempZ-%.2f,tempY-%.2f,tempX-%.2f",countline,tempZ,tempY,tempX);
 //AfxMessageBox(str);
 File1.Close();
 AfxMessageBox("success");
-return;
+return;*/
 /*int ZCount=0;
 int ZNum[20];
 float tempZDate=0.0;
@@ -4002,7 +3998,7 @@ if(ZNum[ZCount-1]!=1+ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z-1))
 ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z-2);
 	}*/
 //////////////////////水平剪刀撑///////////////////////////
-for(i=0;i<ZCount;i++)
+/*for(i=0;i<ZCount;i++)
 {
 	//int Max=ZhuJuGeShu_X>PaiJuGeShu_Y?ZhuJuGeShu_X:PaiJuGeShu_Y;
 	//int Min=ZhuJuGeShu_X<PaiJuGeShu_Y?ZhuJuGeShu_X:PaiJuGeShu_Y;
@@ -4273,7 +4269,7 @@ for(i=0;i<=(PaiJuGeShu_Y-1-1)/5+1;i++)
 		}
 	}
 }
-
+*/
 
 
 qy = 1.1 * (GangJinHunNingTu + MoBanFangLeng);
@@ -4285,7 +4281,7 @@ if (DiYiCiYuYa + DiErCiYuYa + DiSanCiYuYa > 1.4) //Then
 }
 //************Lines = Lines & readFile("d:\参数化建模\支架文件\GROUP.mct")**********//
 
-str.Format("*GROUP    ; Group; NAME, NODE_LIST, ELEM_LIST, PLANE_TYPE",1,1,qd,zd,0);
+/*str.Format("*GROUP    ; Group; NAME, NODE_LIST, ELEM_LIST, PLANE_TYPE",1,1,qd,zd,0);
 File1.WriteString(str);
 File1.WriteString("\n");
 
@@ -4315,7 +4311,7 @@ File1.WriteString("\n");
 
 str.Format("%s ,,    %d   %s   %d","剪刀撑",m3+1,"to",dy);
 File1.WriteString(str);
-File1.WriteString("\n");
+File1.WriteString("\n");*/
 
 
 //'边界组、荷载组定义
@@ -4327,7 +4323,7 @@ File1.WriteString("\n");
 str=_T("; NAME");
 File1.WriteString(str);
 File1.WriteString("\n");
-str=_T("地基支撑\n铰接\n横杆-立杆\n剪刀撑-立杆");
+str=_T("地基支撑\n铰接\n横杆-立杆\n剪刀撑-立杆\n剪刀撑-横杆");
 File1.WriteString(str);
 File1.WriteString("\n");
 File1.WriteString("\n");
@@ -4346,7 +4342,10 @@ File1.WriteString("\n");
 str=_T("预压第三次");
 File1.WriteString(str);
 File1.WriteString("\n");
-str=_T("浇筑第一次");
+str=_T("浇筑第一次-腹板");
+File1.WriteString(str);
+File1.WriteString("\n");
+str=_T("浇筑第一次-底板");
 File1.WriteString(str);
 File1.WriteString("\n");
 str=_T("浇筑第二次");
@@ -5036,9 +5035,7 @@ File1.WriteString(str);
 File1.WriteString("\n");
 str=_T("   风荷载, D , ");
 File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-File1.WriteString("\n");
+File1.WriteString("\n\n\n");
 
 
 
@@ -5057,7 +5054,7 @@ File1.WriteString("\n");
 //Lines = Lines & "1to" & dc & ",001000,地基" & vbCrLf
 //str.Format("%s  %d  , %s", "1 to" ,dc ,"001000,地基");//田海涛
 dc=ZhuJuGeShu_X*PaiJuGeShu_Y;
-str.Format("%s  %d  , %s", "1 to" ,dc ,"111000,地基支撑");
+str.Format("1 to  %d  , 111000,地基支撑", dc);
 File1.WriteString(str);
 File1.WriteString("\n\n");
 
@@ -5067,13 +5064,13 @@ str = _T("; ELEM_LIST, bVALUE, FLAG-i, Fxi, Fyi, Fzi, Mxi, Myi, Mzi        ; 1st
 File1.WriteString(str);
 str = _T(";                    FLAG-j, Fxj, Fyj, Fzj, Mxj, Myj, Mzj, GROUP ; 2nd line\n");
 File1.WriteString(str);
-HorizPoleNum=m2;//表示横向杆件总数
+//HorizPoleNum=m2;//表示横向杆件总数
 float Mx=0.0,My=0.0;//田海涛修改
 ((CEdit*)GetDlgItem(IDC_EDIT_HENG_MX))->GetWindowText(tempstr);
 Mx=atof(tempstr);
 ((CEdit*)GetDlgItem(IDC_EDIT_HENG_MY))->GetWindowText(tempstr);
 My=atof(tempstr);
-for(i=1;i<=HorizPoleNum;i++)
+for(i=YelementStart;i<=XelementEnd;i++)
 {
 	str.Format("     %d,  YES, 000110, 0, 0, 0, %.2f, %.2f, 0\n             000110, 0, 0, 0, %.2f, %.2f, 0, 横杆-立杆\n",i,Mx,My,Mx,My);
 	File1.WriteString(str);
@@ -5084,9 +5081,14 @@ File1.WriteString("\n");
 Mx=atof(tempstr);
 ((CEdit*)GetDlgItem(IDC_EDIT_TRIM_MY))->GetWindowText(tempstr);
 My=atof(tempstr);
-for(i=m3+1;i<=dy;i++)
+for(i=XZelementStart;i<=YZelementEnd;i++)
 {
 	str.Format("     %d,  YES, 000110, 0, 0, 0, %.2f, %.2f, 0\n             000110, 0, 0, 0, %.2f, %.2f, 0, 剪刀撑-立杆\n",i,Mx,My,Mx,My);
+	File1.WriteString(str);
+}
+for(i=XYelementStart;i<=XYelementEnd;i++)
+{
+	str.Format("     %d,  YES, 000110, 0, 0, 0, %.2f, %.2f, 0\n             000110, 0, 0, 0, %.2f, %.2f, 0, 剪刀撑-横杆\n",i,Mx,My,Mx,My);
 	File1.WriteString(str);
 }
 
@@ -5134,8 +5136,18 @@ File1.WriteString("\n");
 
 //qq5 = -JiaoZhuZhenDao/((b - 1) * (a + 1));
 qq5 = -JiaoZhuZhenDao/((PaiJuGeShu_Y - 2) *ZhuJuGeShu_X);
-
-for (int yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+for (i=1;; i++)
+{
+	if (NodeZong[i].Num==0)
+		break;
+		if (fabs(NodeZong[i].z-maxZ)<0.005)
+		{
+			str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qq5,0,0,0,"浇筑及振捣");
+			File1.WriteString(str);
+			File1.WriteString("\n");
+		}
+}
+/*for (int yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 {
 	for ( u = (BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+2+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
 	{
@@ -5144,7 +5156,7 @@ for (int yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 		File1.WriteString(str);
 		File1.WriteString("\n");
 	}
-}
+}*/
 
 //'施工人员材料机械荷载定义
 //Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-q4.mct")
@@ -5170,7 +5182,18 @@ File1.WriteString("\n");
 
 
 qq4 = -RenChaiJi/((PaiJuGeShu_Y-2)*ZhuJuGeShu_X);
-for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+for (i=1;; i++)
+{
+	if (NodeZong[i].Num==0)
+		break;
+	if (fabs(NodeZong[i].z-maxZ)<0.005)
+	{
+		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qq4,0,0,0,"施工人员机械");
+		File1.WriteString(str);
+		File1.WriteString("\n");
+	}
+}
+/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 {
 	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+2+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
 	{
@@ -5179,7 +5202,7 @@ for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 		File1.WriteString(str);
 		File1.WriteString("\n");
 	}
-}
+}*/
 //'第一次预压荷载定义
 //Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-y1.mct")
 str=_T("; End of data for load case [施工人员、材料、设备] -------------------------");
@@ -5203,8 +5226,19 @@ File1.WriteString("\n");
 //	b=PaiJuGeShu_Y-1;
 //	c=BuJuGeShu_Z-3;
 
-qy1 = -DiYiCiYuYa * qy / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);
-for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+qy1 = -DiYiCiYuYa * qy / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);//选择的对象不存在!!!
+for (i=1;; i++)
+{
+	if (NodeZong[i].Num==0)
+		break;
+	if (fabs(NodeZong[i].z-maxZ)<0.005)
+	{
+		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qy1,0,0,0,"预压第一次");
+		File1.WriteString(str);
+		File1.WriteString("\n");
+	}
+}
+/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 {
 	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
 	{//u = (c + 2) * dc + 4 + yyy * (b + 1) ;u<= (c + 2) * dc + b - 2 + yyy * (b + 1);u++
@@ -5213,7 +5247,7 @@ for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 		File1.WriteString(str);
 		File1.WriteString("\n");
 	}
-}
+}*/
 //'第二次预压荷载定义
 //Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-y2.mct")
 str=_T("; End of data for load case [预压荷载1] -------------------------");
@@ -5233,8 +5267,19 @@ File1.WriteString("\n");
 
 
 
-qy2 = -DiErCiYuYa * qy / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);
-for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+qy2 = -DiErCiYuYa * qy / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);//选择的对象不存在!!!
+for (i=1;; i++)
+{
+	if (NodeZong[i].Num==0)
+		break;
+	if (fabs(NodeZong[i].z-maxZ)<0.005)
+	{
+		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qy2,0,0,0,"预压第二次");
+		File1.WriteString(str);
+		File1.WriteString("\n");
+	}
+}
+/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 {
 	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
 	{
@@ -5243,7 +5288,7 @@ for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 		File1.WriteString(str);
 		File1.WriteString("\n");
 	}
-}
+}*/
 //'第三次预压荷载定义
 //Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-y3.mct")
 str=_T("; End of data for load case [预压荷载2] -------------------------");
@@ -5262,8 +5307,19 @@ File1.WriteString(str);
 File1.WriteString("\n");
 
 
-qy3 = -DiSanCiYuYa * qy / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);
-for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+qy3 = -DiSanCiYuYa * qy / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);//选择的对象不存在!!!
+for (i=1;; i++)
+{
+	if (NodeZong[i].Num==0)
+		break;
+	if (fabs(NodeZong[i].z-maxZ)<0.005)
+	{
+		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qy3,0,0,0,"预压第三次");
+		File1.WriteString(str);
+		File1.WriteString("\n");
+	}
+}
+/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 {
 	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
 	{
@@ -5272,7 +5328,7 @@ for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 		File1.WriteString(str);
 		File1.WriteString("\n");
 	}
-}
+}*/
 //'第一次浇筑荷载定义
 //Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-j1.mct")
 str=_T("; End of data for load case [预压荷载3] -------------------------");
@@ -5293,7 +5349,18 @@ File1.WriteString("\n");
 
 
 qj1 = -DiYiCiJiaoZhu * GangJinHunNingTu / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);
-for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+for (i=1;; i++)
+{
+	if (NodeZong[i].Num==0)
+		break;
+	if (fabs(NodeZong[i].z-maxZ)<0.005)
+	{
+		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qy1,0,0,0,"浇筑第一次-腹板");//此处待添加浇筑第一次-底板
+		File1.WriteString(str);
+		File1.WriteString("\n");
+	}
+}
+/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 {
 	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
 	{
@@ -5302,7 +5369,7 @@ for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 		File1.WriteString(str);
 		File1.WriteString("\n");
 	}
-}
+}*/
 
 //'第二次浇筑荷载定义
 //Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-j2.mct")
@@ -5324,7 +5391,18 @@ File1.WriteString("\n");
 
 
 qj2 = -DiErCiJiaoZhu * GangJinHunNingTu / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);
-for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+for (i=1;; i++)
+{
+	if (NodeZong[i].Num==0)
+		break;
+	if (fabs(NodeZong[i].z-maxZ)<0.005)
+	{
+		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qy1,0,0,0,"浇筑第二次");
+		File1.WriteString(str);
+		File1.WriteString("\n");
+	}
+}
+/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 {
 	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
 	{
@@ -5333,7 +5411,7 @@ for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 		File1.WriteString(str);
 		File1.WriteString("\n");
 	}
-}
+}*/
 
 //Print #2, Lines
 //Lines = ""
@@ -5359,16 +5437,27 @@ File1.WriteString("\n");
 
 
 qq2 = -MoBanFangLeng / ((PaiJuGeShu_Y-2) * ZhuJuGeShu_X);
-for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+for (i=1;; i++)
 {
-	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+2+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
+	if (NodeZong[i].Num==0)
+		break;
+	if (fabs(NodeZong[i].z-maxZ)<0.005)
 	{
-		//Lines = Lines & u & ",0,0," & qq2 & ",0,0,0,模板方楞等" & vbCrLf 
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qq2,0,0,0,"模板方楞等");
+		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qq2,0,0,0,"模板方楞等");
 		File1.WriteString(str);
 		File1.WriteString("\n");
 	}
 }
+/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+{
+	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+2+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
+	{
+		//Lines = Lines & u & ",0,0," & qq2 & ",0,0,0,模板方楞等" & vbCrLf
+		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qq2,0,0,0,"模板方楞等");
+		File1.WriteString(str);
+		File1.WriteString("\n");
+	}
+}*/
 //'附加构件等荷载定义
 //Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-q3.mct")
 str=_T("; End of data for load case [模板、支撑梁] -------------------------");
@@ -5388,7 +5477,8 @@ File1.WriteString("\n");
 
 
 
-qq3 = -FuJiaGouJian / (2*ZhuJuGeShu_X);
+qq3 = -FuJiaGouJian / (2*ZhuJuGeShu_X);//选择的对象不存在!!!
+int yyy=0;
 for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 {
 	u = (BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X + 1 + yyy * PaiJuGeShu_Y;
@@ -5431,17 +5521,31 @@ File1.WriteString("\n");
 
 
 qq6 = FengHeZai / (3 * ZhuJuGeShu_X);
-for (int xxx = 0 ;xxx<= 2;xxx++)
+for (i=1;; i++)
+{
+	if (NodeZong[i].Num==0)
+		break;
+	if (fabs(NodeZong[i].x-maxX)<0.005)
+	{
+		if(fabs(NodeZong[i].z-0.3-XiaBuTuoChengGaoDu)>0.005)
+		{
+		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qq6,0,0,0,"风荷载");
+		File1.WriteString(str);
+		File1.WriteString("\n");
+		}
+	}
+}
+/*for (int xxx = 0 ;xxx<= 2;xxx++)
 {
 	for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 	{
 		u = (BuJuGeShu_Z-3)*ZhuJuGeShu_X*PaiJuGeShu_Y + 1 + yyy * PaiJuGeShu_Y + ZhuJuGeShu_X*PaiJuGeShu_Y * xxx;
-		//Lines = Lines & u & ",0," & qq6 & ",0,0,0,0,风荷载" & vbCrLf 
+		//Lines = Lines & u & ",0," & qq6 & ",0,0,0,0,风荷载" & vbCrLf
 		str.Format("%d , %d , %f , %d , %d , %d , %d , %s",u,0,qq6,0,0,0,0,"风荷载");
 		File1.WriteString(str);
 		File1.WriteString("\n");
 	}
-}
+}*/
 //'荷载组合
 //Lines = Lines & readFile("d:\参数化建模\支架文件\LOADCOMB.mct")
 str=_T("; End of data for load case [风荷载] -------------------------");
@@ -5621,8 +5725,12 @@ File1.WriteString("\n");
 //End Sub
 
 
-num=1;
-
+//num=1;
+delete NodeZong;
+delete Xelement;
+delete Yelement;
+delete Zelement;
+delete SDelement;
 File1.Close();
 AfxMessageBox("success");
 return;
@@ -5646,11 +5754,11 @@ void CSet::init()
 	{
 		PaiJuDataSave[q]=0;
 	}
-	
-	
+
+
 }
 
-BOOL CSet::OnInitDialog() 
+BOOL CSet::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	InitVal();
@@ -5660,18 +5768,18 @@ BOOL CSet::OnInitDialog()
 	//m_Control_ZhuJu_X
 	//m_button_Output.SetSkin(IDB_PUTONG_WAICENG,IDB_PUTONG_WAICENG,IDB_PUTONG_WAICENG,IDB_MASK_WAICENG,0,IDB_MASK_WAICENG,0,0,0);
 	//m_button_Clear.SetSkin(IDB_PUTONG_WAICENG,IDB_PUTONG_WAICENG,IDB_PUTONG_WAICENG,IDB_MASK_WAICENG,0,IDB_MASK_WAICENG,0,0,0);
-	
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void CSet::OnClear() 
+void CSet::OnClear()
 {
     BuJuGeShu_Z=0;
 	ZhuJuGeShu_X=0;
 	PaiJuGeShu_Y=0;
 	init();
-	
+
    	m_ZhuJuX.Empty();
 	m_PaiJu_Y.Empty();
 	m_BujuZ.Empty();
@@ -5688,9 +5796,9 @@ void CSet::OnClear()
 	m_DiSanCiYuYa.Empty();
 	m_DiYiCiJiaoZhu.Empty();
 	m_DiErCiJiaoZhu.Empty();
-	
-	
-	
+
+
+
 	m_Control_ZhuJu_X.SetCurSel(-1);
 	m_Control_BuJu_Z.SetCurSel(-1);
 	Sort=0;
@@ -5702,16 +5810,16 @@ void CSet::OnClear()
 	Length_X=0;
 	Length_Y=0;
 	Length_Z=0;
-	
-	
+
+
 	ini_GangJinHunNingTu=0.0;
 	ini_MoBanFangLeng=0.0;
 	ini_FuJiaGouJian=0.0;
 	ini_RenChaiJi=0.0;
 	ini_JiaoZhuZhenDao=0.0;
 	ini_FengHeZai=0.0;
-	
-	
+
+
 	//************************修改VB程序设定的变量************************//
 	a=0;
 	c=0;;
@@ -5720,9 +5828,9 @@ void CSet::OnClear()
 	dc=0      ;            //单层节点数
 	qd=  0      ;           //单元前节点
 	zd=  0      ;           //单元后节点
-	
+
 	//************************修改VB程序斜向单元设定的变量****************************//
-	
+
 	J1=1;
 	j2=1;
 	i1=1;
@@ -5734,12 +5842,12 @@ void CSet::OnClear()
 	k2=0;
 	k3=0;
 	k4=0;
-	
+
 	//************************循环变量设定*************************//
 	xx=0;     //专业循环变量
 	yy=0;     //专业循环变量
 	zz=0;     //专业循环变量
-	rr=0; 
+	rr=0;
 	tt=0;
 	kk=0;
 	yj1=0;
@@ -5749,24 +5857,24 @@ void CSet::OnClear()
 	ff=0;
 	cc=0;
 	xi1=0;
-	
+
 	m1=0;
 	m2=0;
 	m3=0;
 	u=0;
 	qy=0;
-	
-	
-	
+
+
+
 	UpdateData(FALSE);
-	
+
 }
 
-void CSet::OnButtonInputexcel() 
+void CSet::OnButtonInputexcel()
 {
 	CFileDialog file(TRUE,NULL,NULL,OFN_HIDEREADONLY|OFN_OVERWRITEPROMPT,_T("EXCEL文件t(*.xls;*.xlsx)|*.xls;*.xlsx||"),AfxGetMainWnd());
 	if(file.DoModal()!=IDOK)
-	{   
+	{
 		AfxMessageBox("选择窗口未打开");
 		return;
 	}
@@ -5795,25 +5903,25 @@ void CSet::OnButtonInputexcel()
 	COleVariant vResult;
 	COleVariant covTrue((short)TRUE);
 	COleVariant covFalse((short)FALSE);
-	COleVariant covOptional((long)DISP_E_PARAMNOTFOUND, VT_ERROR);	
+	COleVariant covOptional((long)DISP_E_PARAMNOTFOUND, VT_ERROR);
 	//创建Excel服务器(启动Excel)
 	if(!app.CreateDispatch("Excel.Application"))
 	{
 		AfxMessageBox("无法启动Excel服务器!");
 		return;
 	}
-	app.SetVisible(FALSE);          //使Excel不可见	
+	app.SetVisible(FALSE);          //使Excel不可见
 	books.AttachDispatch(app.GetWorkbooks());
 	//CString strFile = "E:\\Desktop\\梁单元应力0611.xlsx";
-	lpDisp = books.Open(strFile, 
+	lpDisp = books.Open(strFile,
 		covOptional, covFalse, covOptional, covOptional, covOptional,
 		covOptional, covOptional, covOptional, covOptional, covOptional,
 		covOptional, covOptional, covOptional, covOptional);
-	
+
 	//得到Workbook
 	book.AttachDispatch(lpDisp);
 	//CString bookname = book.GetName();
-	
+
 	//得到Worksheets
 	//CString tempstr = "梁单元应力";
 	//sheets.Select(COleVariant(tempstr));
@@ -5824,11 +5932,11 @@ void CSet::OnButtonInputexcel()
 		lpDisp=sheets.GetItem(COleVariant(short(i+1)));//book.GetActiveSheet();
 		sheet.AttachDispatch(lpDisp);
 		if(sheet.GetName()=="Sheet1")
-			break;	
+			break;
 	}
 	//sheetname.Format("sheet num = %d",i);
 	//AfxMessageBox(sheetname);
-	
+
 	int SheetNum = i;
 	int m_ValCount[8];
 	memset(m_ValCount,0,sizeof(m_ValCount)/sizeof(m_ValCount[0])*sizeof(int));
@@ -5896,19 +6004,19 @@ void CSet::OnButtonInputexcel()
 		lpDisp=sheets.GetItem(COleVariant(short(i+1)));//book.GetActiveSheet();
 		sheet.AttachDispatch(lpDisp);
 		//CString sheetname = sheet.GetName();
-		
+
 		//读取已经使用区域的信息，包括已经使用的行数、列数、起始行、起始列
 		usedRange.AttachDispatch(sheet.GetUsedRange());
 		range.AttachDispatch(usedRange.GetRows());
 		RowNum=range.GetCount();                   //已经使用的行数
 		range.ReleaseDispatch();
-		range.AttachDispatch(usedRange.GetColumns());	
+		range.AttachDispatch(usedRange.GetColumns());
 		ColNum=range.GetCount()-1;               //获取有效列数目，获取结果总比实际多1
 		EndCellCode.Format("%s%d",TranslateColName(ColNum),RowNum);
-		
+
 		V_VT(&key1) = VT_DISPATCH;                           // 排序时，关键字的vt设置为VT_DISPATCH
-		
-		V_DISPATCH(&key1) = sheet.GetRange(COleVariant("J1"),COleVariant("J1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序	
+
+		V_DISPATCH(&key1) = sheet.GetRange(COleVariant("J1"),COleVariant("J1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序
 		//range=sheet.GetRange(COleVariant(L"A1"),COleVariant(CellName));
 		if(i==0)// 选择对哪些区域内的单元格进行排序
 		{
@@ -5924,7 +6032,7 @@ void CSet::OnButtonInputexcel()
 		}
 		iRange.Sort(key1, xlAscending, vOpt, vOpt, xlAscending, vOpt,xlAscending,
 			xlNoHeader,vOpt,xlIgnoreCase,xlTopToBottom,xlPinYin,0,0,0); //设置排序 无标题时一定要设置为xlNoHeader  否则不起作用
-		
+
 		////////////////////////////////////////////////////////////////////////////
 		lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
 		iRange.AttachDispatch(lpDisp);
@@ -5935,8 +6043,8 @@ void CSet::OnButtonInputexcel()
 		olesaRead.Detach();
 		minJcodeCVal = CellsVal[0];
 		//AfxMessageBox(minJcodeCVal);
-		
-		
+
+
 		tempSCell.Format("C%d",RowNum);
 		tempECell.Format("C%d",RowNum+1);
 		lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
@@ -5947,7 +6055,7 @@ void CSet::OnButtonInputexcel()
 		GetValFromArry(&olesaRead,&CellsVal);
 		maxJcodeCVal = CellsVal[0];
 		//AfxMessageBox(maxJcodeCVal);
-		V_DISPATCH(&key1) = sheet.GetRange(COleVariant("C1"),COleVariant("C1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序	
+		V_DISPATCH(&key1) = sheet.GetRange(COleVariant("C1"),COleVariant("C1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序
 		if(i==0)
 			lpDisp = sheet.GetRange(COleVariant("C3"), COleVariant(EndCellCode));
 		else
@@ -5955,7 +6063,7 @@ void CSet::OnButtonInputexcel()
 		iRange.AttachDispatch(lpDisp);
 		iRange.Sort(key1, xlAscending, vOpt, vOpt, xlAscending, vOpt,xlAscending,
 			xlNoHeader,vOpt,xlIgnoreCase,xlTopToBottom,xlPinYin,0,0,0); //设置排序 无标题时一定要设置为xlNoHeader  否则不起作用
-		
+
 		m_ValCount[i]=0;
 		if(i==0)
 			SRow=3;
@@ -5985,7 +6093,7 @@ void CSet::OnButtonInputexcel()
 				GetValFromArry(&olesaRead,&CellsVal);
 				olesaRead.Detach();
 				m_GetDVal[i][m_ValCount[i]]=CellsVal[0];
-				
+
 				tempSCell.Format("H%d",SRow);
 				tempECell.Format("H%d",SRow+1);
 				lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
@@ -5995,7 +6103,7 @@ void CSet::OnButtonInputexcel()
 				GetValFromArry(&olesaRead,&CellsVal);
 				olesaRead.Detach();
 				m_GetHVal[i][m_ValCount[i]]=CellsVal[0];
-				
+
 				tempSCell.Format("J%d",SRow);
 				tempECell.Format("J%d",SRow+1);
 				lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
@@ -6006,16 +6114,16 @@ void CSet::OnButtonInputexcel()
 				olesaRead.Detach();
 				tempJVal = atof(CellsVal[0]);
 				m_GetJVal[i][m_ValCount[i]++].Format("%.4f",tempJVal/1000);
-				
+
 			}
 			SetProcess(100);
 		}
 	}
-	
-	
+
+
 	//book.Save();
     book.Close(covFalse,COleVariant(strFile),covOptional);
-    books.Close();      
+    books.Close();
     app.Quit();
 	range.ReleaseDispatch();
 	sheet.ReleaseDispatch();
@@ -6080,25 +6188,25 @@ void CSet::OnButtonInputexcel()
 
 
 
-void CSet::OnRadioG1() 
+void CSet::OnRadioG1()
 {
-	GradeID=5;	
+	GradeID=5;
 	((CButton*)GetDlgItem(IDC_RADIO_G1))->SetCheck(TRUE);
 	((CButton*)GetDlgItem(IDC_RADIO_G2))->SetCheck(FALSE);
 	((CButton*)GetDlgItem(IDC_RADIO_G3))->SetCheck(FALSE);
 }
 
-void CSet::OnRadioG2() 
+void CSet::OnRadioG2()
 {
-	GradeID=3;	
+	GradeID=3;
 	((CButton*)GetDlgItem(IDC_RADIO_G2))->SetCheck(TRUE);
 	((CButton*)GetDlgItem(IDC_RADIO_G1))->SetCheck(FALSE);
 	((CButton*)GetDlgItem(IDC_RADIO_G3))->SetCheck(FALSE);
 }
 
-void CSet::OnRadioG3() 
+void CSet::OnRadioG3()
 {
-	GradeID=2;	
+	GradeID=2;
 	((CButton*)GetDlgItem(IDC_RADIO_G3))->SetCheck(TRUE);
 	((CButton*)GetDlgItem(IDC_RADIO_G2))->SetCheck(FALSE);
 	((CButton*)GetDlgItem(IDC_RADIO_G1))->SetCheck(FALSE);
@@ -6120,12 +6228,12 @@ CString CSet::TranslateColName(long ColNum)
 	CString result("");
 	result.Format("%s",ColumnCode);
 	return result;
-	
+
 }
 
 void CSet::GetValFromArry(COleSafeArray* olesaRead, vector < CString >* Valbuf)
 {
-	
+
     VARIANT varItem;
     CString strItem;
     long index[2] = {0, 0};
@@ -6151,7 +6259,7 @@ void CSet::GetValFromArry(COleSafeArray* olesaRead, vector < CString >* Valbuf)
         {
             index[1] = j;
             olesaRead->GetElement(index, &varItem);
-			
+
             switch (varItem.vt)
             {
             case VT_R8:
@@ -6188,7 +6296,7 @@ void CSet::GetValFromArry(COleSafeArray* olesaRead, vector < CString >* Valbuf)
         }
     }
 }
-void CSet::OnButtonOutputword() 
+void CSet::OnButtonOutputword()
 {	//需先导入xls文件读取应力极值处单元号
 	int m=PaiJuGeShu_Y-1;//y向单元数
 	int n=ZhuJuGeShu_X-1;//x向单元数
@@ -6260,7 +6368,7 @@ void CSet::OnButtonOutputword()
 					else
 						L1_L6[i][j] = (m+1)*(n+1)*(r-3)+n*(m+1)*(r-1)+m*(n+1)*(r-1)+int(m/4.0*(j-2)+0.5)+m*(temp1>n?n:temp1)*i;
 				}
-			}		 
+			}
 		}
 		break;
 	case 2:
@@ -6276,12 +6384,12 @@ void CSet::OnButtonOutputword()
 					else
 						L1_L6[i][j] = (m+1)*(n+1)*(r-3)+n*(m+1)*(r-1)+m*(n+1)*(r-1)+int(m/4.0*(j-2)+0.5)+m*(temp1>n?n:temp1)*i;
 				}
-			}	 
+			}
 		}
 		break;
 	default:break;
 	}
-	
+
 	int L1_L3[2][3];
 	memset(L1_L3,0,sizeof(L1_L3)/sizeof(L1_L3[0][0])*sizeof(int));
 	for(i=0;i<2;i++)
@@ -6297,9 +6405,9 @@ void CSet::OnButtonOutputword()
 				L1_L3[i][j]=m*(n+1)*(r-1)+n*(m+1)*(r-1)-n+(temp1>n?n:temp1);
 		}
 	}
-	
+
 	CFileDialog dlg(FALSE,NULL,"*.doc",OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,"*.doc",NULL);
-	dlg.m_ofn.lpstrTitle = _T("导出到..."); 
+	dlg.m_ofn.lpstrTitle = _T("导出到...");
 	int rc= dlg.DoModal();
 	if(rc != IDOK)
     {
@@ -6316,7 +6424,7 @@ void CSet::OnButtonOutputword()
 		CWordOffice m_Word;
 		m_Word.Create();
 		m_Word.AddParagraph("碗扣式满堂支架监测方案\n\n",22,TRUE,"宋体",1,0);
-		
+
 		m_Word.AddParagraph("1.应力测点布置方案\n",12,TRUE,"宋体",0,2);
 		m_Word.AddParagraph("根据Midas/Civil有限元分析软件计算结果，"
 			"布置碗扣式满堂支架应力监测测点布置方案如下所示。\n",12,FALSE,"宋体",0,2);
@@ -6340,7 +6448,7 @@ void CSet::OnButtonOutputword()
 		m_Word.SetTableText(m_Word.m_wdTable,1,4,"荷载阶段",12,FALSE,"宋体",1);
 		m_Word.SetTableText(m_Word.m_wdTable,1,5,"应力值(MPa)",12,FALSE,"宋体",1);
 		CString OrderNum = "";
-		for(i=0,j=0;i<ValCount+GradeID*6;i++)	
+		for(i=0,j=0;i<ValCount+GradeID*6;i++)
 		{
 			OrderNum.Format("%d",i+1);
 			//m_Word.SetTableText(m_Word.m_wdTable,i+2,1,OrderNum,12,FALSE,"宋体",1);
@@ -6396,7 +6504,7 @@ void CSet::OnButtonOutputword()
 		m_Word.SetColWidth(m_Word.m_wdTable,2,12.9);
 		m_Word.SetColWidth(m_Word.m_wdTable,3,12.9);
 		m_Word.SetColWidth(m_Word.m_wdTable,4,15.2);
-		
+
 		tempLastCVal ="";
 		tempCount = 0;
 		for(i=0;i<ValCount0;i++)
@@ -6410,11 +6518,11 @@ void CSet::OnButtonOutputword()
 			ValCount0=ValCount0-tempCount;
 			tempLastCVal=GetCVal0[0];
 		}
-		
+
 		m_Word.AddParagraph("2.位移测点布置方案\n",12,TRUE,"宋体",0,2);
 		m_Word.AddParagraph("根据Midas/Civil有限元分析软件计算结果，"
 			"布置碗扣式满堂支架应力监测测点布置方案如下所示。\n",12,FALSE,"宋体",0,2);
-		
+
 		m_Word.InsertTable(ValCount0*5+1+6*5, 7);
 		m_Word.SetTableText(m_Word.m_wdTable,1,1,"序号",12,FALSE,"宋体",1);
 		m_Word.SetTableText(m_Word.m_wdTable,1,2,"单元编号",12,FALSE,"宋体",1);
@@ -6423,8 +6531,8 @@ void CSet::OnButtonOutputword()
 		m_Word.SetTableText(m_Word.m_wdTable,1,5,"Dx(mm)",12,FALSE,"宋体",1);
 		m_Word.SetTableText(m_Word.m_wdTable,1,6,"Dy(mm)",12,FALSE,"宋体",1);
 		m_Word.SetTableText(m_Word.m_wdTable,1,7,"Dz(mm)",12,FALSE,"宋体",1);
-		
-		for(i=0,j=0;i<ValCount0+6;i++)	
+
+		for(i=0,j=0;i<ValCount0+6;i++)
 		{
 			OrderNum = "";
 			OrderNum.Format("%d",i+1);
@@ -6496,13 +6604,13 @@ void CSet::OnButtonOutputword()
 				m_Word.SetTableText(m_Word.m_wdTable,i*5+2,2,OrderNum,12,FALSE,"宋体",1);
 				m_Word.SetTableText(m_Word.m_wdTable,i*5+2,3,GetXYZ(atoi(OrderNum),m,n,r),12,FALSE,"宋体",1);
 			}
-		}		
+		}
 		m_Word.SetColWidth(m_Word.m_wdTable,1,8.5);
 		m_Word.SetColWidth(m_Word.m_wdTable,2,12.9);
 		m_Word.SetColWidth(m_Word.m_wdTable,3,12.9);
 		m_Word.SetColWidth(m_Word.m_wdTable,4,16.0);
-		
-		
+
+
 		if(m_Word.SaveDocumentAs(dlg.GetPathName()))
 		{
 		/*			if(IDOK==AfxMessageBox("导出成功！是否立即打开?",MB_YESNO))
@@ -6517,8 +6625,8 @@ void CSet::OnButtonOutputword()
 			AfxMessageBox("导出失败！");
 		m_Word.CloseApp();
 	}
-	
-	
+
+
 }
 
 CString CSet::GetXYZ(int Num,int m,int n,int r)
@@ -6534,7 +6642,7 @@ CString CSet::GetXYZ(int Num,int m,int n,int r)
 		y=Num-((z-1)*(n+1)+x-1)*m;
 		result.Format("%d,%d,%d\ny向",x,y,z);
 		return result;
-		
+
 	}
 	if(Num<=m*(n+1)*(r-1)+n*(m+1)*(r-1))
 	{
@@ -6545,7 +6653,7 @@ CString CSet::GetXYZ(int Num,int m,int n,int r)
 		x=Num-m*(n+1)*(r-1)-((z-1)*(m+1)+y-1)*n;
 		result.Format("%d,%d,%d\nx向",x,y,z);
 		return result;
-		
+
 	}
 	else
 	{
@@ -6558,15 +6666,15 @@ CString CSet::GetXYZ(int Num,int m,int n,int r)
 		result.Format("%d,%d,%d\nz向",x,y,z);
 		return result;
 	}
-	
+
 }
 
-void CSet::OnButtonInputexcel2() 
+void CSet::OnButtonInputexcel2()
 {
 	CFileDialog file(TRUE,NULL,NULL,OFN_HIDEREADONLY|OFN_OVERWRITEPROMPT,_T("EXCEL文件t(*.xls;*.xlsx)|*.xls;*.xlsx||"),AfxGetMainWnd());
 	file.m_ofn.lpstrTitle = _T("导入位移文件...");
 	if(file.DoModal()!=IDOK)
-	{   
+	{
 		AfxMessageBox("选择窗口打开失败");
 		return;
 	}
@@ -6596,25 +6704,25 @@ void CSet::OnButtonInputexcel2()
     COleVariant vResult;
     COleVariant covTrue((short)TRUE);
     COleVariant covFalse((short)FALSE);
-    COleVariant covOptional((long)DISP_E_PARAMNOTFOUND, VT_ERROR);	
+    COleVariant covOptional((long)DISP_E_PARAMNOTFOUND, VT_ERROR);
     //创建Excel服务器(启动Excel)
     if(!app.CreateDispatch("Excel.Application"))
     {
         AfxMessageBox("无法启动Excel服务器!");
         return;
     }
-    app.SetVisible(FALSE);          //使Excel不可见	
+    app.SetVisible(FALSE);          //使Excel不可见
 	books.AttachDispatch(app.GetWorkbooks());
 	//CString strFile = "E:\\Desktop\\梁单元应力0611.xlsx";
-    lpDisp = books.Open(strFile, 
+    lpDisp = books.Open(strFile,
         covOptional, covFalse, covOptional, covOptional, covOptional,
         covOptional, covOptional, covOptional, covOptional, covOptional,
         covOptional, covOptional, covOptional, covOptional);
-	
+
     //得到Workbook
     book.AttachDispatch(lpDisp);
 	//CString bookname = book.GetName();
-	
+
     //得到Worksheets
 	//CString tempstr = "梁单元应力";
 	//sheets.Select(COleVariant(tempstr));
@@ -6624,9 +6732,9 @@ void CSet::OnButtonInputexcel2()
 		lpDisp=sheets.GetItem(COleVariant(short(i+1)));//book.GetActiveSheet();
 		sheet.AttachDispatch(lpDisp);
 		if(sheet.GetName()=="Sheet1")
-			break;	
+			break;
 	}
-	
+
 	int SheetNum = i;
 	int m_ValCount0[8];
 	memset(m_ValCount0,0,sizeof(m_ValCount0)/sizeof(m_ValCount0[0])*sizeof(int));
@@ -6692,7 +6800,7 @@ void CSet::OnButtonInputexcel2()
 	{
 		m_GetJVal0[i].resize(40);
 	}
-	
+
 	//如果有单元格正处于编辑状态中，此操作不能返回，会一直等待
 	SetProcess(0);
 	for(i=0;i<SheetNum;i++)
@@ -6700,19 +6808,19 @@ void CSet::OnButtonInputexcel2()
 		lpDisp=sheets.GetItem(COleVariant(short(i+1)));//book.GetActiveSheet();
 		sheet.AttachDispatch(lpDisp);
 		//CString sheetname = sheet.GetName();
-		
+
 		//读取已经使用区域的信息，包括已经使用的行数、列数、起始行、起始列
 		usedRange.AttachDispatch(sheet.GetUsedRange());
 		range.AttachDispatch(usedRange.GetRows());
 		RowNum=range.GetCount();                   //已经使用的行数
 		range.ReleaseDispatch();
-		range.AttachDispatch(usedRange.GetColumns());	
+		range.AttachDispatch(usedRange.GetColumns());
 		ColNum=range.GetCount()-1;               //获取有效列数目，获取结果总比实际多1
 		EndCellCode.Format("%s%d",TranslateColName(ColNum),RowNum);
-		
+
 		V_VT(&key1) = VT_DISPATCH;                           // 排序时，关键字的vt设置为VT_DISPATCH
-		
-		V_DISPATCH(&key1) = sheet.GetRange(COleVariant("H1"),COleVariant("H1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序	
+
+		V_DISPATCH(&key1) = sheet.GetRange(COleVariant("H1"),COleVariant("H1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序
 		//range=sheet.GetRange(COleVariant(L"A1"),COleVariant(CellName));              // 选择对哪些区域内的单元格进行排序
 		if(i==0)// 选择对哪些区域内的单元格进行排序
 		{
@@ -6728,7 +6836,7 @@ void CSet::OnButtonInputexcel2()
 		}
 		iRange.Sort(key1, xlAscending, vOpt, vOpt, xlAscending, vOpt,xlAscending,
 			xlNoHeader,vOpt,xlIgnoreCase,xlTopToBottom,xlPinYin,0,0,0); //设置排序 无标题时一定要设置为xlNoHeader  否则不起作用
-		
+
 		lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
 		iRange.AttachDispatch(lpDisp);
 		varRead = iRange.GetValue2();
@@ -6737,8 +6845,8 @@ void CSet::OnButtonInputexcel2()
 		olesaRead.Detach();
 		minHcodeCVal0 = CellsVal[0];
 		//AfxMessageBox(minHcodeCVal0);
-		
-		
+
+
 		tempSCell.Format("C%d",RowNum);
 		tempECell.Format("C%d",RowNum+1);
 		lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
@@ -6749,14 +6857,14 @@ void CSet::OnButtonInputexcel2()
 		GetValFromArry(&olesaRead,&CellsVal);
 		maxHcodeCVal0 = CellsVal[0];
 		//AfxMessageBox(maxJcodeCVal);
-		/*	V_DISPATCH(&key1) = sheet.GetRange(COleVariant("C1"),COleVariant("C1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序	
+		/*	V_DISPATCH(&key1) = sheet.GetRange(COleVariant("C1"),COleVariant("C1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序
 		lpDisp = sheet.GetRange(COleVariant("C3"), COleVariant(EndCellCode));
 		iRange.AttachDispatch(lpDisp);
 		iRange.Sort(key1, xlAscending, vOpt, vOpt, xlAscending, vOpt,xlAscending,
 		xlNoHeader,vOpt,xlIgnoreCase,xlTopToBottom,xlPinYin,0,0,0);*/ //设置排序 无标题时一定要设置为xlNoHeader  否则不起作用
 		/////////////////////////////////////////////////////////////////////////////////////////
-		
-		V_DISPATCH(&key1) = sheet.GetRange(COleVariant("I1"),COleVariant("I1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序	
+
+		V_DISPATCH(&key1) = sheet.GetRange(COleVariant("I1"),COleVariant("I1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序
 		//range=sheet.GetRange(COleVariant(L"A1"),COleVariant(CellName));              // 选择对哪些区域内的单元格进行排序
 		if(i==0)
 		{
@@ -6773,7 +6881,7 @@ void CSet::OnButtonInputexcel2()
 		iRange.AttachDispatch(lpDisp);
 		iRange.Sort(key1, xlAscending, vOpt, vOpt, xlAscending, vOpt,xlAscending,
 			xlNoHeader,vOpt,xlIgnoreCase,xlTopToBottom,xlPinYin,0,0,0); //设置排序 无标题时一定要设置为xlNoHeader  否则不起作用
-		
+
 		lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
 		iRange.AttachDispatch(lpDisp);
 		varRead = iRange.GetValue2();
@@ -6782,8 +6890,8 @@ void CSet::OnButtonInputexcel2()
 		olesaRead.Detach();
 		minIcodeCVal0 = CellsVal[0];
 		//AfxMessageBox(minJcodeCVal);
-		
-		
+
+
 		tempSCell.Format("C%d",RowNum);
 		tempECell.Format("C%d",RowNum+1);
 		lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
@@ -6794,15 +6902,15 @@ void CSet::OnButtonInputexcel2()
 		GetValFromArry(&olesaRead,&CellsVal);
 		maxIcodeCVal0 = CellsVal[0];
 		//AfxMessageBox(maxJcodeCVal);
-		/*	V_DISPATCH(&key1) = sheet.GetRange(COleVariant("C1"),COleVariant("C1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序	
+		/*	V_DISPATCH(&key1) = sheet.GetRange(COleVariant("C1"),COleVariant("C1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序
 		lpDisp = sheet.GetRange(COleVariant("C3"), COleVariant(EndCellCode));
 		iRange.AttachDispatch(lpDisp);
 		iRange.Sort(key1, xlAscending, vOpt, vOpt, xlAscending, vOpt,xlAscending,
 		xlNoHeader,vOpt,xlIgnoreCase,xlTopToBottom,xlPinYin,0,0,0);*/ //设置排序 无标题时一定要设置为xlNoHeader  否则不起作用
 		///////////////////////////////////////////////////////////////////////////////////
-		
-		V_DISPATCH(&key1) = sheet.GetRange(COleVariant("J1"),COleVariant("J1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序	
-		//range=sheet.GetRange(COleVariant(L"A1"),COleVariant(CellName)); 
+
+		V_DISPATCH(&key1) = sheet.GetRange(COleVariant("J1"),COleVariant("J1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序
+		//range=sheet.GetRange(COleVariant(L"A1"),COleVariant(CellName));
 		if(i==0)// 选择对哪些区域内的单元格进行排序
 		{
 			iRange = sheet.GetRange(COleVariant("C3"),COleVariant(EndCellCode));
@@ -6817,7 +6925,7 @@ void CSet::OnButtonInputexcel2()
 		}
 		iRange.Sort(key1, xlAscending, vOpt, vOpt, xlAscending, vOpt,xlAscending,
 			xlNoHeader,vOpt,xlIgnoreCase,xlTopToBottom,xlPinYin,0,0,0); //设置排序 无标题时一定要设置为xlNoHeader  否则不起作用
-		
+
 		lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
 		iRange.AttachDispatch(lpDisp);
 		varRead = iRange.GetValue2();
@@ -6826,8 +6934,8 @@ void CSet::OnButtonInputexcel2()
 		olesaRead.Detach();
 		minJcodeCVal0 = CellsVal[0];
 		//AfxMessageBox(minJcodeCVal);
-		
-		
+
+
 		tempSCell.Format("C%d",RowNum);
 		tempECell.Format("C%d",RowNum+1);
 		lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
@@ -6838,7 +6946,7 @@ void CSet::OnButtonInputexcel2()
 		GetValFromArry(&olesaRead,&CellsVal);
 		CString maxJcodeCVal0 = CellsVal[0];
 		//AfxMessageBox(maxJcodeCVal0);
-		V_DISPATCH(&key1) = sheet.GetRange(COleVariant("C1"),COleVariant("C1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序	
+		V_DISPATCH(&key1) = sheet.GetRange(COleVariant("C1"),COleVariant("C1"));   // 设置按哪个关键字进行排序 选择单元意为：按此列（或行）为主关键字进行排序
 		if(i==0)
 			lpDisp = sheet.GetRange(COleVariant("C3"), COleVariant(EndCellCode));
 		else
@@ -6878,7 +6986,7 @@ void CSet::OnButtonInputexcel2()
 				GetValFromArry(&olesaRead,&CellsVal);
 				olesaRead.Detach();
 				m_GetDVal0[i][m_ValCount0[i]]=CellsVal[0];
-				
+
 				tempSCell.Format("H%d",SRow);
 				tempECell.Format("H%d",SRow+1);
 				lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
@@ -6888,7 +6996,7 @@ void CSet::OnButtonInputexcel2()
 				GetValFromArry(&olesaRead,&CellsVal);
 				olesaRead.Detach();
 				m_GetHVal0[i][m_ValCount0[i]]=CellsVal[0];
-				
+
 				tempSCell.Format("I%d",SRow);
 				tempECell.Format("I%d",SRow+1);
 				lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
@@ -6898,7 +7006,7 @@ void CSet::OnButtonInputexcel2()
 				GetValFromArry(&olesaRead,&CellsVal);
 				olesaRead.Detach();
 				m_GetIVal0[i][m_ValCount0[i]] = CellsVal[0];
-				
+
 				tempSCell.Format("J%d",SRow);
 				tempECell.Format("J%d",SRow+1);
 				lpDisp = sheet.GetRange(COleVariant(tempSCell), COleVariant(tempECell));
@@ -6908,15 +7016,15 @@ void CSet::OnButtonInputexcel2()
 				GetValFromArry(&olesaRead,&CellsVal);
 				olesaRead.Detach();
 				m_GetJVal0[i][m_ValCount0[i]++] = CellsVal[0];
-				
+
 			}
 		}
 	}
-	
-	
+
+
 	//book.Save();
     book.Close(covFalse,COleVariant(strFile),covOptional);
-    books.Close();      
+    books.Close();
     app.Quit();
 	range.ReleaseDispatch();
 	sheet.ReleaseDispatch();
@@ -6961,7 +7069,7 @@ void CSet::OnButtonInputexcel2()
 						if(m_GetCVal0[j][i]==m_GetCVal0[k][l])//||m_GetIVal0[j][i]==m_GetIVal0[k][l]||m_GetJVal0[j][i]==m_GetJVal0[k][l])
 						{
 							//CString tempi = "";
-							
+
 							//tempi.Format("ValCount0 = %d",ValCount0);
 							//AfxMessageBox(tempi);
 							GetCVal0[ValCount0] = m_GetCVal0[k][l];
@@ -6982,12 +7090,12 @@ void CSet::OnButtonInputexcel2()
 	}
 	//AfxMessageBox(tempstr);
 	AfxMessageBox("读取位移数据成功！");
-	
+
 	return;
 }
 
 
-void CSet::OnButtonCaclu() 
+void CSet::OnButtonCaclu()
 {
 	CWinThread *pThread=AfxBeginThread(RUNTIME_CLASS(CUIThread));
 }
@@ -7005,32 +7113,32 @@ void CSet::SetProcess(int process)
 	Process=process;
 	UpdateData(TRUE);
 	AfxBeginThread(ThreadFunc,&Info);*/
-	
+
 }
 
-void CSet::OnChangeZhuJuX1() 
+void CSet::OnChangeZhuJuX1()
 {
 	// TODO: If this is a RICHEDIT control, the control will not
 	// send this notification unless you override the CDialog::OnInitDialog()
 	// function and call CRichEditCtrl().SetEventMask()
 	// with the ENM_CHANGE flag ORed into the mask.
-	
+
 	// TODO: Add your control notification handler code here
-	
+
 }
 
-void CSet::OnChangePaiJuY() 
+void CSet::OnChangePaiJuY()
 {
 	// TODO: If this is a RICHEDIT control, the control will not
 	// send this notification unless you override the CDialog::OnInitDialog()
 	// function and call CRichEditCtrl().SetEventMask()
 	// with the ENM_CHANGE flag ORed into the mask.
-	
+
 	// TODO: Add your control notification handler code here
-	
+
 }
 
-void CSet::OnButton1() 
+void CSet::OnButton1()
 {
 	int BB,BB1,ZZ,ZZ1,PP,PP1;
     Deal_PaiJu_Y();
@@ -7095,18 +7203,18 @@ void CSet::OnButton1()
 	AfxMessageBox("完成");
 }
 
-void CSet::OnChangeXiaTuoChengGaoDu() 
+void CSet::OnChangeXiaTuoChengGaoDu()
 {
-	CString str; 
+	CString str;
 	UpdateData(TRUE);
 	GetDlgItemText(IDE_XiaTuoChengGaoDu,str);
 	XiaBuTuoChengGaoDu=atof(str);
 	return;
-	
+
 }
 
 
-void CSet::OnAddWaijing() 
+void CSet::OnAddWaijing()
 {
 	CString tempstr;
 	CListCtrl* m_list=NULL;
@@ -7157,11 +7265,11 @@ void CSet::OnAddWaijing()
 	m_list->SetItemText(0,0,tempstr);
 	tempstr.Format("%d",Per);
 	m_list->SetItemText(0,1,tempstr);
-	
-	
+
+
 }
 
-void CSet::OnDelWaijing() 
+void CSet::OnDelWaijing()
 {
 	CListCtrl* m_list=NULL;
 	m_list=(CListCtrl*)GetDlgItem(IDC_LIST_WAIJING_WUCHA);
@@ -7172,7 +7280,7 @@ void CSet::OnDelWaijing()
 	}
 }
 
-void CSet::OnAddBihou() 
+void CSet::OnAddBihou()
 {
 	CString tempstr;
 	CListCtrl* m_list=NULL;
@@ -7222,10 +7330,10 @@ void CSet::OnAddBihou()
 	m_list->InsertItem(0,"");
 	m_list->SetItemText(0,0,tempstr);
 	tempstr.Format("%d",Per);
-	m_list->SetItemText(0,1,tempstr);	
+	m_list->SetItemText(0,1,tempstr);
 }
 
-void CSet::OnDelBihou() 
+void CSet::OnDelBihou()
 {
 	CListCtrl* m_list=NULL;
 	m_list=(CListCtrl*)GetDlgItem(IDC_LIST_BIHOU_WUCHA);
@@ -7284,24 +7392,24 @@ BOOL CSet::AddDeviation()
 			return FALSE;
 	}
 	return TRUE;
-	
+
 }
 
-void CSet::OnBtnTestzero() 
+void CSet::OnBtnTestzero()
 {
 /*typedef double (_stdcall * AddProc)(double,double);//定义函数指针类型
 
   HINSTANCE hInst;
-  
+
 	hInst=LoadLibrary("Zero.dll");//动态加载Dll
-	
+
 	  AddProc Max=(AddProc)GetProcAddress(hInst,"max");//获取Dll的导出函数
-	  
+
 		if(!Max)
 		{
 		MessageBox("获取Max函数地址失败！");
 		}
-		
+
 		  //double guess=Rand::Gauss(0.5,1.5);
 		  CString str="";
 		  str.Format("guess=%.4f",Max(1.5,2.6));
@@ -7309,7 +7417,7 @@ void CSet::OnBtnTestzero()
 	::FreeLibrary(hInst);//释放Dll函数*/
 }
 
-void CSet::OnBtnSection() 
+void CSet::OnBtnSection()
 {
 	CSection dlg;
 	dlg.DoModal();
@@ -7333,13 +7441,13 @@ void CSet::InitVal()
 	m_list->InsertColumn(1,"%",LVCFMT_CENTER,30);
 	m_list->InsertColumn(2,"ToTal(%)",LVCFMT_CENTER,70);
 	m_list->SetExtendedStyle(LVS_EX_GRIDLINES|LVS_EX_FULLROWSELECT);
-	
+
 	m_list=(CListCtrl*)GetDlgItem(IDC_LIST_BIHOU_WUCHA);
 	m_list->InsertColumn(0,"壁厚",LVCFMT_CENTER,50);
 	m_list->InsertColumn(1,"%",LVCFMT_CENTER,30);
 	m_list->InsertColumn(2,"ToTal(%)",LVCFMT_CENTER,70);
 	m_list->SetExtendedStyle(LVS_EX_GRIDLINES|LVS_EX_FULLROWSELECT);
-	
+
 	PaiJuGeShu_Y=0;
 	ZhuJuGeShu_X=0;
 	BuJuGeShu_Z=0;	// TODO: Add extra initialization here
@@ -7354,19 +7462,19 @@ void CSet::InitVal()
 	memset(D_Deviation_Per,0,sizeof(D_Deviation_Per)/sizeof(D_Deviation_Per[0])*sizeof(int));
 	memset(tw_Deviation,0,sizeof(tw_Deviation)/sizeof(tw_Deviation[0])*sizeof(double));
 	memset(tw_Deviation_Per,0,sizeof(tw_Deviation_Per)/sizeof(tw_Deviation_Per[0])*sizeof(int));
-	
+
 	int i=0;
 	SectionVal[i++]=20;
 	SectionVal[i++]=50;
 	SectionVal[i++]=110;
-	
+
 	SectionVal[i++]=200;
 	SectionVal[i++]=50;
 	SectionVal[i++]=250;
 	SectionVal[i++]=50;
 	SectionVal[i++]=250;
 	SectionVal[i++]=50;
-	
+
 	SectionVal[i++]=30;
 	SectionVal[i++]=30;
 	SectionVal[i++]=30;
@@ -7375,7 +7483,7 @@ void CSet::InitVal()
 	SectionVal[i++]=30;
 	SectionVal[i++]=30;
 	SectionVal[i++]=30;
-	
+
 	SectionVal[i++]=30;
 	SectionVal[i++]=30;
 	SectionVal[i++]=30;
@@ -7397,38 +7505,109 @@ void CSet::InitVal()
 void CSet::SudoINI()
 {
 	//获取exe路径
-    CString  strPath;   
-	GetModuleFileName(NULL,strPath.GetBufferSetLength(MAX_PATH+1),MAX_PATH);     
-	strPath.ReleaseBuffer();     
-	int nPos = strPath.ReverseFind('\\');     
-	strPath=strPath.Left(nPos);     
+    CString  strPath;
+	GetModuleFileName(NULL,strPath.GetBufferSetLength(MAX_PATH+1),MAX_PATH);
+	strPath.ReleaseBuffer();
+	int nPos = strPath.ReverseFind('\\');
+	strPath=strPath.Left(nPos);
 	strPath += "\\initval.ini";
-    //向INI文件中添加键值 
+    //向INI文件中添加键值
 	CString tempstr;
-	GetPrivateProfileString("初始edit值", "IDE_ZhuJu_X1", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath); 
+	GetPrivateProfileString("初始edit值", "IDE_ZhuJu_X1", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
 	SetDlgItemText(IDE_ZhuJu_X1, tempstr);
 	tempstr.ReleaseBuffer();
-	GetPrivateProfileString("初始edit值", "IDE_PaiJu_Y", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath); 
-	SetDlgItemText(IDE_PaiJu_Y, tempstr); 
+	GetPrivateProfileString("初始edit值", "IDE_PaiJu_Y", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_PaiJu_Y, tempstr);
 	tempstr.ReleaseBuffer();
-	GetPrivateProfileString("初始edit值", "IDE_BuJu_Z", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath); 
-	SetDlgItemText(IDE_BuJu_Z, tempstr); 
+	GetPrivateProfileString("初始edit值", "IDE_BuJu_Z", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_BuJu_Z, tempstr);
 	tempstr.ReleaseBuffer();
-	GetPrivateProfileString("初始edit值", "IDE_DingCengXuanBi", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath); 
-	SetDlgItemText(IDE_DingCengXuanBi, tempstr); 
+	GetPrivateProfileString("初始edit值", "IDE_DingCengXuanBi", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_DingCengXuanBi, tempstr);
 	tempstr.ReleaseBuffer();
-	GetPrivateProfileString("初始edit值", "IDE_SaoDiGanGaoDu", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath); 
-	SetDlgItemText(IDE_SaoDiGanGaoDu, tempstr); 
+	GetPrivateProfileString("初始edit值", "IDE_SaoDiGanGaoDu", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_SaoDiGanGaoDu, tempstr);
 	tempstr.ReleaseBuffer();
-	GetPrivateProfileString("初始edit值", "IDE_XiaTuoChengGaoDu", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath); 
-	SetDlgItemText(IDE_XiaTuoChengGaoDu, tempstr); 
+	GetPrivateProfileString("初始edit值", "IDE_XiaTuoChengGaoDu", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_XiaTuoChengGaoDu, tempstr);
 	tempstr.ReleaseBuffer();
-	/*WritePrivateProfileString ("初始edit值", "IDE_ZhuJu_X1", "8@1.2 7@1.6", strPath); 
-    WritePrivateProfileString ("初始edit值",  "IDE_PaiJu_Y", "3@2",strPath); 
-    WritePrivateProfileString ("初始edit值",  "IDE_BuJu_Z", "9@1.1 8@1.6",strPath); 
-    WritePrivateProfileString ("初始edit值",  "IDE_DingCengXuanBi", "0.35",strPath); 
-    WritePrivateProfileString ("初始edit值",  "IDE_SaoDiGanGaoDu", "0.30",strPath); 
-    WritePrivateProfileString ("初始edit值", "IDE_XiaTuoChengGaoDu", "0.15", strPath);*/ 
+
+	GetPrivateProfileString("初始edit值", "IDE_GangJinHunNingTu", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_GangJinHunNingTu, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_MoBanFangLeng", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_MoBanFangLeng, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_FuJiaGouJian", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_FuJiaGouJian, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_RenChaiJi", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_RenChaiJi, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_JiaoZhuZhenDao", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_JiaoZhuZhenDao, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_FengHeZai", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_FengHeZai, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_DiYiCiYuYa", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_DiYiCiYuYa, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_DiErCiYuYa", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_DiErCiYuYa, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_DiSanCiYuYa", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_DiSanCiYuYa, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_DiYiCiJiaoZhu", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_DiYiCiJiaoZhu, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_DiErCiJiaoZhu", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_DiErCiJiaoZhu, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDC_EDIT_HENG_MX", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDC_EDIT_HENG_MX, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDC_EDIT_HENG_MY", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDC_EDIT_HENG_MY, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDC_EDIT_TRIM_MX", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDC_EDIT_TRIM_MX, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDC_EDIT_TRIM_MY", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDC_EDIT_TRIM_MY, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_GangGuanWaiJing", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_GangGuanWaiJing, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDE_GangGuanBiHou", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDE_GangGuanBiHou, tempstr);
+	tempstr.ReleaseBuffer();
+
+
+	/*WritePrivateProfileString ("初始edit值", "IDE_ZhuJu_X1", "8@1.2 7@1.6", strPath);
+    WritePrivateProfileString ("初始edit值",  "IDE_PaiJu_Y", "3@2",strPath);
+    WritePrivateProfileString ("初始edit值",  "IDE_BuJu_Z", "9@1.1 8@1.6",strPath);
+    WritePrivateProfileString ("初始edit值",  "IDE_DingCengXuanBi", "0.35",strPath);
+    WritePrivateProfileString ("初始edit值",  "IDE_SaoDiGanGaoDu", "0.30",strPath);
+    WritePrivateProfileString ("初始edit值", "IDE_XiaTuoChengGaoDu", "0.15", strPath);
+	WritePrivateProfileString ("初始edit值",  "IDE_GangJinHunNingTu", "100",strPath);//钢筋混凝土自重
+	WritePrivateProfileString ("初始edit值", "IDE_MoBanFangLeng", "20", strPath);//模板，支撑自重
+	WritePrivateProfileString ("初始edit值", "IDE_FuJiaGouJian", "15", strPath);//附加构件自重
+	WritePrivateProfileString ("初始edit值", "IDE_RenChaiJi", "20", strPath);//施工人员设备荷载
+	WritePrivateProfileString ("初始edit值", "IDE_JiaoZhuZhenDao", "30", strPath);//浇筑振捣荷载
+	WritePrivateProfileString ("初始edit值", "IDE_FengHeZai", "0.15", strPath);//风荷载
+	WritePrivateProfileString ("初始edit值", "IDE_DiYiCiYuYa", "0.2", strPath);//第一次预压
+	WritePrivateProfileString ("初始edit值", "IDE_DiErCiYuYa", "0.3", strPath);//第二次预压
+	WritePrivateProfileString ("初始edit值", "IDE_DiSanCiYuYa", "0.4", strPath);//第三次预压
+	WritePrivateProfileString ("初始edit值", "IDE_DiYiCiJiaoZhu", "0.3", strPath);//第一次浇筑
+	WritePrivateProfileString ("初始edit值", "IDE_DiErCiJiaoZhu", "0.7", strPath);//第二次浇筑
+	WritePrivateProfileString ("初始edit值", "IDC_EDIT_HENG_MX", "12", strPath);//Mx-横向与立杆
+	WritePrivateProfileString ("初始edit值", "IDC_EDIT_HENG_MY", "8", strPath);//My-横向与立杆
+	WritePrivateProfileString ("初始edit值", "IDC_EDIT_TRIM_MX", "10", strPath);//Mx-剪刀与立杆
+	WritePrivateProfileString ("初始edit值", "IDC_EDIT_TRIM_MY", "15", strPath);//My-剪刀与立杆
+	WritePrivateProfileString ("初始edit值", "IDE_GangGuanWaiJing", "0.048", strPath);//钢管外径
+	WritePrivateProfileString ("初始edit值", "IDE_GangGuanBiHou", "0.0035", strPath);//钢管壁厚*/
 }
 
 void CSet::JudgeCross(float x1, float y1, float x2, float y2, float a1, float b1, float a2, float b2,float res[])
