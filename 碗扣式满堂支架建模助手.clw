@@ -13,11 +13,11 @@ Class2=CMyDlg
 Class3=CAboutDlg
 
 ResourceCount=5
-Resource1=IDD_ABOUTBOX
+Resource1=IDD_Set
 Resource2=IDR_MAINFRAME
-Resource3=IDD_MY_DIALOG
+Resource3=IDD_ABOUTBOX
 Class4=CSet
-Resource4=IDD_Set
+Resource4=IDD_MY_DIALOG
 Class5=CSection
 Resource5=IDD_DIALOG_SECTION
 
@@ -62,7 +62,7 @@ Control3=IDB_Exit,button,1342242816
 [DLG:IDD_Set]
 Type=1
 Class=CSet
-ControlCount=106
+ControlCount=110
 Control1=IDE_ZhuJu_X1,edit,1350631552
 Control2=IDE_PaiJu_Y,edit,1350631552
 Control3=IDE_BuJu_Z,edit,1350631552
@@ -169,6 +169,10 @@ Control103=IDC_STATIC,static,1342308352
 Control104=IDC_EDIT_TRIM_MX,edit,1350631552
 Control105=IDC_EDIT_TRIM_MY,edit,1350631552
 Control106=IDC_BTN_SECTION,button,1342242816
+Control107=IDC_EDIT_JDMJJ,edit,1350631552
+Control108=IDC_STATIC,static,1342308352
+Control109=IDC_EDIT_JDXJJ,edit,1350631552
+Control110=IDC_STATIC,static,1342308352
 
 [CLS:CSet]
 Type=0

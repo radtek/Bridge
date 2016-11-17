@@ -16,6 +16,7 @@ class CSet : public CDialog
 {
 // Construction
 public:
+	void SudoGetEditVal();
 	void JudgeCross(float x1,float y1,float x2,float y2,float a1,float b1,float a2,float b2,float res[]);
 	void SudoINI();
 	void InitVal();
@@ -53,6 +54,8 @@ public:
 	int tw_Deviation_Per[20];//放置tw壁厚值对应的误差百分比
 	int SectionVal[33];
 	int SectionFlag;
+	float JianDaoMianJianJu;//剪刀撑面间距
+	float JianDaoXianJianJu;//剪刀撑线间距
 ///////////////////////
 	//多线程后添加数据
 	double D;//D为标准外径
@@ -100,14 +103,6 @@ protected:
 	HICON m_hIcon;
 	// Generated message map functions
 	//{{AFX_MSG(CSet)
-	afx_msg void OnSelchangeBuJuZ();
-	afx_msg void OnSelchangeZhuJuX();
-	afx_msg void OnSelchangeDanWeiFengHeZai();
-	afx_msg void OnSelchangeDanWeiFuJiaGouJian();
-	afx_msg void OnSelchangeDanWeiGangJinHunNingTu();
-	afx_msg void OnSelchangeDanWeiJiaoZhuZhenDao();
-	afx_msg void OnSelchangeDanWeiMoBanFangLeng();
-	afx_msg void OnSelchangeDanWeiRenChaiJi();
 	afx_msg void OnChangeGangJinHunNingTu();
 	afx_msg void OnChangeJiaoZhuZhenDao();
 	afx_msg void OnChangeMoBanFangLeng();

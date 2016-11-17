@@ -102,6 +102,10 @@ SOURCE=.\excel.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\fline.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\msword.cpp
 # End Source File
 # Begin Source File
@@ -164,6 +168,10 @@ SOURCE=.\element.h
 # Begin Source File
 
 SOURCE=.\excel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\fline.h
 # End Source File
 # Begin Source File
 

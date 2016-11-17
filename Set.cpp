@@ -7,6 +7,7 @@
 #include "math.h"
 #include "Node.h"
 #include "element.h"
+#include "fline.h"
 #include "xSkinButton.h"
 #include "excel.h"
 //#include "msword.h"
@@ -31,7 +32,7 @@ struct threadInfo
 	CProgressCtrl* pctrlProgress;
 	//CWnd* pCWnd;
 };
-struct fline
+/*struct fline
 {
 	float xs;
 	float ys;
@@ -39,28 +40,28 @@ struct fline
 	float xe;
 	float ye;
 	float ze;
-};
+};*/
 /*struct Node
 {
-	float x;
-	float y;
-	float z;
-	float YuanXin_X;
-	float YuanXin_Y;
-	int Num;
+float x;
+float y;
+float z;
+float YuanXin_X;
+float YuanXin_Y;
+int Num;
 };
 
-struct element
-{
-	int qd;
-	int zd;
-	//int unit;//1,2,3,4,5,6分别代表x向y向z向杆件及xy面xz面yz面剪刀撑
-	float xs;
-	float ys;
-	float zs;
-	float xe;
-	float ye;
-	float ze;
+  struct element
+  {
+  int qd;
+  int zd;
+  //int unit;//1,2,3,4,5,6分别代表x向y向z向杆件及xy面xz面yz面剪刀撑
+  float xs;
+  float ys;
+  float zs;
+  float xe;
+  float ye;
+  float ze;
 };*/
 //UINT ThreadFunc(LPVOID lpParam);
 threadInfo Info;
@@ -253,14 +254,6 @@ void CSet::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CSet, CDialog)
 //{{AFX_MSG_MAP(CSet)
-ON_CBN_SELCHANGE(IDC_BuJu_Z, OnSelchangeBuJuZ)
-ON_CBN_SELCHANGE(IDC_ZhuJu_X, OnSelchangeZhuJuX)
-ON_CBN_SELCHANGE(IDXLCD_DanWei_FengHeZai, OnSelchangeDanWeiFengHeZai)
-ON_CBN_SELCHANGE(IDXLCD_DanWei_FuJiaGouJian, OnSelchangeDanWeiFuJiaGouJian)
-ON_CBN_SELCHANGE(IDXLCD_DanWei_GangJinHunNingTu, OnSelchangeDanWeiGangJinHunNingTu)
-ON_CBN_SELCHANGE(IDXLCD_DanWei_JiaoZhuZhenDao, OnSelchangeDanWeiJiaoZhuZhenDao)
-ON_CBN_SELCHANGE(IDXLCD_DanWei_MoBanFangLeng, OnSelchangeDanWeiMoBanFangLeng)
-ON_CBN_SELCHANGE(IDXLCD_DanWei_RenChaiJi, OnSelchangeDanWeiRenChaiJi)
 ON_EN_CHANGE(IDE_GangJinHunNingTu, OnChangeGangJinHunNingTu)
 ON_EN_CHANGE(IDE_JiaoZhuZhenDao, OnChangeJiaoZhuZhenDao)
 ON_EN_CHANGE(IDE_MoBanFangLeng, OnChangeMoBanFangLeng)
@@ -303,253 +296,253 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CSet message handlers
 
-void CSet::OnSelchangeBuJuZ()
-{
-	// TODO: Add your control notification handler code here
-	CString str;
-	//int i;
-    Sort=m_Control_BuJu_Z.GetCurSel();
-	if(Sort==0)                                        //0.6
-	{
-		BuJu_Z=0.6;
-	}
-	if(Sort==1)                                        //0.9
-	{
-		BuJu_Z=0.9;
-	}
-	if(Sort==2)                                        //1.2
-	{
-		BuJu_Z=1.2;
-	}
-}
+//DEL void CSet::OnSelchangeBuJuZ()
+//DEL {
+//DEL 	// TODO: Add your control notification handler code here
+//DEL 	CString str;
+//DEL 	//int i;
+//DEL     Sort=m_Control_BuJu_Z.GetCurSel();
+//DEL 	if(Sort==0)                                        //0.6
+//DEL 	{
+//DEL 		BuJu_Z=0.6;
+//DEL 	}
+//DEL 	if(Sort==1)                                        //0.9
+//DEL 	{
+//DEL 		BuJu_Z=0.9;
+//DEL 	}
+//DEL 	if(Sort==2)                                        //1.2
+//DEL 	{
+//DEL 		BuJu_Z=1.2;
+//DEL 	}
+//DEL }
 
-void CSet::OnSelchangeZhuJuX()
-{
-	// TODO: Add your control notification handler code here
-	CString str;
-	//int i;
-    Sort=m_Control_ZhuJu_X.GetCurSel();
-	if(Sort==0)                                        //0.6
-	{
-		ZhuJu_X=0.6;
-	}
-	if(Sort==1)                                        //0.9
-	{
-		ZhuJu_X=0.9;
-	}
-	if(Sort==2)                                        //1.2
-	{
-		ZhuJu_X=1.2;
-	}
-}
+//DEL void CSet::OnSelchangeZhuJuX()
+//DEL {
+//DEL 	// TODO: Add your control notification handler code here
+//DEL 	CString str;
+//DEL 	//int i;
+//DEL     Sort=m_Control_ZhuJu_X.GetCurSel();
+//DEL 	if(Sort==0)                                        //0.6
+//DEL 	{
+//DEL 		ZhuJu_X=0.6;
+//DEL 	}
+//DEL 	if(Sort==1)                                        //0.9
+//DEL 	{
+//DEL 		ZhuJu_X=0.9;
+//DEL 	}
+//DEL 	if(Sort==2)                                        //1.2
+//DEL 	{
+//DEL 		ZhuJu_X=1.2;
+//DEL 	}
+//DEL }
 
-void CSet::OnSelchangeDanWeiFengHeZai()               //风荷载
-{
-	// TODO: Add your control notification handler code here
-	CString str;
-	//int i;
-    Sort=m_Control_DanWei_FengHeZai.GetCurSel();
-	if(Sort==0)                                        //kg
-	{
-		//	AfxMessageBox("1");
-		FengHeZai=ini_FengHeZai;
-		FengHeZai=9.8*FengHeZai/1000;
-	}
-	if(Sort==1)                                        //kN/(m*m)
-	{
-		//	AfxMessageBox("2");
-		FengHeZai=ini_FengHeZai;
-		FengHeZai=FengHeZai*ZhuJu_X*a*2.4;
-	}
-}
+//DEL void CSet::OnSelchangeDanWeiFengHeZai()               //风荷载
+//DEL {
+//DEL 	// TODO: Add your control notification handler code here
+//DEL 	CString str;
+//DEL 	//int i;
+//DEL     Sort=m_Control_DanWei_FengHeZai.GetCurSel();
+//DEL 	if(Sort==0)                                        //kg
+//DEL 	{
+//DEL 		//	AfxMessageBox("1");
+//DEL 		FengHeZai=ini_FengHeZai;
+//DEL 		FengHeZai=9.8*FengHeZai/1000;
+//DEL 	}
+//DEL 	if(Sort==1)                                        //kN/(m*m)
+//DEL 	{
+//DEL 		//	AfxMessageBox("2");
+//DEL 		FengHeZai=ini_FengHeZai;
+//DEL 		FengHeZai=FengHeZai*ZhuJu_X*a*2.4;
+//DEL 	}
+//DEL }
 
-void CSet::OnSelchangeDanWeiFuJiaGouJian()           //附加构建
-{
-	// TODO: Add your control notification handler code here
-	CString str;
-	//int i;
-    Sort=m_Control_DanWei_FuJiaGouJian.GetCurSel();
+//DEL void CSet::OnSelchangeDanWeiFuJiaGouJian()           //附加构建
+//DEL {
+//DEL 	// TODO: Add your control notification handler code here
+//DEL 	CString str;
+//DEL 	//int i;
+//DEL     Sort=m_Control_DanWei_FuJiaGouJian.GetCurSel();
+//DEL
+//DEL 	if(Sort==0)                                        //kg
+//DEL 	{
+//DEL 		//	AfxMessageBox("1");
+//DEL 		FuJiaGouJian=ini_FuJiaGouJian;
+//DEL 		FuJiaGouJian=(9.8)*FuJiaGouJian/1000;
+//DEL 	}
+//DEL 	if(Sort==1)                                        //kN
+//DEL 	{
+//DEL 		//	AfxMessageBox("2");
+//DEL 		FuJiaGouJian=ini_FuJiaGouJian;
+//DEL 	}
+//DEL 	if(Sort==2)                                        //kN/(m*m)
+//DEL 	{
+//DEL 		//	AfxMessageBox("3");
+//DEL         FuJiaGouJian=ini_FuJiaGouJian;
+//DEL 		FuJiaGouJian=FuJiaGouJian*a*ZhuJu_X*1.2;
+//DEL 	}
+//DEL 	if(Sort==3)                                        //t
+//DEL 	{
+//DEL 		//	AfxMessageBox("4");
+//DEL 		FuJiaGouJian=ini_FuJiaGouJian;
+//DEL 		FuJiaGouJian=FuJiaGouJian*9.8;
+//DEL 	}
+//DEL }
 
-	if(Sort==0)                                        //kg
-	{
-		//	AfxMessageBox("1");
-		FuJiaGouJian=ini_FuJiaGouJian;
-		FuJiaGouJian=(9.8)*FuJiaGouJian/1000;
-	}
-	if(Sort==1)                                        //kN
-	{
-		//	AfxMessageBox("2");
-		FuJiaGouJian=ini_FuJiaGouJian;
-	}
-	if(Sort==2)                                        //kN/(m*m)
-	{
-		//	AfxMessageBox("3");
-        FuJiaGouJian=ini_FuJiaGouJian;
-		FuJiaGouJian=FuJiaGouJian*a*ZhuJu_X*1.2;
-	}
-	if(Sort==3)                                        //t
-	{
-		//	AfxMessageBox("4");
-		FuJiaGouJian=ini_FuJiaGouJian;
-		FuJiaGouJian=FuJiaGouJian*9.8;
-	}
-}
+//DEL void CSet::OnSelchangeDanWeiGangJinHunNingTu()       //钢筋
+//DEL {
+//DEL 	// TODO: Add your control notification handler code here
+//DEL 	CString str;
+//DEL 	//int i;
+//DEL     Sort=m_Control_DanWei_GangJinHunNingTu.GetCurSel();
+//DEL 	if(Sort==0)                                        //kg
+//DEL 	{
+//DEL 		//AfxMessageBox("1");
+//DEL 		GangJinHunNingTu=ini_GangJinHunNingTu;
+//DEL         GangJinHunNingTu=9.8*GangJinHunNingTu/1000;
+//DEL 		str.Format("%f",GangJinHunNingTu);
+//DEL 		AfxMessageBox(str);
+//DEL
+//DEL 	}
+//DEL 	if(Sort==1)                                        //kN
+//DEL 	{
+//DEL 		//	AfxMessageBox("2");
+//DEL 		GangJinHunNingTu=ini_GangJinHunNingTu;
+//DEL 		GangJinHunNingTu=GangJinHunNingTu;
+//DEL 		str.Format("%f",GangJinHunNingTu);
+//DEL 		AfxMessageBox(str);
+//DEL
+//DEL 	}
+//DEL 	if(Sort==2)                                        //m3
+//DEL 	{
+//DEL 		//	AfxMessageBox("3");
+//DEL 		GangJinHunNingTu=ini_GangJinHunNingTu;
+//DEL 		GangJinHunNingTu=25*GangJinHunNingTu;
+//DEL 		str.Format("%f",GangJinHunNingTu);
+//DEL 		AfxMessageBox(str);
+//DEL 	}
+//DEL 	if(Sort==3)                                        //t
+//DEL 	{
+//DEL 		//	AfxMessageBox("4");
+//DEL 		GangJinHunNingTu=ini_GangJinHunNingTu;
+//DEL 		GangJinHunNingTu=9.8*GangJinHunNingTu;
+//DEL 		str.Format("%f",GangJinHunNingTu);
+//DEL 		AfxMessageBox(str);
+//DEL 	}
+//DEL }
 
-void CSet::OnSelchangeDanWeiGangJinHunNingTu()       //钢筋
-{
-	// TODO: Add your control notification handler code here
-	CString str;
-	//int i;
-    Sort=m_Control_DanWei_GangJinHunNingTu.GetCurSel();
-	if(Sort==0)                                        //kg
-	{
-		//AfxMessageBox("1");
-		GangJinHunNingTu=ini_GangJinHunNingTu;
-        GangJinHunNingTu=9.8*GangJinHunNingTu/1000;
-		str.Format("%f",GangJinHunNingTu);
-		AfxMessageBox(str);
+//DEL void CSet::OnSelchangeDanWeiJiaoZhuZhenDao()         //振捣
+//DEL {
+//DEL 	// TODO: Add your control notification handler code here
+//DEL 	CString str;
+//DEL 	//int i;
+//DEL     Sort=m_Control_DanWei_JiaoZhuZhenDao.GetCurSel();
+//DEL 	if(Sort==0)                                        //kg
+//DEL 	{
+//DEL 		//	AfxMessageBox("1");
+//DEL 		JiaoZhuZhenDao=ini_JiaoZhuZhenDao;
+//DEL 		JiaoZhuZhenDao=9.8*JiaoZhuZhenDao/1000;
+//DEL 	}
+//DEL 	if(Sort==1)                                        //kN/(m*m)
+//DEL 	{
+//DEL 		//	AfxMessageBox("2");
+//DEL 		JiaoZhuZhenDao=ini_JiaoZhuZhenDao;
+//DEL 		for(int oo=1;oo<=10;oo++)
+//DEL 		{
+//DEL 			Length_Y+=(PaiJuDataSave[oo]*PaiJuCountSave[oo]);
+//DEL 		}
+//DEL 		JiaoZhuZhenDao=JiaoZhuZhenDao*a*ZhuJu_X*Length_Y;
+//DEL 	}
+//DEL }
 
-	}
-	if(Sort==1)                                        //kN
-	{
-		//	AfxMessageBox("2");
-		GangJinHunNingTu=ini_GangJinHunNingTu;
-		GangJinHunNingTu=GangJinHunNingTu;
-		str.Format("%f",GangJinHunNingTu);
-		AfxMessageBox(str);
+//DEL void CSet::OnSelchangeDanWeiMoBanFangLeng()     //模版方愣
+//DEL {
+//DEL 	// TODO: Add your control notification handler code here
+//DEL 	CString str;
+//DEL 	//int i;
+//DEL     Sort=m_Control_DanWei_MoBanFangLeng.GetCurSel();
+//DEL 	if(Sort==0)                                        //kg
+//DEL 	{
+//DEL 		//	AfxMessageBox("1");
+//DEL 		/*
+//DEL 		MoBanFangLeng=ini_MoBanFangLeng;
+//DEL 		MoBanFangLeng=9.8*MoBanFangLeng/1000;
+//DEL 		*/
+//DEL
+//DEL 	}
+//DEL 	if(Sort==1)                                        //kN
+//DEL 	{
+//DEL 		//	AfxMessageBox("2");
+//DEL 		MoBanFangLeng=ini_MoBanFangLeng;
+//DEL 	}
+//DEL 	if(Sort==2)                                        //kN/(m*m)
+//DEL 	{
+//DEL 		//	AfxMessageBox("3");
+//DEL         for(int oo=1;oo<=10;oo++)
+//DEL 		{
+//DEL 			Length_Y+=(PaiJuDataSave[oo]*PaiJuCountSave[oo]);
+//DEL 		}
+//DEL 		MoBanFangLeng=MoBanFangLeng*a*ZhuJu_X*Length_Y;
+//DEL
+//DEL 	}
+//DEL 	if(Sort==3)                                        //t
+//DEL 	{
+//DEL 		//	AfxMessageBox("4");
+//DEL 		MoBanFangLeng=ini_MoBanFangLeng;
+//DEL 		MoBanFangLeng=9.8*MoBanFangLeng;
+//DEL 	}
+//DEL }
 
-	}
-	if(Sort==2)                                        //m3
-	{
-		//	AfxMessageBox("3");
-		GangJinHunNingTu=ini_GangJinHunNingTu;
-		GangJinHunNingTu=25*GangJinHunNingTu;
-		str.Format("%f",GangJinHunNingTu);
-		AfxMessageBox(str);
-	}
-	if(Sort==3)                                        //t
-	{
-		//	AfxMessageBox("4");
-		GangJinHunNingTu=ini_GangJinHunNingTu;
-		GangJinHunNingTu=9.8*GangJinHunNingTu;
-		str.Format("%f",GangJinHunNingTu);
-		AfxMessageBox(str);
-	}
-}
-
-void CSet::OnSelchangeDanWeiJiaoZhuZhenDao()         //振捣
-{
-	// TODO: Add your control notification handler code here
-	CString str;
-	//int i;
-    Sort=m_Control_DanWei_JiaoZhuZhenDao.GetCurSel();
-	if(Sort==0)                                        //kg
-	{
-		//	AfxMessageBox("1");
-		JiaoZhuZhenDao=ini_JiaoZhuZhenDao;
-		JiaoZhuZhenDao=9.8*JiaoZhuZhenDao/1000;
-	}
-	if(Sort==1)                                        //kN/(m*m)
-	{
-		//	AfxMessageBox("2");
-		JiaoZhuZhenDao=ini_JiaoZhuZhenDao;
-		for(int oo=1;oo<=10;oo++)
-		{
-			Length_Y+=(PaiJuDataSave[oo]*PaiJuCountSave[oo]);
-		}
-		JiaoZhuZhenDao=JiaoZhuZhenDao*a*ZhuJu_X*Length_Y;
-	}
-}
-
-void CSet::OnSelchangeDanWeiMoBanFangLeng()     //模版方愣
-{
-	// TODO: Add your control notification handler code here
-	CString str;
-	//int i;
-    Sort=m_Control_DanWei_MoBanFangLeng.GetCurSel();
-	if(Sort==0)                                        //kg
-	{
-		//	AfxMessageBox("1");
-		/*
-		MoBanFangLeng=ini_MoBanFangLeng;
-		MoBanFangLeng=9.8*MoBanFangLeng/1000;
-		*/
-
-	}
-	if(Sort==1)                                        //kN
-	{
-		//	AfxMessageBox("2");
-		MoBanFangLeng=ini_MoBanFangLeng;
-	}
-	if(Sort==2)                                        //kN/(m*m)
-	{
-		//	AfxMessageBox("3");
-        for(int oo=1;oo<=10;oo++)
-		{
-			Length_Y+=(PaiJuDataSave[oo]*PaiJuCountSave[oo]);
-		}
-		MoBanFangLeng=MoBanFangLeng*a*ZhuJu_X*Length_Y;
-
-	}
-	if(Sort==3)                                        //t
-	{
-		//	AfxMessageBox("4");
-		MoBanFangLeng=ini_MoBanFangLeng;
-		MoBanFangLeng=9.8*MoBanFangLeng;
-	}
-}
-
-void CSet::OnSelchangeDanWeiRenChaiJi()           //人材机
-{
-	// TODO: Add your control notification handler code here
-	CString str;
-	//int i;
-    Sort=m_Control_DanWei_RenChaiJi.GetCurSel();
-	if(Sort==0)                                        //kg
-	{
-	/*
-	//	AfxMessageBox("1");
-	RenChaiJi=ini_RenChaiJi;
-	RenChaiJi=9.8*RenChaiJi/1000;
-	str.Format("%f",RenChaiJi);
-	AfxMessageBox(str);
-		*/
-	}
-	if(Sort==1)                                        //kN
-	{
-		//	AfxMessageBox("2");
-		RenChaiJi=ini_RenChaiJi;
-		str.Format("%f",RenChaiJi);
-		AfxMessageBox(str);
-	}
-	if(Sort==2)                                        //kN/(m*m)
-	{
-
-		//	AfxMessageBox("3");
-		/*
-		Deal_PaiJu_Y();
-		RenChaiJi=ini_RenChaiJi;
-		for(int oo=1;oo<=10;oo++)
-		{
-		Length_Y=Length_Y+(PaiJuDataSave[oo]*PaiJuCountSave[oo]);
-		}
-		RenChaiJi=RenChaiJi*a*ZhuJu_X*Length_Y;
-		str.Format("%f",RenChaiJi);
-		AfxMessageBox(str);
-		*/
-	}
-	if(Sort==3)                                        //t
-	{
-
-		//	AfxMessageBox("4");
-        /*
-        RenChaiJi=ini_RenChaiJi;
-		RenChaiJi=9.8*RenChaiJi;
-		str.Format("%f",RenChaiJi);
-		AfxMessageBox(str);
-        */
-	}
-}
+//DEL void CSet::OnSelchangeDanWeiRenChaiJi()           //人材机
+//DEL {
+//DEL 	// TODO: Add your control notification handler code here
+//DEL 	CString str;
+//DEL 	//int i;
+//DEL     Sort=m_Control_DanWei_RenChaiJi.GetCurSel();
+//DEL 	if(Sort==0)                                        //kg
+//DEL 	{
+//DEL 	/*
+//DEL 	//	AfxMessageBox("1");
+//DEL 	RenChaiJi=ini_RenChaiJi;
+//DEL 	RenChaiJi=9.8*RenChaiJi/1000;
+//DEL 	str.Format("%f",RenChaiJi);
+//DEL 	AfxMessageBox(str);
+//DEL 		*/
+//DEL 	}
+//DEL 	if(Sort==1)                                        //kN
+//DEL 	{
+//DEL 		//	AfxMessageBox("2");
+//DEL 		RenChaiJi=ini_RenChaiJi;
+//DEL 		str.Format("%f",RenChaiJi);
+//DEL 		AfxMessageBox(str);
+//DEL 	}
+//DEL 	if(Sort==2)                                        //kN/(m*m)
+//DEL 	{
+//DEL
+//DEL 		//	AfxMessageBox("3");
+//DEL 		/*
+//DEL 		Deal_PaiJu_Y();
+//DEL 		RenChaiJi=ini_RenChaiJi;
+//DEL 		for(int oo=1;oo<=10;oo++)
+//DEL 		{
+//DEL 		Length_Y=Length_Y+(PaiJuDataSave[oo]*PaiJuCountSave[oo]);
+//DEL 		}
+//DEL 		RenChaiJi=RenChaiJi*a*ZhuJu_X*Length_Y;
+//DEL 		str.Format("%f",RenChaiJi);
+//DEL 		AfxMessageBox(str);
+//DEL 		*/
+//DEL 	}
+//DEL 	if(Sort==3)                                        //t
+//DEL 	{
+//DEL
+//DEL 		//	AfxMessageBox("4");
+//DEL         /*
+//DEL         RenChaiJi=ini_RenChaiJi;
+//DEL 		RenChaiJi=9.8*RenChaiJi;
+//DEL 		str.Format("%f",RenChaiJi);
+//DEL 		AfxMessageBox(str);
+//DEL         */
+//DEL 	}
+//DEL }
 
 void CSet::OnChangeGangJinHunNingTu()
 {
@@ -661,7 +654,7 @@ DiErCiJiaoZhu=atof(str);
 
 void CSet::Deal_PaiJu_Y()
 {
-	CStdioFile File;
+	//CStdioFile File;
    	CString str;
 	string segment;
 	string paijusave;
@@ -691,8 +684,8 @@ void CSet::Deal_PaiJu_Y()
 	//*********************************分跨方案******************************//
     UpdateData(TRUE);
 	CEdit *pEdit=(CEdit *)GetDlgItem(IDE_PaiJu_Y);
-	fstream File_Clear("Sentence.txt", fstream::out | ios_base::trunc); //每次存入前先清空前一次的内容
-	File_Clear.close();
+	//fstream File_Clear("Sentence.txt", fstream::out | ios_base::trunc); //每次存入前先清空前一次的内容
+	//File_Clear.close();
 	UpdateData(TRUE);
 	if(m_PaiJu_Y.IsEmpty())
 	{
@@ -829,8 +822,8 @@ void CSet::Deal_ZhuJu_X()
 	//*********************************分跨方案******************************//
     UpdateData(TRUE);
 	CEdit *pEdit=(CEdit *)GetDlgItem(IDE_ZhuJu_X1);
-	fstream File_Clear("Sentence.txt", fstream::out | ios_base::trunc); //每次存入前先清空前一次的内容
-	File_Clear.close();
+	//fstream File_Clear("Sentence.txt", fstream::out | ios_base::trunc); //每次存入前先清空前一次的内容
+	//File_Clear.close();
 	UpdateData(TRUE);
 	CString Editstr = "";
 	CString tempstr = "";
@@ -901,8 +894,8 @@ void CSet::Deal_BuJu_Z()
 	//*********************************分跨方案******************************//
     UpdateData(TRUE);
 	CEdit *pEdit=(CEdit *)GetDlgItem(IDE_BuJu_Z);
-	fstream File_Clear("Sentence.txt", fstream::out | ios_base::trunc); //每次存入前先清空前一次的内容
-	File_Clear.close();
+	//fstream File_Clear("Sentence.txt", fstream::out | ios_base::trunc); //每次存入前先清空前一次的内容
+	//File_Clear.close();
 	UpdateData(TRUE);
 	CString Editstr = "";
 	CString tempstr = "";
@@ -1047,15 +1040,10 @@ void CSet::OnOutput()
 	int m=0;
 	int n=0;
 	int o=0;
-	CString str;
 	init();
-	GetDlgItemText(IDE_SaoDiGanGaoDu,str);
-	SaoDiGanGaoDu=atof(str);
-	GetDlgItemText(IDE_DingCengXuanBi,str);
-	DingCengXuanBiChangDu=atof(str);
-	GetDlgItemText(IDE_XiaTuoChengGaoDu,str);
-	XiaBuTuoChengGaoDu=atof(str);
-    Deal_PaiJu_Y();
+	CString str="";
+	SudoGetEditVal();
+	Deal_PaiJu_Y();
     Deal_ZhuJu_X();
     Deal_BuJu_Z();
 
@@ -1069,8 +1057,8 @@ void CSet::OnOutput()
 
 	NodeZongShu=BuJuGeShu_Z*ZhuJuGeShu_X*PaiJuGeShu_Y;
 
-    Node *NodeZong = new Node[10000];
-	memset(NodeZong,0,sizeof(NodeZong)/sizeof(NodeZong[0])*sizeof(Node));
+    Node *NodeZong = new Node[20000];
+	//memset(NodeZong,0,sizeof(NodeZong)/sizeof(NodeZong[0])*sizeof(Node));
 	/*vector < Node > NodeZong;
 	NodeZong.resize(NodeZongShu*3);
 	for(i=0;i<NodeZongShu*3;i++)
@@ -1085,7 +1073,7 @@ void CSet::OnOutput()
 
 
 	////////////////////////////////////////////////////////////////////////////////
-	int BB,BB1,ZZ,ZZ1,PP,PP1;
+	int BB=0,BB1=0,ZZ=0,ZZ1=0,PP=0,PP1=0;
     //Deal_PaiJu_Y();
     //Deal_ZhuJu_X();
     //Deal_BuJu_Z();
@@ -1184,7 +1172,7 @@ void CSet::OnOutput()
 						CurYVal=0.0;
 					else
 						CurYVal=CurYVal+PaiJuDataSave[PP];
-					if((CurXVal==0.0)||(CurXVal==maxX)||(CurYVal==0.0)||(CurYVal==maxY))
+					if((CurXVal==0.0)||fabs(CurXVal-maxX)<0.005||(CurYVal==0.0)||fabs(CurYVal-maxY)<0.005)
 					{
 						NodeZong[num].Num=num;
 						NodeZong[num].x=CurXVal;
@@ -1197,7 +1185,7 @@ void CSet::OnOutput()
 	}
 	int SDNodeEnd=num-1;
 	//File.Close();
-	float XZVal[3][10];//一序号012分别表示垂直于xz,yz,xy方向,，二序号表示第几层面，
+	float XZVal[3][30];//一序号012分别表示垂直于xz,yz,xy方向,，二序号表示第几层面，
 	memset(XZVal,0,sizeof(XZVal)/sizeof(XZVal[0][0])*sizeof(float));
 	float tempZ=0.0;
 	int Numcount=0;
@@ -1207,7 +1195,7 @@ void CSet::OnOutput()
 	{
 		for(j=0;j<BuJuCountSave[i];j++)
 		{
-			if(tempcount==5)
+			if((tempcount==5)||(tempZ+BuJuDataSave[i]-XZVal[2][Numcount-1]>JianDaoMianJianJu))
 			{
 				XZVal[2][Numcount++]=tempZ+0.3+XiaBuTuoChengGaoDu;
 				//tempZ=0.0;
@@ -1227,7 +1215,7 @@ void CSet::OnOutput()
 	{
 		for(j=0;j<PaiJuCountSave[i];j++)
 		{
-			if(tempcount==5)
+			if((tempcount==5)||(tempY+PaiJuDataSave[i]-XZVal[0][Numcount-1]>JianDaoMianJianJu))
 			{
 				XZVal[0][Numcount++]=tempY;
 				//tempZ=0.0;
@@ -1247,7 +1235,7 @@ void CSet::OnOutput()
 	{
 		for(j=0;j<ZhuJuCountSave[i];j++)
 		{
-			if(tempcount==5)
+			if((tempcount==5)||(tempX+ZhuJuDataSave[i]-XZVal[1][Numcount-1]>JianDaoMianJianJu))
 			{
 				XZVal[1][Numcount++]=tempX;
 				//tempZ=0.0;
@@ -1259,8 +1247,12 @@ void CSet::OnOutput()
 	}
 	if(XZVal[1][Numcount-1]!=maxX)
 		XZVal[1][Numcount]=maxX;
-	fline XZline[10][30];//三维数组，一序号012分别表示垂直于xz,yz,xy方向，二序号表示第几层面，3序号表示某面斜线
-	memset(XZline,0,sizeof(XZline)/sizeof(XZline[0][0])*sizeof(fline));
+	fline* XZline[50];//[100];//三维数组，一序号012分别表示垂直于xz,yz,xy方向，二序号表示第几层面，3序号表示某面斜线
+	for(i=0;i<50;i++)
+	{
+		XZline[i]=new fline[500];
+	}
+	//memset(XZline,0,sizeof(XZline)/sizeof(XZline[0][0])*sizeof(fline));
 	int countline=0;
 	for(i=0;;i++)
 	{
@@ -1282,12 +1274,12 @@ void CSet::OnOutput()
 			XZline[i][countline].ye=XZVal[0][i];
 			XZline[i][countline++].xe=maxX;
 		}
-		//int abc=(maxZ-0.3-XiaBuTuoChengGaoDu)/4.5;
-		for(j=0;j<(maxZ-0.3-XiaBuTuoChengGaoDu)/4.5-1;j++)
+		//int abc=(maxZ-0.3-XiaBuTuoChengGaoDu)/JianDaoXianJianJu;
+		for(j=0;j<(maxZ-0.3-XiaBuTuoChengGaoDu)/JianDaoXianJianJu-1;j++)
 		{//xz面正向中斜线及其以上斜线
 			XZline[i][countline].xs=0.0;
 			XZline[i][countline].ys=XZVal[0][i];
-			XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+j*4.5+4.5;
+			XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+j*JianDaoXianJianJu+JianDaoXianJianJu;
 			if(maxX+XZline[i][countline].zs>maxZ)
 			{
 				XZline[i][countline].xe=maxZ-XZline[i][countline].zs;
@@ -1302,11 +1294,11 @@ void CSet::OnOutput()
 			}
 		}
 		int GettempStart=countline;
-		for(j=1;j<maxX/4.5;j++)
+		for(j=1;j<maxX/JianDaoXianJianJu;j++)
 		{//xz面正向中斜线以下斜线
 			XZline[i][countline].zs=0.0;
 			XZline[i][countline].ys=XZVal[0][i];
-			XZline[i][countline].xs=j*4.5;
+			XZline[i][countline].xs=j*JianDaoXianJianJu;
 			if(maxX-XZline[i][countline].xs>maxZ)
 			{
 				XZline[i][countline].xe=maxZ+XZline[i][countline].xs;
@@ -1334,7 +1326,7 @@ void CSet::OnOutput()
 			}
 			else
 			{
-				XZline[i][countline].xe=XZline[i][countline].xs-maxY+0.3+XiaBuTuoChengGaoDu;
+				XZline[i][countline].xe=XZline[i][countline].xs-maxZ+0.3+XiaBuTuoChengGaoDu;
 				XZline[i][countline].ye=XZVal[0][i];
 				XZline[i][countline++].ze=maxZ;
 			}
@@ -1348,7 +1340,7 @@ void CSet::OnOutput()
 		}
 		else
 		{
-			XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+(4.5-(maxX-tempfloat));
+			XZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+(JianDaoXianJianJu-(maxX-tempfloat));
 			XZline[i][countline].ys=XZVal[0][i];
 			XZline[i][countline].xs=maxX;
 			if(maxZ-XZline[i][countline].zs<maxX)
@@ -1364,11 +1356,11 @@ void CSet::OnOutput()
 				XZline[i][countline++].xe=0.0;
 			}
 		}
-		for(j=0;j<(maxZ-0.3-XiaBuTuoChengGaoDu-(4.5-(maxX-tempfloat)))/4.5-1;j++)
+		for(j=0;j<(maxZ-0.3-XiaBuTuoChengGaoDu-(JianDaoXianJianJu-(maxX-tempfloat)))/JianDaoXianJianJu-1;j++)
 		{//xz面反向中斜线以上斜线
 			XZline[i][countline].xs=maxX;
 			XZline[i][countline].ys=XZVal[0][i];
-			XZline[i][countline].zs=XZline[i][countline-1].zs+4.5;
+			XZline[i][countline].zs=XZline[i][countline-1].zs+JianDaoXianJianJu;
 			if(maxZ-XZline[i][countline].zs<maxX)
 			{
 				XZline[i][countline].xe=maxX-(maxZ-XZline[i][countline].zs);
@@ -1385,8 +1377,12 @@ void CSet::OnOutput()
 	}
 	int jiandaoStart=num;
 	//////////////////YZ方向剪刀撑轨迹线生成/////////////////
-	fline YZline[10][30];//三维数组，一序号012分别表示垂直于xz,yz,xy方向，二序号表示第几层面，3序号表示某面斜线
-	memset(YZline,0,sizeof(YZline)/sizeof(YZline[0][0])*sizeof(fline));
+	fline* YZline[50];//三维数组，一序号012分别表示垂直于xz,yz,xy方向，二序号表示第几层面，3序号表示某面斜线
+	for(i=0;i<50;i++)
+	{
+		YZline[i]=new fline[500];
+	}
+	//memset(YZline,0,sizeof(YZline)/sizeof(YZline[0][0])*sizeof(fline));
 	countline=0;
 	for(i=0;;i++)
 	{
@@ -1408,12 +1404,12 @@ void CSet::OnOutput()
 			YZline[i][countline].xe=XZVal[1][i];
 			YZline[i][countline++].ye=maxY;
 		}
-		//int abc=(maxZ-0.3-XiaBuTuoChengGaoDu)/4.5;
-		for(j=0;j<(maxZ-0.3-XiaBuTuoChengGaoDu)/4.5-1;j++)
+		//int abc=(maxZ-0.3-XiaBuTuoChengGaoDu)/JianDaoXianJianJu;
+		for(j=0;j<(maxZ-0.3-XiaBuTuoChengGaoDu)/JianDaoXianJianJu-1;j++)
 		{//xz面正向中斜线及其以上斜线
 			YZline[i][countline].ys=0.0;
 			YZline[i][countline].xs=XZVal[1][i];
-			YZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+j*4.5+4.5;
+			YZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+j*JianDaoXianJianJu+JianDaoXianJianJu;
 			if(maxY+YZline[i][countline].zs>maxZ)
 			{
 				YZline[i][countline].ye=maxZ-YZline[i][countline].zs;
@@ -1428,11 +1424,11 @@ void CSet::OnOutput()
 			}
 		}
 		int GettempStart=countline;
-		for(j=1;j<maxY/4.5;j++)
-		{//xz面正向中斜线以下斜线
+		for(j=1;j<maxY/JianDaoXianJianJu;j++)
+		{//yz面正向中斜线以下斜线
 			YZline[i][countline].zs=0.0;
 			YZline[i][countline].xs=XZVal[1][i];
-			YZline[i][countline].ys=j*4.5;
+			YZline[i][countline].ys=j*JianDaoXianJianJu;
 			if(maxY-YZline[i][countline].ys>maxZ)
 			{
 				YZline[i][countline].ye=maxZ+YZline[i][countline].ys;
@@ -1448,7 +1444,7 @@ void CSet::OnOutput()
 		}
 		int GettempEnd=countline;
 		for(j=GettempStart;j<GettempEnd;j++)
-		{//xz面反向中斜线以下斜线
+		{//yz面反向中斜线以下斜线
 			YZline[i][countline].ys=YZline[i][j].ys;
 			YZline[i][countline].xs=XZVal[1][i];
 			YZline[i][countline].zs=YZline[i][j].zs;
@@ -1460,7 +1456,7 @@ void CSet::OnOutput()
 			}
 			else
 			{
-				YZline[i][countline].ye=YZline[i][countline].ys-maxY+0.3+XiaBuTuoChengGaoDu;
+				YZline[i][countline].ye=YZline[i][countline].ys-maxZ+0.3+XiaBuTuoChengGaoDu;
 				YZline[i][countline].xe=XZVal[1][i];
 				YZline[i][countline++].ze=maxZ;
 			}
@@ -1474,7 +1470,7 @@ void CSet::OnOutput()
 		}
 		else
 		{
-			YZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+(4.5-(maxY-tempfloat));
+			YZline[i][countline].zs=0.3+XiaBuTuoChengGaoDu+(JianDaoXianJianJu-(maxY-tempfloat));
 			YZline[i][countline].xs=XZVal[1][i];
 			YZline[i][countline].ys=maxY;
 			if(maxZ-YZline[i][countline].zs<maxY)
@@ -1490,11 +1486,11 @@ void CSet::OnOutput()
 				YZline[i][countline++].ye=0.0;
 			}
 		}
-		for(j=0;j<(maxZ-0.3-XiaBuTuoChengGaoDu-(4.5-(maxY-tempfloat)))/4.5-1;j++)
+		for(j=0;j<(maxZ-0.3-XiaBuTuoChengGaoDu-(JianDaoXianJianJu-(maxY-tempfloat)))/JianDaoXianJianJu-1;j++)
 		{//xz面反向中斜线以上斜线
 			YZline[i][countline].ys=maxY;
 			YZline[i][countline].xs=XZVal[1][i];
-			YZline[i][countline].zs=YZline[i][countline-1].zs+4.5;
+			YZline[i][countline].zs=YZline[i][countline-1].zs+JianDaoXianJianJu;
 			if(maxZ-YZline[i][countline].zs<maxY)
 			{
 				YZline[i][countline].ye=maxY-(maxZ-YZline[i][countline].zs);
@@ -1511,18 +1507,22 @@ void CSet::OnOutput()
 	}
 
 
-	fline XYline[10][30];//三维数组，一序号012分别表示垂直于xz,yz,xy方向，二序号表示第几层面，3序号表示某面斜线
-	memset(XYline,0,sizeof(XYline)/sizeof(XYline[0][0])*sizeof(fline));
+	fline* XYline[50];//三维数组，一序号012分别表示垂直于xz,yz,xy方向，二序号表示第几层面，3序号表示某面斜线
+	for(i=0;i<50;i++)
+	{
+		XYline[i]=new fline[500];
+	}
+	//memset(XYline,0,sizeof(XYline)/sizeof(XYline[0][0])*sizeof(fline));
 	countline=0;
 	for(i=0;;i++)
 	{
-		if(i!=0&&XZVal[2][i]==0.0)
+		if(i!=0&&fabs(XZVal[2][i])<0.005)
 			break;
 		countline=0;
 		XYline[i][countline].xs=0.0;
 		XYline[i][countline].zs=XZVal[2][i];
 		XYline[i][countline].ys=0.0;
-		if(maxX+XYline[i][countline].ys>maxY)
+		if((maxX+XYline[i][countline].ys)>maxY)
 		{
 			XYline[i][countline].ye=maxY;
 			XYline[i][countline].xe=maxY-XYline[i][countline].ys;
@@ -1534,12 +1534,12 @@ void CSet::OnOutput()
 			XYline[i][countline].ze=XZVal[2][i];
 			XYline[i][countline++].xe=maxX;
 		}
-		//int abc=(maxY-0.3-XiaBuTuoChengGaoDu)/4.5;
-		for(j=0;j<maxY/4.5-1;j++)
+		//int abc=(maxY-0.3-XiaBuTuoChengGaoDu)/JianDaoXianJianJu;
+		for(j=0;j<maxY/JianDaoXianJianJu-1;j++)
 		{//xz面正向中斜线及其以上斜线
 			XYline[i][countline].xs=0.0;
 			XYline[i][countline].zs=XZVal[2][i];
-			XYline[i][countline].ys=j*4.5+4.5;
+			XYline[i][countline].ys=j*JianDaoXianJianJu+JianDaoXianJianJu;
 			if(maxX+XYline[i][countline].ys>maxY)
 			{
 				XYline[i][countline].ye=maxY;
@@ -1554,11 +1554,11 @@ void CSet::OnOutput()
 			}
 		}
 		int GettempStart=countline;
-		for(j=1;j<maxX/4.5;j++)
+		for(j=1;j<maxX/JianDaoXianJianJu;j++)
 		{//xz面正向中斜线以下斜线
 			XYline[i][countline].ys=0.0;
 			XYline[i][countline].zs=XZVal[2][i];
-			XYline[i][countline].xs=j*4.5;
+			XYline[i][countline].xs=j*JianDaoXianJianJu;
 			if(maxX-XYline[i][countline].xs>maxY)
 			{
 				XYline[i][countline].xe=maxY+XYline[i][countline].xs;
@@ -1574,7 +1574,7 @@ void CSet::OnOutput()
 		}
 		int GettempEnd=countline;
 		for(j=GettempStart;j<GettempEnd;j++)
-		{//xz面反向中斜线以下斜线
+		{//xy面反向中斜线以下斜线
 			XYline[i][countline].xs=XYline[i][j].xs;
 			XYline[i][countline].zs=XZVal[2][i];
 			XYline[i][countline].ys=XYline[i][j].ys;
@@ -1600,7 +1600,7 @@ void CSet::OnOutput()
 		}
 		else
 		{
-			XYline[i][countline].ys=4.5-(maxX-tempfloat);
+			XYline[i][countline].ys=JianDaoXianJianJu-(maxX-tempfloat);
 			XYline[i][countline].zs=XZVal[2][i];
 			XYline[i][countline].xs=maxX;
 			if(maxY-XYline[i][countline].ys<maxX)
@@ -1616,11 +1616,11 @@ void CSet::OnOutput()
 				XYline[i][countline++].xe=0.0;
 			}
 		}
-		for(j=0;j<(maxY-(4.5-(maxX-tempfloat)))/4.5-1;j++)
+		for(j=0;j<(maxY-(JianDaoXianJianJu-(maxX-tempfloat)))/JianDaoXianJianJu-1;j++)
 		{//xz面反向中斜线以上斜线
 			XYline[i][countline].xs=maxX;
 			XYline[i][countline].zs=XZVal[2][i];
-			XYline[i][countline].ys=XYline[i][countline-1].ys+4.5;
+			XYline[i][countline].ys=XYline[i][countline-1].ys+JianDaoXianJianJu;
 			if(maxY-XYline[i][countline].ys<maxX)
 			{
 				XYline[i][countline].xe=maxX-(maxY-XYline[i][countline].ys);
@@ -1647,8 +1647,8 @@ void CSet::OnOutput()
 	int va=0;
 	dy=0;
 	//横杆1/2
-	element *Yelement = new element[4000];
-	memset(Yelement,0,sizeof(Yelement)/sizeof(Yelement[0])*sizeof(element));
+	element *Yelement = new element[15000];
+	//memset(Yelement,0,sizeof(Yelement)/sizeof(Yelement[0])*sizeof(element));
 	tempcount=1;//临时单元计数器，1开始
 	for(i=2;i<BuJuGeShu_Z-1;i++)
 	{
@@ -1665,11 +1665,11 @@ void CSet::OnOutput()
 	}
 	/*for(vc=2;vc<=c+1;vc++)
 	{
-		break;
-		for(va=1;va<=a+1;va++)
-		{
-			for(qd=(va-1)*b+va+vc*dc;qd<=va-1+va*b+vc*dc;qd++)
-			{
+	break;
+	for(va=1;va<=a+1;va++)
+	{
+	for(qd=(va-1)*b+va+vc*dc;qd<=va-1+va*b+vc*dc;qd++)
+	{
 				zd=qd+1;
 				dy=dy+1;
 				//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
@@ -1677,13 +1677,13 @@ void CSet::OnOutput()
 				Yelement[tempcount++].zd=zd;
 				//File1.WriteString(str);
 				//File1.WriteString("\n");
-			}
-		}
+				}
+				}
 	}*/
 
 	//横杆2/2
-	element *Xelement = new element[4000];
-	memset(Xelement,0,sizeof(Xelement)/sizeof(Xelement[0])*sizeof(element));
+	element *Xelement = new element[15000];
+	//memset(Xelement,0,sizeof(Xelement)/sizeof(Xelement[0])*sizeof(element));
 	tempcount=1;
 	for(i=2;i<BuJuGeShu_Z-1;i++)
 	{
@@ -1700,23 +1700,23 @@ void CSet::OnOutput()
 	}
 	/*for(vc=2;vc<=c+1;vc++)
 	{
-		break;
-		for(qd=1+dc*vc;qd<=a*(b+1)+dc*vc;qd++)
-		{
-			zd=qd+b+1;
-			dy=dy+1;
-			//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			Xelement[tempcount].qd=qd;
-			Xelement[tempcount++].zd=zd;
-			//File1.WriteString(str);
-			//File1.WriteString("\n");
-		}
+	break;
+	for(qd=1+dc*vc;qd<=a*(b+1)+dc*vc;qd++)
+	{
+	zd=qd+b+1;
+	dy=dy+1;
+	//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+	Xelement[tempcount].qd=qd;
+	Xelement[tempcount++].zd=zd;
+	//File1.WriteString(str);
+	//File1.WriteString("\n");
+	}
 
 	}*/
 	HorizPoleNum = dy;
 	//立杆
-	element *Zelement = new element[8000];
-	memset(Zelement,0,sizeof(Zelement)/sizeof(Zelement[0])*sizeof(element));
+	element *Zelement = new element[15000];
+	//memset(Zelement,0,sizeof(Zelement)/sizeof(Zelement[0])*sizeof(element));
 	tempcount=1;
 	for(vc=0;vc<=c+1;vc++)
 	{
@@ -1798,32 +1798,32 @@ void CSet::OnOutput()
 	//return;
 	//扫地杆
 	////////////////y方向
-	element *SDelement = new element[200];
-	memset(SDelement,0,sizeof(SDelement)/sizeof(SDelement[0])*sizeof(element));
+	element *SDelement = new element[1000];
+	//memset(SDelement,0,sizeof(SDelement)/sizeof(SDelement[0])*sizeof(element));
 	tempcount=1;
 	qd=SDNodeStart;
 	for(i=1;i<PaiJuGeShu_Y;i++)
 	{
-		zd=qd+1;
-		dy=dy+1;
+		//zd=qd+1;
+		//dy=dy+1;
 		//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-		SDelement[tempcount].qd=qd;
-		SDelement[tempcount++].zd=zd;
+		SDelement[tempcount].qd=qd++;
+		SDelement[tempcount++].zd=qd;
 		//File1.WriteString(str);
 		//File1.WriteString("\n");
-		qd=zd;
+		//qd++;
 	}
 	qd=SDNodeStart+PaiJuGeShu_Y+2*(ZhuJuGeShu_X-2);
 	for(i=1;i<PaiJuGeShu_Y;i++)
 	{
-		zd=qd+1;
-		dy=dy+1;
+		//zd=qd+1;
+		//dy=dy+1;
 		//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-		SDelement[tempcount].qd=qd;
-		SDelement[tempcount++].zd=zd;
+		SDelement[tempcount].qd=qd++;
+		SDelement[tempcount++].zd=qd;
 		//File1.WriteString(str);
 		//File1.WriteString("\n");
-		qd=zd;
+		//qd=zd;
 	}
 	/////////////////x方向
 	qd=SDNodeStart;
@@ -1833,7 +1833,7 @@ void CSet::OnOutput()
 			zd=qd+PaiJuGeShu_Y;
 		else
 			zd=qd+2;
-		dy=dy+1;
+		//dy=dy+1;
 		//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
 		SDelement[tempcount].qd=qd;
 		SDelement[tempcount++].zd=zd;
@@ -1848,7 +1848,7 @@ void CSet::OnOutput()
 			zd=qd+PaiJuGeShu_Y;
 		else
 			zd=qd+2;
-		dy=dy+1;
+		//dy=dy+1;
 		//str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
 		SDelement[tempcount].qd=qd;
 		SDelement[tempcount++].zd=zd;
@@ -1856,9 +1856,13 @@ void CSet::OnOutput()
 		//File1.WriteString("\n");
 		qd=zd;
 	}
-	Node XZNode[10][400];//从0开始填充，存储剪刀撑新生节点
-	memset(XZNode,0,sizeof(XZNode)/sizeof(XZNode[0][0])*sizeof(Node));
-	int JDNode[10];
+	Node* XZNode[50];//[400];//从0开始填充，存储剪刀撑新生节点
+	for(i=0;i<50;i++)
+	{
+		XZNode[i]=new Node[2000];
+	}
+	//memset(XZNode,0,sizeof(XZNode)/sizeof(XZNode[0][0])*sizeof(Node));
+	int JDNode[50];
 	memset(JDNode,0,sizeof(JDNode)/sizeof(JDNode[0])*sizeof(int));
 	int totalcount=0;
 	int XZNodeStart=num;
@@ -1909,8 +1913,12 @@ void CSet::OnOutput()
 		}
 	}
 	int XZNodeEnd=num-1;
-	Node YZNode[10][400];//从0开始填充，存储剪刀撑新生节点
-	memset(YZNode,0,sizeof(YZNode)/sizeof(YZNode[0][0])*sizeof(Node));
+	Node* YZNode[50];//[400];//从0开始填充，存储剪刀撑新生节点
+	for(i=0;i<50;i++)
+	{
+		YZNode[i]=new Node[2000];
+	}
+	//memset(YZNode,0,sizeof(YZNode)/sizeof(YZNode[0][0])*sizeof(Node));
 	//int JDNode[10];
 	memset(JDNode,0,sizeof(JDNode)/sizeof(JDNode[0])*sizeof(int));
 	totalcount=0;
@@ -1968,8 +1976,12 @@ void CSet::OnOutput()
 		}
 	}
 	int YZNodeEnd=num-1;
-	Node XYNode[10][400];//从0开始填充，存储剪刀撑新生节点
-	memset(XYNode,0,sizeof(XYNode)/sizeof(XYNode[0][0])*sizeof(Node));
+	Node* XYNode[50];//[400];//从0开始填充，存储剪刀撑新生节点
+	for(i=0;i<50;i++)
+	{
+		XYNode[i]=new Node[2000];
+	}
+	//memset(XYNode,0,sizeof(XYNode)/sizeof(XYNode[0][0])*sizeof(Node));
 	//int JDNode[10];
 	memset(JDNode,0,sizeof(JDNode)/sizeof(JDNode[0])*sizeof(int));
 	totalcount=0;
@@ -1990,11 +2002,11 @@ void CSet::OnOutput()
 					break;
 				tempres[0]=0.0;
 				tempres[1]=0.0;
-				if(Xelement[j].zs!=XZVal[2][l])
+				if(fabs(Xelement[j].zs-XZVal[2][l])>0.005)
 					continue;
 				JudgeCross(Xelement[j].xs,Xelement[j].ys,Xelement[j].xe,Xelement[j].ye,
 					XYline[l][i].xs,XYline[l][i].ys,XYline[l][i].xe,XYline[l][i].ye,tempres);
-				if(tempres[0]==-1.0)
+				if(fabs(tempres[0]+1.0)<0.005)
 					continue;
 				int flag=0;
 				for(k=1;k<tempcount;k++)
@@ -2022,12 +2034,12 @@ void CSet::OnOutput()
 	}
 	int XYNodeEnd=num-1;
 	/////////////////////////通过循环对比找出normalNode与XZNode和YZNode的重复节点//////////////////
-	int tempcount1=0;
+	/*int tempcount1=0;
 	tempcount=0;
-	Node XZEqualNormal[2][200];//[0][200]中表示Normal节点信息，[1][200]中表示XZNode节点信息
-	memset(XZEqualNormal,0,sizeof(XZEqualNormal)/sizeof(XZEqualNormal[0][0])*sizeof(Node));
-	Node YZEqualNormal[2][200];//[0][200]中表示Normal节点信息，[1][200]中表示YZNode节点信息
-	memset(YZEqualNormal,0,sizeof(YZEqualNormal)/sizeof(YZEqualNormal[0][0])*sizeof(Node));
+	Node XZEqualNormal[2][400];//[0][200]中表示Normal节点信息，[1][200]中表示XZNode节点信息
+	//memset(XZEqualNormal,0,sizeof(XZEqualNormal)/sizeof(XZEqualNormal[0][0])*sizeof(Node));
+	Node YZEqualNormal[2][400];//[0][200]中表示Normal节点信息，[1][200]中表示YZNode节点信息
+	//memset(YZEqualNormal,0,sizeof(YZEqualNormal)/sizeof(YZEqualNormal[0][0])*sizeof(Node));
 	for(i=1;;i++)
 	{
 		if(NodeZong[i].Num==0)
@@ -2063,7 +2075,7 @@ void CSet::OnOutput()
 			}
 		}
 	}
-
+*/
 	tempcount=SDNodeEnd+1;
 	for(i=0;;i++)
 	{
@@ -2075,6 +2087,14 @@ void CSet::OnOutput()
 			if(XZNode[i][j].Num==0)
 				break;
 			NodeZong[tempcount++]=XZNode[i][j];
+			for(k=1;k<=SDNodeEnd;k++)
+			{
+				if(fabs(XZNode[i][j].x-NodeZong[k].x)<0.005&&fabs(XZNode[i][j].y-NodeZong[k].y)<0.005&&fabs(XZNode[i][j].z-NodeZong[k].z)<0.005)
+				{
+				tempcount--;
+				break;
+				}
+			}
 		}
 	}
 	for(i=0;;i++)
@@ -2087,6 +2107,14 @@ void CSet::OnOutput()
 			if(YZNode[i][j].Num==0)
 				break;
 			NodeZong[tempcount++]=YZNode[i][j];
+			for(k=1;k<=SDNodeEnd;k++)
+			{
+				if(fabs(YZNode[i][j].x-NodeZong[k].x)<0.005&&fabs(YZNode[i][j].y-NodeZong[k].y)<0.005&&fabs(YZNode[i][j].z-NodeZong[k].z)<0.005)
+				{
+				tempcount--;
+				break;
+				}
+			}
 		}
 	}
 	for(i=0;;i++)
@@ -2099,10 +2127,20 @@ void CSet::OnOutput()
 			if(XYNode[i][j].Num==0)
 				break;
 			NodeZong[tempcount++]=XYNode[i][j];
+			for(k=1;k<=SDNodeEnd;k++)
+			{
+				if(fabs(XYNode[i][j].x-NodeZong[k].x)<0.005&&fabs(XYNode[i][j].y-NodeZong[k].y)<0.005&&fabs(XYNode[i][j].z-NodeZong[k].z)<0.005)
+				{
+				tempcount--;
+				break;
+				}
+			}
 		}
 	}
 	///////////////重新计算生成立杆单元///////////////////////
-	memset(Zelement,0,sizeof(Zelement)/sizeof(Zelement[0])*sizeof(element));
+	//memset(Zelement,0,sizeof(Zelement)/sizeof(Zelement[0])*sizeof(element));
+	delete Zelement;
+	Zelement=new element[15000];
 	tempcount=1;
 	tempX=0.0;
 	tempY=0.0;
@@ -2139,7 +2177,7 @@ void CSet::OnOutput()
 									if(o==0)
 									{
 										if(fabs(NodeZong[m].x-tempX)<0.005&&fabs(NodeZong[m].y-tempY)<0.005
-											&&NodeZong[m].z>=tempstart&&NodeZong[m].z<=maxZ)
+											&&NodeZong[m].z>=tempstart&&NodeZong[m].z<maxZ)
 										{
 											if(tempval>=NodeZong[m].z)
 											{
@@ -2218,7 +2256,7 @@ void CSet::OnOutput()
 								if(o==0)
 								{
 									if(fabs(NodeZong[m].x-tempX)<0.005&&fabs(NodeZong[m].y-tempY)<0.005
-										&&NodeZong[m].z>=tempstart&&NodeZong[m].z<=maxZ)
+										&&NodeZong[m].z>=tempstart&&NodeZong[m].z<maxZ)
 									{
 										if(tempval>=NodeZong[m].z)
 										{
@@ -2306,7 +2344,7 @@ void CSet::OnOutput()
 								if(o==0)
 								{
 									if(fabs(NodeZong[m].x-tempX)<0.005&&fabs(NodeZong[m].y-tempY)<0.005
-										&&NodeZong[m].z>=tempstart&&NodeZong[m].z<=maxZ)
+										&&NodeZong[m].z>=tempstart&&NodeZong[m].z<maxZ)
 									{
 										if(tempval>=NodeZong[m].z)
 										{
@@ -2385,7 +2423,7 @@ void CSet::OnOutput()
 							if(o==0)
 							{
 								if(fabs(NodeZong[m].x-tempX)<0.005&&fabs(NodeZong[m].y-tempY)<0.005
-									&&NodeZong[m].z>=tempstart&&NodeZong[m].z<=maxZ)
+									&&NodeZong[m].z>=tempstart&&NodeZong[m].z<maxZ)
 								{
 									if(tempval>=NodeZong[m].z)
 									{
@@ -2491,7 +2529,7 @@ void CSet::OnOutput()
 									if(o==0)
 									{
 										if(fabs(NodeZong[m].z-tempZ)<0.005&&fabs(NodeZong[m].y-tempY)<0.005
-											&&NodeZong[m].x>=tempstart&&NodeZong[m].x<=maxX)
+											&&NodeZong[m].x>=tempstart&&NodeZong[m].x<maxX)
 										{
 											if(tempval>=NodeZong[m].x)
 											{
@@ -2570,7 +2608,7 @@ void CSet::OnOutput()
 								if(o==0)
 								{
 									if(fabs(NodeZong[m].z-tempZ)<0.005&&fabs(NodeZong[m].y-tempY)<0.005
-										&&NodeZong[m].x>=tempstart&&NodeZong[m].x<=maxX)
+										&&NodeZong[m].x>=tempstart&&NodeZong[m].x<maxX)
 									{
 										if(tempval>=NodeZong[m].x)
 										{
@@ -2658,7 +2696,7 @@ void CSet::OnOutput()
 								if(o==0)
 								{
 									if(fabs(NodeZong[m].z-tempZ)<0.005&&fabs(NodeZong[m].y-tempY)<0.005
-										&&NodeZong[m].x>=tempstart&&NodeZong[m].x<=maxX)
+										&&NodeZong[m].x>=tempstart&&NodeZong[m].x<maxX)
 									{
 										if(tempval>=NodeZong[m].x)
 										{
@@ -2737,7 +2775,7 @@ void CSet::OnOutput()
 							if(o==0)
 							{
 								if(fabs(NodeZong[m].z-tempZ)<0.005&&fabs(NodeZong[m].y-tempY)<0.005
-									&&NodeZong[m].x>=tempstart&&NodeZong[m].x<=maxX)
+									&&NodeZong[m].x>=tempstart&&NodeZong[m].x<maxX)
 								{
 									if(tempval>=NodeZong[m].x)
 									{
@@ -2803,42 +2841,42 @@ void CSet::OnOutput()
 			}
 		}
 	}
-///////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////
 	/*tempcount=SDNodeEnd+1;
 	for(i=0;;i++)
 	{
-		//break;
-		if(XZNode[i][0].Num==0)
-			break;
-		for(j=0;;j++)
-		{
-			if(XZNode[i][j].Num==0)
-				break;
-			NodeZong[tempcount++]=XZNode[i][j];
-		}
-	}
-	for(i=0;;i++)
+	//break;
+	if(XZNode[i][0].Num==0)
+	break;
+	for(j=0;;j++)
 	{
-		//break;
-		if(YZNode[i][0].Num==0)
-			break;
-		for(j=0;;j++)
-		{
-			if(YZNode[i][j].Num==0)
+	if(XZNode[i][j].Num==0)
 				break;
-			NodeZong[tempcount++]=YZNode[i][j];
-		}
-	}
-	for(i=0;;i++)
-	{
-		if(XYNode[i][0].Num==0)
-			break;
-		for(j=0;;j++)
-		{
-			if(XYNode[i][j].Num==0)
+				NodeZong[tempcount++]=XZNode[i][j];
+				}
+				}
+				for(i=0;;i++)
+				{
+				//break;
+				if(YZNode[i][0].Num==0)
 				break;
-			NodeZong[tempcount++]=XYNode[i][j];
-		}
+				for(j=0;;j++)
+				{
+				if(YZNode[i][j].Num==0)
+				break;
+				NodeZong[tempcount++]=YZNode[i][j];
+				}
+				}
+				for(i=0;;i++)
+				{
+				if(XYNode[i][0].Num==0)
+				break;
+				for(j=0;;j++)
+				{
+				if(XYNode[i][j].Num==0)
+				break;
+				NodeZong[tempcount++]=XYNode[i][j];
+				}
 	}*/
 	//str.Format("Zelement共有%d个",tempcount-1);
 	//MessageBox(str);
@@ -2856,12 +2894,16 @@ void CSet::OnOutput()
 	NodeZong[SDNodeEnd+1].y=0.0;
 	NodeZong[SDNodeEnd+1].z=0.0;
 
-	element XZscielement[10][200];
-	memset(XZscielement,0,sizeof(XZscielement)/sizeof(XZscielement[0][0])*sizeof(element));
+	element* XZscielement[50];//[500];
+	for(i=0;i<50;i++)
+	{
+		XZscielement[i]=new element[2000];
+	}
+	//memset(XZscielement,0,sizeof(XZscielement)/sizeof(XZscielement[0][0])*sizeof(element));
 	Node tempNode[50];
-	memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
+	//memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
 	Node tempNode1[50];
-	memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
+	//memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
 
 	int Node1count=1;
 	int scicount=1;
@@ -2871,12 +2913,12 @@ void CSet::OnOutput()
 	tempstart.y=0.0;*/
 	for(l=0;;l++)
 	{
-		if(l!=0&&XZVal[0][l]==0.0)
+		if(l!=0&&fabs(XZVal[0][l])<0.005)
 			break;
 		scicount=1;
 		for(i=0;;i++)
 		{
-			if(XZline[l][i].zs==0.0&&XZline[l][i].xs==0.0)
+			if(fabs(XZline[l][i].zs)<0.005&&fabs(XZline[l][i].xs)<0.005)
 				break;
 			tempcount=1;
 			memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
@@ -2931,8 +2973,12 @@ void CSet::OnOutput()
 		}
 	}
 
-	element YZscielement[10][200];
-	memset(YZscielement,0,sizeof(YZscielement)/sizeof(YZscielement[0][0])*sizeof(element));
+	element* YZscielement[50];
+	for(i=0;i<50;i++)
+	{
+		YZscielement[i]=new element[2000];
+	}
+	//memset(YZscielement,0,sizeof(YZscielement)/sizeof(YZscielement[0][0])*sizeof(element));
 	memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
 	memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
 
@@ -2940,12 +2986,12 @@ void CSet::OnOutput()
 	scicount=1;
 	for(l=0;;l++)
 	{
-		if(l!=0&&XZVal[1][l]==0.0)
+		if(l!=0&&fabs(XZVal[1][l])<0.005)
 			break;
 		scicount=1;
 		for(i=0;;i++)
 		{
-			if(YZline[l][i].zs==0.0&&YZline[l][i].ys==0.0)
+			if(fabs(YZline[l][i].zs)<0.005&&fabs(YZline[l][i].ys)<0.005)
 				break;
 			tempcount=1;
 			memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
@@ -3000,8 +3046,12 @@ void CSet::OnOutput()
 		}
 	}
 
-	element XYscielement[10][200];
-	memset(XYscielement,0,sizeof(XYscielement)/sizeof(XYscielement[0][0])*sizeof(element));
+	element* XYscielement[50];//[200];
+	for(i=0;i<50;i++)
+	{
+		XYscielement[i]=new element[2000];
+	}
+	//memset(XYscielement,0,sizeof(XYscielement)/sizeof(XYscielement[0][0])*sizeof(element));
 	memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
 	memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
 
@@ -3009,12 +3059,12 @@ void CSet::OnOutput()
 	scicount=1;
 	for(l=0;;l++)
 	{
-		if(l!=0&&XZVal[2][l]==0.0)
+		if(l!=0&&fabs(XZVal[2][l])<0.005)
 			break;
 		scicount=1;
 		for(i=0;;i++)
 		{
-			if(XYline[l][i].zs==0.0&&XYline[l][i].ys==0.0)
+			if(fabs(XYline[l][i].zs)<0.005&&fabs(XYline[l][i].ys)<0.005)
 				break;
 			tempcount=1;
 			memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
@@ -3082,16 +3132,33 @@ void CSet::OnOutput()
 	CString fileext;//文件扩展名
 	CString filepathname;
 	CFileDialog fpdlg(FALSE,  NULL,  NULL,OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,"(文件类型)(*.mct)|*.mct|(文件类型)(*.txt)|*.txt|所有文件(*.*)|*.*||",NULL);
-
-	if(fpdlg.DoModal() == IDOK)
+	i=fpdlg.DoModal();
+	if( i== IDOK)
 	{
 		filename = fpdlg.GetFileName();
 		fileext = fpdlg.GetFileExt();//文件扩展名
 		filepathname = fpdlg.GetPathName();
 	}
-	else if (fpdlg.DoModal() == IDCANCEL)
+	else if (i == IDCANCEL)
 	{
 		AfxMessageBox("没有读取sgy文件");
+		delete NodeZong;
+		delete Xelement;
+		delete Yelement;
+		delete Zelement;
+		delete SDelement;
+		for(i=0;i<50;i++)
+		{
+			delete XZline[i];
+			delete YZline[i];
+			delete XYline[i];
+			delete XZscielement[i];
+			delete YZscielement[i];
+			delete XYscielement[i];
+			delete XZNode[i];
+			delete YZNode[i];
+			delete XYNode[i];
+		}
 		return;
 	}
 
@@ -3110,6 +3177,8 @@ void CSet::OnOutput()
 	str.Format(";---------------------------------------------------------------------------\n\n");
 	File1.WriteString(str);
 	str.Format("*VERSION\n   8.0.5\n\n");
+	File1.WriteString(str);
+	str.Format(";助手版本 1.7.0\n\n");
 	File1.WriteString(str);
 	str.Format("*UNIT    ; Unit System\n; FORCE, LENGTH, HEAT, TEMPER\n   KN   , M, KJ, C\n\n");
 	File1.WriteString(str);
@@ -3362,2380 +3431,1455 @@ void CSet::OnOutput()
 	//File1.Close();
 	//AfxMessageBox("success");
 	//return;
+	qy = 1.1 * (GangJinHunNingTu + MoBanFangLeng);
+	str.Format("%f",qy);
 
-	/*
-	Dim dy, dc, qd, zd As Integer
-	' dy单元编号 dc单层节点数，qd单元起点节点号，zd单元重点节点号
-	dy = 0
-	dc = (a + 1) * (b + 1)
-	*/
-
-	/*a=ZhuJuGeShu_X-1;
-	b=PaiJuGeShu_Y-1;
-	c=BuJuGeShu_Z-3;//-3;田海涛20:00 2016/9/8
-	float z=BuJu_Z;
-	int HorizPoleNum=0;//记录横向杆总个数
-	dy=0;
-	dc=(a+1)*(b+1);
-	int vc=0;
-	int va=0;*/
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////首次执行整个单元建模过程以计算总单元数////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/*for(vc=2;vc<=c+1;vc++)
+	if (DiYiCiYuYa + DiErCiYuYa + DiSanCiYuYa > 1.4) //Then
 	{
-		for(va=1;va<=a+1;va++)
+		if(IDOK==MessageBox("警告","预压荷载是否过大？",MB_YESNO))
 		{
-			for(qd=(va-1)*b+va+vc*dc;qd<=va-1+va*b+vc*dc;qd++)
-			{
-				dy=dy+1;
-			}
-		}
-
-	}
-	//横杆2/2
-	for(vc=2;vc<=c+1;vc++)
-	{
-		for(qd=1+dc*vc;qd<=a*(b+1)+dc*vc;qd++)
-		{
-			dy=dy+1;
-		}
-
-	}
-	HorizPoleNum = dy;
-	//立杆
-	for(vc=0;vc<=c+1;vc++)
-	{
-		for(qd=1+dc*vc;qd<=(a+1)*(b+1)+dc*vc;qd++)
-		{
-			dy=dy+1;
-		}
-
-	}
-	int ZCount=0;
-	int ZNum[20];
-	float maxZDate=0.0;
-	int maxZNum=2;
-	ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*maxZNum;
-	for(i=2;i<Count_Z-1;i++)
-	{
-		for(j=0;j<BuJuCountSave[i];j++)
-		{
-			maxZDate=maxZDate+BuJuDataSave[i];
-			if(maxZDate>=4.8)
-			{
-				ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*maxZNum;
-				maxZDate=BuJuDataSave[i];
-			}
-			maxZNum++;
+			delete NodeZong;
+			delete Xelement;
+			delete Yelement;
+			delete Zelement;
+			delete SDelement;
+			return;
 		}
 	}
-	if(ZNum[ZCount-1]!=1+ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z-1))
-	{
-		ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z-2);
-	}
-	int Turn = 1;
-	//////////////////////水平剪刀撑///////////////////////////
-	for(i=0;i<ZCount;i++)
-	{
-		//int Max=ZhuJuGeShu_X>PaiJuGeShu_Y?ZhuJuGeShu_X:PaiJuGeShu_Y;
-		//int Min=ZhuJuGeShu_X<PaiJuGeShu_Y?ZhuJuGeShu_X:PaiJuGeShu_Y;
-		for(k=0;k<=(PaiJuGeShu_Y-1-1)/5;k++)//1代表允许末尾多出段数
-		{
-			zd=ZNum[i]+k*5;
-			for(j=1+5*k;j<=PaiJuGeShu_Y-1;j++)
-			{
-				dy = dy + 1;
-				if((j-5*k)==ZhuJuGeShu_X-1)
-					break;
-			}
-		}
-		for(k=1;k<=(ZhuJuGeShu_X-1-1)/5;k++)//1代表允许末尾多出段数
-		{
-			zd=ZNum[i]+k*5*PaiJuGeShu_Y;
-			for(j=1+5*k;j<=ZhuJuGeShu_X-1;j++)
-			{
-				dy = dy + 1;
-				if((j-5*k)==PaiJuGeShu_Y-1)
-					break;
-			}
-		}
-		for(k=1;k<=(ZhuJuGeShu_X-1-1)/5;k++)//1代表允许末尾多出段数
-		{
-			zd=ZNum[i]+k*5*PaiJuGeShu_Y;
-			for(j=1;j<=5*k;j++)
-			{
-				dy = dy + 1;
-				if(j==PaiJuGeShu_Y-1)
-					break;
-			}
-		}
-		if((ZhuJuGeShu_X-1)%5>=3)
-		{
-			zd=ZNum[i]+ZhuJuGeShu_X*PaiJuGeShu_Y-PaiJuGeShu_Y;
-			for(j=1;j<=PaiJuGeShu_Y-1;j++)
-			{
-				dy = dy + 1;
-				if(j==ZhuJuGeShu_X-1)
-					break;
-			}
-		}
-		for(k=(ZhuJuGeShu_X-1)%5;k<PaiJuGeShu_Y-1;k+=5)//1代表允许末尾多出段数
-		{
-			zd=ZNum[i]+ZhuJuGeShu_X*PaiJuGeShu_Y-PaiJuGeShu_Y+k;
-			for(j=1;j<=ZhuJuGeShu_X-1;j++)
-			{
-				dy = dy + 1;
-				if(j+k==PaiJuGeShu_Y-1)
-					break;
-			}
-		}
-	}
-	//File1.Close();
-	//AfxMessageBox("success");
-	//return;
-	//File1.WriteString(";;横桥向剪刀撑\n");
+	//'边界组、荷载组定义
+	//************* Lines = Lines & readFile("d:\参数化建模\支架文件\BNDR-GROUP.mct") ************
 
-	//////////////////////////////////////////////////////////
-	///////////////////////横桥向剪刀撑//////////////////////////////
-	for(i=0;i<=(ZhuJuGeShu_X-1-1)/5+1;i++)
-	{
-		//int Max=ZhuJuGeShu_X>PaiJuGeShu_Y?ZhuJuGeShu_X:PaiJuGeShu_Y;
-		//int Min=ZhuJuGeShu_X<PaiJuGeShu_Y?ZhuJuGeShu_X:PaiJuGeShu_Y;
-		for(k=0;k<=(PaiJuGeShu_Y-1-1)/5;k++)//1代表允许末尾多出段数
-		{
-			zd=1+2*ZhuJuGeShu_X*PaiJuGeShu_Y+i*5*PaiJuGeShu_Y+k*5;
-			if(i==(ZhuJuGeShu_X-1-1)/5+1)
-				zd=1+2*ZhuJuGeShu_X*PaiJuGeShu_Y+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y+k*5;
-			for(j=1;j<=BuJuGeShu_Z-5;j++)
-			{
-				dy = dy + 1;
-				if((j+5*k)==PaiJuGeShu_Y-1)
-					break;
-			}
-		}
-		for(k=1;k<=(BuJuGeShu_Z-5)/5;k++)//1代表允许末尾多出段数
-		{
-			zd=1+3*ZhuJuGeShu_X*PaiJuGeShu_Y+i*5*PaiJuGeShu_Y+k*ZhuJuGeShu_X*PaiJuGeShu_Y*5;
-			if(i==(ZhuJuGeShu_X-1-1)/5+1)
-				zd=1+3*ZhuJuGeShu_X*PaiJuGeShu_Y+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y+k*ZhuJuGeShu_X*PaiJuGeShu_Y*5;
-			for(j=1;j<=PaiJuGeShu_Y-1;j++)
-			{
-				dy = dy + 1;
-				if((j+5*k)==BuJuGeShu_Z-5)
-					break;
-			}
-		}
-		/////////////////////////////0915暂停
-		for(k=1;k<=(PaiJuGeShu_Y-1)/5;k++)//1代表允许末尾多出段数
-		{
-			zd=1+2*ZhuJuGeShu_X*PaiJuGeShu_Y+i*5*PaiJuGeShu_Y+k*5;
-			if(i==(ZhuJuGeShu_X-1-1)/5+1)
-				zd=1+2*ZhuJuGeShu_X*PaiJuGeShu_Y+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y+k*5;
-			for(j=1;j<=5*k;j++)
-			{
-				dy = dy + 1;
-				if(j==BuJuGeShu_Z-5)
-					break;
-			}
-		}
-		if((PaiJuGeShu_Y-1)%5>=3)
-		{
-			zd=2*ZhuJuGeShu_X*PaiJuGeShu_Y+i*5*PaiJuGeShu_Y+PaiJuGeShu_Y;
-			if(i==(ZhuJuGeShu_X-1-1)/5+1)
-				zd=3*ZhuJuGeShu_X*PaiJuGeShu_Y;
-			for(j=1;j<=PaiJuGeShu_Y-1;j++)
-			{
-				dy = dy + 1;
-				if(j==BuJuGeShu_Z-5)
-					break;
-			}
-		}
-		for(k=(PaiJuGeShu_Y-1)%5+3;k<BuJuGeShu_Z-3;k+=5)//1代表允许末尾多出段数
-		{
-			zd=PaiJuGeShu_Y+k*ZhuJuGeShu_X*PaiJuGeShu_Y+i*5*PaiJuGeShu_Y;
-			if(i==(ZhuJuGeShu_X-1-1)/5+1)
-				zd=PaiJuGeShu_Y+k*ZhuJuGeShu_X*PaiJuGeShu_Y+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y;
-			for(j=1;j+k<=BuJuGeShu_Z-2;j++)
-			{
-				dy = dy + 1;
-				if(j==PaiJuGeShu_Y-1)
-					break;
-			}
-		}
-	}
-
-	///////////////////////顺桥向剪刀撑//////////////////////////////
-	for(i=0;i<=(PaiJuGeShu_Y-1-1)/5+1;i++)
-	{
-		//int Max=PaiJuGeShu_Y>ZhuJuGeShu_X?PaiJuGeShu_Y:ZhuJuGeShu_X;
-		//int Min=PaiJuGeShu_Y<ZhuJuGeShu_X?PaiJuGeShu_Y:ZhuJuGeShu_X;
-		for(k=0;k<=(ZhuJuGeShu_X-1-1)/5;k++)//1代表允许末尾多出段数
-		{
-			zd=1+2*PaiJuGeShu_Y*ZhuJuGeShu_X+i*5+k*5*PaiJuGeShu_Y;
-			if(i==(PaiJuGeShu_Y-1-1)/5+1)
-				zd=1+2*PaiJuGeShu_Y*ZhuJuGeShu_X+PaiJuGeShu_Y-1+k*5*PaiJuGeShu_Y;
-			for(j=1;j<=BuJuGeShu_Z-5;j++)
-			{
-				dy = dy + 1;
-				if((j+5*k)==ZhuJuGeShu_X-1)
-					break;
-			}
-		}
-		for(k=1;k<=(BuJuGeShu_Z-5)/5;k++)//1代表允许末尾多出段数
-		{
-			zd=1+3*PaiJuGeShu_Y*ZhuJuGeShu_X+i*5+k*5*PaiJuGeShu_Y*ZhuJuGeShu_X;
-			if(i==(PaiJuGeShu_Y-1-1)/5+1)
-				zd=3*PaiJuGeShu_Y*ZhuJuGeShu_X+PaiJuGeShu_Y+k*ZhuJuGeShu_X*PaiJuGeShu_Y*5;
-			for(j=1;j<=ZhuJuGeShu_X-1;j++)
-			{
-				dy = dy + 1;
-				if((j+5*k)==BuJuGeShu_Z-5)
-					break;
-			}
-		}
-		/////////////////////////////0915暂停
-		for(k=1;k<=(ZhuJuGeShu_X-1)/5;k++)//1代表允许末尾多出段数
-		{
-			zd=1+2*PaiJuGeShu_Y*ZhuJuGeShu_X+i*5+k*5*PaiJuGeShu_Y;
-			if(i==(PaiJuGeShu_Y-1-1)/5+1)
-				zd=2*PaiJuGeShu_Y*ZhuJuGeShu_X+PaiJuGeShu_Y+k*5*PaiJuGeShu_Y;
-			for(j=1;j<=5*k;j++)
-			{
-				dy = dy + 1;
-				if(j==BuJuGeShu_Z-5)
-					break;
-			}
-		}
-		if((ZhuJuGeShu_X-1)%5>=3)
-		{
-			zd=1+2*PaiJuGeShu_Y*ZhuJuGeShu_X+i*5+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y;
-			if(i==(PaiJuGeShu_Y-1-1)/5+1)
-				zd=3*PaiJuGeShu_Y*ZhuJuGeShu_X;
-			for(j=1;j<=ZhuJuGeShu_X-1;j++)
-			{
-				dy = dy + 1;
-				if(j==BuJuGeShu_Z-5)
-					break;
-			}
-		}
-		for(k=(ZhuJuGeShu_X-1)%5+3;k<BuJuGeShu_Z-3;k+=5)//1代表允许末尾多出段数
-		{
-			zd=1+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y+k*PaiJuGeShu_Y*ZhuJuGeShu_X+i*5;
-			if(i==(PaiJuGeShu_Y-1-1)/5+1)
-				zd=(ZhuJuGeShu_X-1)*PaiJuGeShu_Y+k*PaiJuGeShu_Y*ZhuJuGeShu_X+PaiJuGeShu_Y;
-			for(j=1;j+k<=BuJuGeShu_Z-2;j++)
-			{
-				dy = dy + 1;
-				if(j==ZhuJuGeShu_X-1)
-					break;
-			}
-		}
-	}*/
-
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	////////////////////////以下过程才开始执行整个单元建模过程//////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/*dy=0;
-	//横杆1/2
-	element Yelement[2000];
-	memset(Yelement,0,sizeof(Yelement)/sizeof(Yelement[0])*sizeof(element));
-	tempcount=1;//临时单元计数器，1开始
-	for(vc=2;vc<=c+1;vc++)
-	{
-	for(va=1;va<=a+1;va++)
-	{
-	for(qd=(va-1)*b+va+vc*dc;qd<=va-1+va*b+vc*dc;qd++)
-	{
-				zd=qd+1;
-				dy=dy+1;
-				str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-				Yelement[tempcount].qd=qd;
-				Yelement[tempcount++].zd=zd;
-				File1.WriteString(str);
-				File1.WriteString("\n");
-				}
-				}
-
-				  }
-
-					//横杆2/2
-					element Xelement[2000];
-					memset(Xelement,0,sizeof(Xelement)/sizeof(Xelement[0])*sizeof(element));
-					tempcount=1;
-					for(vc=2;vc<=c+1;vc++)
-					{
-					for(qd=1+dc*vc;qd<=a*(b+1)+dc*vc;qd++)
-					{
-					zd=qd+b+1;
-					dy=dy+1;
-					str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-					Xelement[tempcount].qd=qd;
-					Xelement[tempcount++].zd=zd;
-					File1.WriteString(str);
-					File1.WriteString("\n");
-					}
-
-					  }
-					  HorizPoleNum = dy;
-					  //立杆
-					  element Zelement[2000];
-					  memset(Zelement,0,sizeof(Zelement)/sizeof(Zelement[0])*sizeof(element));
-					  tempcount=1;
-					  for(vc=0;vc<=c+1;vc++)
-					  {
-					  for(qd=1+dc*vc;qd<=(a+1)*(b+1)+dc*vc;qd++)
-					  {
-					  zd=qd+dc;
-					  dy=dy+1;
-					  str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-					  Zelement[tempcount].qd=qd;
-					  Zelement[tempcount++].zd=zd;
-					  File1.WriteString(str);
-					  File1.WriteString("\n");
-					  }
-
-						}
-						for(i=1;;i++)
-						{
-						if(Yelement[i].qd==0)
-						break;
-						for(j=1;j<jiandaoStart;j++)
-						{
-						if(Yelement[i].qd==NodeZong[j].Num)
-						{
-						Yelement[i].xs=NodeZong[j].x;
-						Yelement[i].ys=NodeZong[j].y;
-						Yelement[i].zs=NodeZong[j].z;
-						}
-						if(Yelement[i].zd==NodeZong[j].Num)
-						{
-						Yelement[i].xe=NodeZong[j].x;
-						Yelement[i].ye=NodeZong[j].y;
-						Yelement[i].ze=NodeZong[j].z;
-						}
-						}
-						}
-						for(i=1;;i++)
-						{
-						if(Xelement[i].qd==0)
-						break;
-						for(j=1;j<jiandaoStart;j++)
-						{
-						if(Xelement[i].qd==NodeZong[j].Num)
-						{
-						Xelement[i].xs=NodeZong[j].x;
-						Xelement[i].ys=NodeZong[j].y;
-						Xelement[i].zs=NodeZong[j].z;
-						}
-						if(Xelement[i].zd==NodeZong[j].Num)
-						{
-						Xelement[i].xe=NodeZong[j].x;
-						Xelement[i].ye=NodeZong[j].y;
-						Xelement[i].ze=NodeZong[j].z;
-						}
-						}
-						}
-						for(i=1;;i++)
-						{
-						if(Zelement[i].qd==0)
-						break;
-						for(j=1;j<jiandaoStart;j++)
-						{
-						if(Zelement[i].qd==NodeZong[j].Num)
-						{
-						Zelement[i].xs=NodeZong[j].x;
-						Zelement[i].ys=NodeZong[j].y;
-						Zelement[i].zs=NodeZong[j].z;
-						}
-						if(Zelement[i].zd==NodeZong[j].Num)
-						{
-						Zelement[i].xe=NodeZong[j].x;
-						Zelement[i].ye=NodeZong[j].y;
-						Zelement[i].ze=NodeZong[j].z;
-						}
-						}
-						}
-						//File1.Close();
-						//AfxMessageBox("success");
-						//return;
-						//扫地杆
-						////////////////y方向
-						element SDelement[200];
-						memset(SDelement,0,sizeof(SDelement)/sizeof(SDelement[0])*sizeof(element));
-						tempcount=1;
-						qd=saodiStart;
-						for(i=1;i<PaiJuGeShu_Y;i++)
-						{
-						zd=qd+1;
-						dy=dy+1;
-						str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-						SDelement[tempcount].qd=qd;
-						SDelement[tempcount++].zd=zd;
-						File1.WriteString(str);
-						File1.WriteString("\n");
-						qd=zd;
-						}
-						qd=saodiStart+PaiJuGeShu_Y+2*(ZhuJuGeShu_X-2);
-						for(i=1;i<PaiJuGeShu_Y;i++)
-						{
-						zd=qd+1;
-						dy=dy+1;
-						str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-						SDelement[tempcount].qd=qd;
-						SDelement[tempcount++].zd=zd;
-						File1.WriteString(str);
-						File1.WriteString("\n");
-						qd=zd;
-						}
-						/////////////////x方向
-						qd=saodiStart;
-						for(i=1;i<ZhuJuGeShu_X;i++)
-						{
-						if(i==1)
-						zd=qd+PaiJuGeShu_Y;
-						else
-						zd=qd+2;
-						dy=dy+1;
-						str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-						SDelement[tempcount].qd=qd;
-						SDelement[tempcount++].zd=zd;
-						File1.WriteString(str);
-						File1.WriteString("\n");
-						qd=zd;
-						}
-						qd=saodiStart+PaiJuGeShu_Y-1;
-						for(i=1;i<ZhuJuGeShu_X;i++)
-						{
-						if(i==ZhuJuGeShu_X-1)
-						zd=qd+PaiJuGeShu_Y;
-						else
-						zd=qd+2;
-						dy=dy+1;
-						str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-						SDelement[tempcount].qd=qd;
-						SDelement[tempcount++].zd=zd;
-						File1.WriteString(str);
-						File1.WriteString("\n");
-						qd=zd;
-						}
-						tempcount=1;
-						Node XZNode[10][400];//从1开始填充，存储剪刀撑新生节点
-						memset(XZNode,0,sizeof(XZNode)/sizeof(XZNode[0][0])*sizeof(Node));
-						for(i=0;i<countline;i++)
-						{
-						float tempres[2];
-						for(j=1;;j++)
-						{//写算法判断两单元是否相交，并返回交点
-						if(Zelement[j].qd==0)
-						break;
-						tempres[0]=0.0;
-						tempres[1]=0.0;
-						JudgeCross(Zelement[j].xs,Zelement[j].zs,Zelement[j].xe,Zelement[j].ze,
-						XZline[0][i].xs,XZline[0][i].zs,XZline[0][i].xe,XZline[0][i].ze,tempres);
-						if(tempres[0]==-1.0)
-						continue;
-						int flag=0;
-						for(k=1;k<tempcount;k++)
-						{
-						if((XZNode[k].x==tempres[0])&&(XZNode[k].z==tempres[1]))
-						{
-						flag=1;
-						break;
-						}
-						}
-						if(0==flag)
-						{
-						XZNode[tempcount].x=tempres[0];
-						XZNode[tempcount].z=tempres[1];
-						XZNode[tempcount].Num=num+tempcount;
-						tempcount++;
-						}
-						}
-						}
-						str.Format(";///////////////////////////////////////我是分割线\n");
-						File1.WriteString(str);
-						for(i=1;i<tempcount;i++)
-						{
-						str.Format("%d,  %7.2f , %7.2f , %7.2f",XZNode[i].Num,XZNode[i].x,XZNode[i].y,XZNode[i].z);
-						File1.WriteString(str);
-						File1.WriteString("\n");
-						}
-						str.Format(";///////////////////////////////////////我是分割线\n");
-						File1.WriteString(str);
-
-
-							element XZscielement[2000];
-							memset(XZscielement,0,sizeof(XZscielement)/sizeof(XZscielement[0])*sizeof(element));
-							Node tempNode[50];
-							memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
-							Node tempNode1[50];
-							memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
-
-							  int Node1count=1;
-							  int scicount=1;
-							  /*Node tempstart;
-							  tempcount=1;
-							  tempNode.y=0.0;
-tempstart.y=0.0;*/
-/*for(i=0;i<countline;i++)
-{
-tempcount=1;
-memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
-for(j=1;;j++)
-{
-if(XZNode[j].Num==0)
-break;
-float res=(XZNode[j].x-XZline[0][i].xs)*(XZline[0][i].zs-XZline[0][i].ze)/(XZline[0][i].xs-XZline[0][i].xe)+XZline[0][i].zs-XZNode[j].z;
-if(fabs(res)<=0.000002&&(XZNode[j].z-XZline[0][i].ze)*(XZNode[j].z-XZline[0][i].zs)<=0.0)
-{
-tempNode[tempcount++]=XZNode[j];
-}
-}//此处按顺序找到所有应该连线的剪刀撑坐标，待连接，睡了。。。
-Node tempsingleNode;
-float maxZ=tempNode[1].z;
-Node1count=1;
-memset(tempNode1,0,sizeof(tempNode1)/sizeof(tempNode1[0])*sizeof(Node));
-float tempmin=0.0;
-for(j=1;j<tempcount;j++)
-{
-if(j==1)
-tempmin=-1.0;
-else
-tempmin=maxZ;
-maxZ=200.0;
-for(k=1;k<tempcount;k++)
-{
-if(tempNode[k].z>tempmin)
-{
-if(tempNode[k].z<maxZ)
-{
-tempsingleNode=tempNode[k];
-maxZ=tempNode[k].z;
-}
-}
-}
-tempNode1[Node1count++]=tempsingleNode;
-}
-for(j=1;j<Node1count-1;j++)
-{
-XZscielement[scicount].qd=tempNode1[j].Num;
-XZscielement[scicount].xs=tempNode1[j].x;
-XZscielement[scicount].ys=tempNode1[j].y;
-XZscielement[scicount].zs=tempNode1[j].z;
-XZscielement[scicount].zd=tempNode1[j+1].Num;
-XZscielement[scicount].xe=tempNode1[j+1].x;
-XZscielement[scicount].ye=tempNode1[j+1].y;
-XZscielement[scicount++].ze=tempNode1[j+1].z;
-}
-	}*/
-	/*for(i=1;i<scicount;i++)
-	{
-	//dy=dy+1;
-	str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d\n",i+dy,"BEAM",1,1,XZscielement[i].qd,XZscielement[i].zd,0);
-	//Yelement[tempcount].qd=qd;
-	//Yelement[tempcount++].zd=zd;
+	str=_T("*BNDR-GROUP    ; Boundary Group");
 	File1.WriteString(str);
-	}
-str.Format("scicount=%d",scicount-1);
-AfxMessageBox(str);
-File1.Close();
-AfxMessageBox("success");
-return;
-*/
-/*for(i=0;i<countline;i++)
-{
-int temps=0,tempe=0;
-for(j=1;j<=num;j++)
-{
-if((NodeZong[j].y=0.0)&&(NodeZong[j].x==XZline[0][i].xs)&&(NodeZong[j].z==XZline[0][i].zs))
-{
-temps=NodeZong[j].Num;
-}
-if((NodeZong[j].y=0.0)&&(NodeZong[j].x==XZline[0][i].xe)&&(NodeZong[j].z==XZline[0][i].ze))
-{
-tempe=NodeZong[j].Num;
-}
-}
-if(temps!=0&&tempe!=0)
-{
-dy=dy+1;
-str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,temps,tempe,0);
-File1.WriteString(str);
-File1.WriteString("\n");
-}
-	}
-//str.Format("countline=%d,tempZ-%.2f,tempY-%.2f,tempX-%.2f",countline,tempZ,tempY,tempX);
-//AfxMessageBox(str);
-File1.Close();
-AfxMessageBox("success");
-return;*/
-/*int ZCount=0;
-int ZNum[20];
-float tempZDate=0.0;
-int tempZNum=2;
-ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*tempZNum;
-for(i=2;i<Count_Z-1;i++)
-{
-for(j=0;j<BuJuCountSave[i];j++)
-{
-tempZDate=tempZDate+BuJuDataSave[i];
-if(tempZDate>=4.8)
-{
-ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*tempZNum;
-tempZDate=BuJuDataSave[i];
-}
-tempZNum++;
-}
-}
-if(ZNum[ZCount-1]!=1+ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z-1))
-{
-ZNum[ZCount++]=1+ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z-2);
-	}*/
-//////////////////////水平剪刀撑///////////////////////////
-/*for(i=0;i<ZCount;i++)
-{
-	//int Max=ZhuJuGeShu_X>PaiJuGeShu_Y?ZhuJuGeShu_X:PaiJuGeShu_Y;
-	//int Min=ZhuJuGeShu_X<PaiJuGeShu_Y?ZhuJuGeShu_X:PaiJuGeShu_Y;
-	for(k=0;k<=(PaiJuGeShu_Y-1-1)/5;k++)//1代表允许末尾多出段数
+	File1.WriteString("\n");
+	str=_T("; NAME");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("地基支撑\n铰接\n横杆-立杆\n剪刀撑-立杆\n剪刀撑-横杆");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*LOAD-GROUP    ; Load Group");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NAME");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("预压第一次");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("预压第二次");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("预压第三次");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("浇筑第一次-腹板");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("浇筑第一次-底板");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("浇筑第二次");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("风荷载");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("支架自重");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("模板方楞等");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("附加构件");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("施工人员机械");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("浇筑及振捣");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+
+
+	//'材料特性、截面定义
+	//*******  Lines = Lines & readFile("d:\参数化建模\支架文件\MATERIAL.mct") ************
+	str=_T("*MATERIAL    ; Material");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iMAT, TYPE, MNAME, SPHEAT, HEATCO, PLAST, TUNIT, bMASS, DAMPRATIO, [DATA1]          ; STEEL, CONC, USER");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iMAT, TYPE, MNAME, SPHEAT, HEATCO, PLAST, TUNIT, bMASS, DAMPRATIO, [DATA2], [DATA2] ; SRC");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA1] : 1, DB, NAME, CODE ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA1] : 2, ELAST, POISN, THERMAL, DEN, MASS");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA1] : 3, Ex, Ey, Ez, Tx, Ty, Tz, Sxy, Sxz, Syz, Pxy, Pxz, Pyz, DEN, MASS   ; Orthotropic");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA2] : 1, DB, NAME, CODE or 2, ELAST, POISN, THERMAL, DEN, MASS");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("    1, STEEL, Q235              , 0, 0, , C, NO, 0.02, 1, GB03(S)    ,            , Q235  ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+
+	str=_T("*MATL-COLOR");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iMAT, W_R, W_G, W_B, HF_R, HF_G, HF_B, HE_R, HE_G, HE_B, bBLEND, FACT");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("    1, 255,   0,   0,    0, 255,   0,    0,   0, 255,  NO, 0.5");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+
+
+	str=_T("*SECTION    ; Section");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, [DATA1], [DATA2]                    ; 1st line - DB/USER");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, BLT, D1, ..., D8, iCEL              ; 1st line - VALUE");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       AREA, ASy, ASz, Ixx, Iyy, Izz                                          ; 2nd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       CyP, CyM, CzP, CzM, QyB, QzB, PERI_OUT, PERI_IN, Cy, Cz                ; 3rd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       Y1, Y2, Y3, Y4, Z1, Z2, Z3, Z4, Zyy, Zzz                               ; 4th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, ELAST, DEN, POIS, POIC, SF          ; 1st line - SRC");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       D1, D2, [SRC]                                                          ; 2nd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, 1, DB, NAME1, NAME2, D1, D2         ; 1st line - COMBINED");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, 2, D11, D12, D13, D14, D15, D21, D22, D23, D24");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET2], bSD, SHAPE, iyVAR, izVAR, STYPE                ; 1st line - TAPERED");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       DB, NAME1, NAME2                                                       ; 2nd line(STYPE=DB)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [DIM1], [DIM2]                                                         ; 2nd line(STYPE=USER)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       D11, D12, D13, D14, D15, D16, D17, D18                                 ; 2nd line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       AREA1, ASy1, ASz1, Ixx1, Iyy1, Izz1                                    ; 3rd line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       CyP1, CyM1, CzP1, CzM1, QyB1, QzB1, PERI_OUT1, PERI_IN1, Cy1, Cz1      ; 4th line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       Y11, Y12, Y13, Y14, Z11, Z12, Z13, Z14, Zyy1, Zyy2                     ; 5th line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       D21, D22, D23, D24, D25, D26, D27, D28                                 ; 6th line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       AREA2, ASy2, ASz2, Ixx2, Iyy2, Izz2                                    ; 7th line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       CyP2, CyM2, CzP2, CzM2, QyB2, QzB2, PERI_OUT2, PERI_IN2, Cy2, Cz2      ; 8th line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       Y21, Y22, Y23, Y24, Z21, Z22, Z23, Z24, Zyy2, Zzz2                     ; 9th line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 2nd line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       ELAST, DEN, POIS, POIC                                                 ; 2nd line(STYPE=PSC-CMPW)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       bSHEARCHK, [SCHK-I], [SCHK-J], [WT-I], [WT-J], WI, WJ, bSYM, bSIDEHOLE ; 3rd line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       bSHEARCHK, bSYM, bHUNCH, [CMPWEB-I], [CMPWEB-J]                        ; 3rd line(STYPE=PSC-CMPW)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       bUSERDEFMESHSIZE, MESHSIZE, bUSERINPSTIFF, [STIFF-I], [STIFF-J]        ; 4th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-A]-i                                                             ; 5th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-B]-i                                                             ; 6th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-C]-i                                                             ; 7th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-D]-i                                                             ; 8th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-A]-j                                                             ; 9th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-B]-j                                                             ; 10th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-C]-j                                                             ; 11th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-D]-j                                                             ; 12th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       GN, CTC, Bc, Tc, Hh, EsEc, DsDc, Ps, Pc, bMULTI, EsEc-L, EsEc-S        ; 2nd line(STYPE=CMP-B/I)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SW_i, Hw_i, tw_i, B_i, Bf1_i, tf1_i, B2_i, Bf2_i, tf2_i                ; 3rd line(STYPE=CMP-B/I)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SW_j, Hw_j, tw_j, B_j, Bf1_j, tf1_j, B2_j, Bf2_j, tf2_j                ; 4th line(STYPE=CMP-B/I)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       N1, N2, Hr, Hr2, tr1, tr2                                              ; 5th line(STYPE=CMP-B)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       GN, CTC, Bc, Tc, Hh, EgdEsb, DgdDsb, Pgd, Psb, bSYM, SW_i, SW_j        ; 2nd line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 3rd line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-A]-i                                                             ; 4th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-B]-i                                                             ; 5th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-C]-i                                                             ; 6th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-D]-i                                                             ; 7th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-A]-j                                                             ; 8th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-B]-j                                                             ; 9th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-C]-j                                                             ; 10th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-D]-j                                                             ; 11th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, STYPE1, STYPE2                             ; 1st line - CONSTRUCT");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SHAPE, ...(same with other type data from shape)                       ; Before (STYPE1)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SHAPE, ...(same with other type data from shape)                       ; After  (STYPE2)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - COMPOSITE-SB");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       Hw, tw, B, Bf1, tf1, B2, Bf2, tf2                                      ; 2nd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       N1, N2, Hr, Hr2, tr1, tr2                                              ; 3rd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SW, GN, CTC, Bc, Tc, Hh, EsEc, DsDc, Ps, Pc, bMulti, Elong, Esh        ; 4th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - COMPOSITE-SI");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       Hw, tw, B, tf1, B2, tf2                                                ; 2nd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SW, GN, CTC, Bc, Tc, Hh, EsEc, DsDc, Ps, Pc, bMulti, Elong, Esh        ; 3rd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - COMPOSITE-CI/CT");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 2nd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-A]                                                               ; 3rd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-B]                                                               ; 4th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-C]                                                               ; 5th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-D]                                                               ; 6th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SW, GN, CTC, Bc, Tc, Hh, EgdEsb, DgdDsb, Pgd, Psb                      ; 7th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - PSC");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 2nd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       bSHEARCHK, [SCHK], [WT], WIDTH, bSYM, bSIDEHOLE                        ; 3rd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       bUSERDEFMESHSIZE, MESHSIZE, bUSERINPSTIFF, [STIFF]                     ; 4th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-A]                                                               ; 5th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-B]                                                               ; 6th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-C]                                                               ; 7th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-D]                                                               ; 8th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA1] : 1, DB, NAME or 2, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA2] : CCSHAPE or iCEL or iN1, iN2");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [SRC]  : 1, DB, NAME1, NAME2 or 2, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, iN1, iN2");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DIM1], [DIM2] : D1, D2, D3, D4, D5, D6, D7, D8");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [OFFSET] : OFFSET, iCENT, iREF, iHORZ, HUSER, iVERT, VUSER");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [OFFSET2]: OFFSET, iCENT, iREF, iHORZ, HUSERI, HUSERJ, iVERT, VUSERI, VUSERJ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [JOINT]  :  8(1CELL, 2CELL), 13(3CELL),  9(PSCM),  8(PSCH), 9(PSCT),  2(PSCB), 0(nCELL),  2(nCEL2)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [SIZE-A] :  6(1CELL, 2CELL), 10(3CELL), 10(PSCM),  6(PSCH), 8(PSCT), 10(PSCB), 5(nCELL), 11(nCEL2)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [SIZE-B] :  6(1CELL, 2CELL), 12(3CELL),  6(PSCM),  6(PSCH), 8(PSCT),  6(PSCB), 8(nCELL), 18(nCEL2)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [SIZE-C] : 10(1CELL, 2CELL), 13(3CELL),  9(PSCM), 10(PSCH), 7(PSCT),  8(PSCB), 0(nCELL), 11(nCEL2)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [SIZE-D] :  8(1CELL, 2CELL), 13(3CELL),  6(PSCM),  7(PSCH), 8(PSCT),  5(PSCB), 0(nCELL), 18(nCEL2)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [STIFF]  : AREA, ASy, ASz, Ixx, Iyy, Izz");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [SCHK]   : bAUTO_Z1, Z1, bAUTO_Z3, Z3");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [WT]     : bAUTO_TOR, TOR, bAUTO_SHR1, SHR1, bAUTO_SHR2, SHR2, bAUTO_SHR3, SHR3");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [CMPWEB] : EFD, LRF, A, B, H, T");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	CString tempstr="";
+	((CEdit*)GetDlgItem(IDE_GangGuanWaiJing))->GetWindowText(tempstr);
+	D=atof(tempstr);
+	D_Deviation[1]=D;
+	D_Deviation_Per[1]=100;
+	((CEdit*)GetDlgItem(IDE_GangGuanBiHou))->GetWindowText(tempstr);
+	tw=atof(tempstr);
+	tw_Deviation[1]=tw;
+	tw_Deviation_Per[1]=100;
+	int SectionCount=1;
+	for(i=1;i<=D_Deviation_Per[0];i++)
 	{
-		zd=ZNum[i]+k*5;
-		for(j=1+5*k;j<=PaiJuGeShu_Y-1;j++)
+		for(j=1;j<=tw_Deviation_Per[0];j++)
 		{
-			qd=zd;
-			zd=zd+PaiJuGeShu_Y+1;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+			str.Format("    %d, DBUSER    , 钢管截面          , CC, 0, 0, 0, 0, 0, 0, YES, P  , 2, %.3f, %.4f, 0, 0, 0, 0, 0, 0, 0, 0\n\n",SectionCount++,D_Deviation[i],tw_Deviation[j]);
 			File1.WriteString(str);
-			File1.WriteString("\n");
-			if((j-5*k)==ZhuJuGeShu_X-1)
-				break;
 		}
 	}
-	for(k=1;k<=(ZhuJuGeShu_X-1-1)/5;k++)//1代表允许末尾多出段数
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+
+	str=_T("*SECT-COLOR");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, W_R, W_G, W_B, HF_R, HF_G, HF_B, HE_R, HE_G, HE_B, bBLEND, FACT");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("    1, 255,   0,   0,    0, 255,   0,    0,   0, 255,  NO, 0.5");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+
+	str=_T("*DGN-SECT");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, [DATA1], [DATA2]                    ; 1st line - DB/USER");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, BLT, D1, ..., D8, iCEL              ; 1st line - VALUE");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       AREA, ASy, ASz, Ixx, Iyy, Izz                                          ; 2nd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       CyP, CyM, CzP, CzM, QyB, QzB, PERI_OUT, PERI_IN, Cy, Cz                ; 3rd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       Y1, Y2, Y3, Y4, Z1, Z2, Z3, Z4, Zyy, Zzz                               ; 4th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, ELAST, DEN, POIS, POIC, SF          ; 1st line - SRC");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       D1, D2, [SRC]                                                          ; 2nd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, 1, DB, NAME1, NAME2, D1, D2         ; 1st line - COMBINED");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, 2, D11, D12, D13, D14, D15, D21, D22, D23, D24");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET2], bSD, SHAPE, iyVAR, izVAR, STYPE                ; 1st line - TAPERED");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       DB, NAME1, NAME2                                                       ; 2nd line(STYPE=DB)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [DIM1], [DIM2]                                                         ; 2nd line(STYPE=USER)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       D11, D12, D13, D14, D15, D16, D17, D18                                 ; 2nd line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       AREA1, ASy1, ASz1, Ixx1, Iyy1, Izz1                                    ; 3rd line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       CyP1, CyM1, CzP1, CzM1, QyB1, QzB1, PERI_OUT1, PERI_IN1, Cy1, Cz1      ; 4th line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       Y11, Y12, Y13, Y14, Z11, Z12, Z13, Z14, Zyy1, Zyy2                     ; 5th line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       D21, D22, D23, D24, D25, D26, D27, D28                                 ; 6th line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       AREA2, ASy2, ASz2, Ixx2, Iyy2, Izz2                                    ; 7th line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       CyP2, CyM2, CzP2, CzM2, QyB2, QzB2, PERI_OUT2, PERI_IN2, Cy2, Cz2      ; 8th line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       Y21, Y22, Y23, Y24, Z21, Z22, Z23, Z24, Zyy2, Zzz2                     ; 9th line(STYPE=VALUE)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 2nd line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       ELAST, DEN, POIS, POIC                                                 ; 2nd line(STYPE=PSC-CMPW)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       bSHEARCHK, [SCHK-I], [SCHK-J], [WT-I], [WT-J], WI, WJ, bSYM, bSIDEHOLE ; 3rd line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       bSHEARCHK, bSYM, bHUNCH, [CMPWEB-I], [CMPWEB-J]                        ; 3rd line(STYPE=PSC-CMPW)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       bUSERDEFMESHSIZE, MESHSIZE, bUSERINPSTIFF, [STIFF-I], [STIFF-J]        ; 4th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-A]-i                                                             ; 5th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-B]-i                                                             ; 6th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-C]-i                                                             ; 7th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-D]-i                                                             ; 8th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-A]-j                                                             ; 9th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-B]-j                                                             ; 10th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-C]-j                                                             ; 11th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-D]-j                                                             ; 12th line(STYPE=PSC)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       GN, CTC, Bc, Tc, Hh, EsEc, DsDc, Ps, Pc, bMULTI, EsEc-L, EsEc-S        ; 2nd line(STYPE=CMP-B/I)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SW_i, Hw_i, tw_i, B_i, Bf1_i, tf1_i, B2_i, Bf2_i, tf2_i                ; 3rd line(STYPE=CMP-B/I)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SW_j, Hw_j, tw_j, B_j, Bf1_j, tf1_j, B2_j, Bf2_j, tf2_j                ; 4th line(STYPE=CMP-B/I)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       N1, N2, Hr, Hr2, tr1, tr2                                              ; 5th line(STYPE=CMP-B)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       GN, CTC, Bc, Tc, Hh, EgdEsb, DgdDsb, Pgd, Psb, bSYM, SW_i, SW_j        ; 2nd line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 3rd line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-A]-i                                                             ; 4th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-B]-i                                                             ; 5th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-C]-i                                                             ; 6th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-D]-i                                                             ; 7th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-A]-j                                                             ; 8th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-B]-j                                                             ; 9th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-C]-j                                                             ; 10th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-D]-j                                                             ; 11th line(STYPE=CMP-CI/CT)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, STYPE1, STYPE2                             ; 1st line - CONSTRUCT");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SHAPE, ...(same with other type data from shape)                       ; Before (STYPE1)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SHAPE, ...(same with other type data from shape)                       ; After  (STYPE2)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - COMPOSITE-SB");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       Hw, tw, B, Bf1, tf1, B2, Bf2, tf2                                      ; 2nd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       N1, N2, Hr, Hr2, tr1, tr2                                              ; 3rd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SW, GN, CTC, Bc, Tc, Hh, EsEc, DsDc, Ps, Pc, bMulti, Elong, Esh        ; 4th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - COMPOSITE-SI");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       Hw, tw, B, tf1, B2, tf2                                                ; 2nd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SW, GN, CTC, Bc, Tc, Hh, EsEc, DsDc, Ps, Pc, bMulti, Elong, Esh        ; 3rd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - COMPOSITE-CI/CT");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 2nd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-A]                                                               ; 3rd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-B]                                                               ; 4th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-C]                                                               ; 5th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-D]                                                               ; 6th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       SW, GN, CTC, Bc, Tc, Hh, EgdEsb, DgdDsb, Pgd, Psb                      ; 7th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - PSC");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 2nd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       bSHEARCHK, [SCHK], [WT], WIDTH, bSYM, bSIDEHOLE                        ; 3rd line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       bUSERDEFMESHSIZE, MESHSIZE, bUSERINPSTIFF, [STIFF]                     ; 4th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-A]                                                               ; 5th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-B]                                                               ; 6th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-C]                                                               ; 7th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";       [SIZE-D]                                                               ; 8th line");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA1] : 1, DB, NAME or 2, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA2] : CCSHAPE or iCEL or iN1, iN2");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [SRC]  : 1, DB, NAME1, NAME2 or 2, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, iN1, iN2");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DIM1], [DIM2] : D1, D2, D3, D4, D5, D6, D7, D8");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [OFFSET] : OFFSET, iCENT, iREF, iHORZ, HUSER, iVERT, VUSER");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [OFFSET2]: OFFSET, iCENT, iREF, iHORZ, HUSERI, HUSERJ, iVERT, VUSERI, VUSERJ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [JOINT]  :  8(1CELL, 2CELL), 13(3CELL),  9(PSCM),  8(PSCH), 9(PSCT),  2(PSCB), 0(nCELL),  2(nCEL2)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [SIZE-A] :  6(1CELL, 2CELL), 10(3CELL), 10(PSCM),  6(PSCH), 8(PSCT), 10(PSCB), 5(nCELL), 11(nCEL2)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [SIZE-B] :  6(1CELL, 2CELL), 12(3CELL),  6(PSCM),  6(PSCH), 8(PSCT),  6(PSCB), 8(nCELL), 18(nCEL2)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [SIZE-C] : 10(1CELL, 2CELL), 13(3CELL),  9(PSCM), 10(PSCH), 7(PSCT),  8(PSCB), 0(nCELL), 11(nCEL2)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [SIZE-D] :  8(1CELL, 2CELL), 13(3CELL),  6(PSCM),  7(PSCH), 8(PSCT),  5(PSCB), 0(nCELL), 18(nCEL2)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [STIFF]  : AREA, ASy, ASz, Ixx, Iyy, Izz");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [SCHK]   : bAUTO_Z1, Z1, bAUTO_Z3, Z3");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [WT]     : bAUTO_TOR, TOR, bAUTO_SHR1, SHR1, bAUTO_SHR2, SHR2, bAUTO_SHR3, SHR3");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [CMPWEB] : EFD, LRF, A, B, H, T");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+
+	//str=_T("1, DBUSER    , 钢管截面          , CC, 0, 0, 0, 0, 0, 0, YES, P  , 2, 0.048, 0.0035, 0, 0, 0, 0, 0, 0, 0, 0\n");
+	//File1.WriteString(str);
+	SectionCount=1;
+	for(i=1;i<=D_Deviation_Per[0];i++)
 	{
-		zd=ZNum[i]+k*5*PaiJuGeShu_Y;
-		for(j=1+5*k;j<=ZhuJuGeShu_X-1;j++)
+		for(j=1;j<=tw_Deviation_Per[0];j++)
 		{
-			qd=zd;
-			zd=zd+PaiJuGeShu_Y+1;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
+			str.Format("    %d, DBUSER    , 钢管截面          , CC, 0, 0, 0, 0, 0, 0, YES, P  , 2, %.3f, %.4f, 0, 0, 0, 0, 0, 0, 0, 0\n\n",SectionCount++,D_Deviation[i],tw_Deviation[j]);
 			File1.WriteString(str);
-			File1.WriteString("\n");
-			if((j-5*k)==PaiJuGeShu_Y-1)
-				break;
 		}
 	}
-	for(k=1;k<=(ZhuJuGeShu_X-1-1)/5;k++)//1代表允许末尾多出段数
+
+
+
+
+
+
+
+	//'荷载工况定义
+	//*********** Lines = Lines & readFile("d:\参数化建模\支架文件\STLDCASE.mct")   *************
+	str=_T("*STLDCASE    ; Static Load Cases");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; LCNAME, LCTYPE, DESC");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   杆系自重, D , ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   浇筑和振捣混凝土, D , ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   施工人员、材料、设备, D , ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   预压荷载1, D , ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   预压荷载2, D , ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   预压荷载3, D , ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   第一次浇筑, D , ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   第二次浇筑, D , ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   模板、支撑梁, D , ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   防护设施、附加构件, D , ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   风荷载, D , ");
+	File1.WriteString(str);
+	File1.WriteString("\n\n\n");
+
+
+
+
+
+	//'一般边界条件定义
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\CONSTRAINT.mct")
+	str=_T("*CONSTRAINT    ; Supports");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NODE_LIST, CONSt(Dx,Dy,Dz,Rx,Ry,Rz),GROUP");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+
+
+	//Lines = Lines & "1to" & dc & ",001000,地基" & vbCrLf
+	//str.Format("%s  %d  , %s", "1 to" ,dc ,"001000,地基");//田海涛
+	dc=ZhuJuGeShu_X*PaiJuGeShu_Y;
+	str.Format("1 to  %d  , 111000,地基支撑", dc);
+	File1.WriteString(str);
+	File1.WriteString("\n\n");
+
+	str = _T("*FRAME-RLS    ; Beam End Release\n");
+	File1.WriteString(str);
+	str = _T("; ELEM_LIST, bVALUE, FLAG-i, Fxi, Fyi, Fzi, Mxi, Myi, Mzi        ; 1st line\n");
+	File1.WriteString(str);
+	str = _T(";                    FLAG-j, Fxj, Fyj, Fzj, Mxj, Myj, Mzj, GROUP ; 2nd line\n");
+	File1.WriteString(str);
+	//HorizPoleNum=m2;//表示横向杆件总数
+	float Mx=0.0,My=0.0;//田海涛修改
+	((CEdit*)GetDlgItem(IDC_EDIT_HENG_MX))->GetWindowText(tempstr);
+	Mx=atof(tempstr);
+	((CEdit*)GetDlgItem(IDC_EDIT_HENG_MY))->GetWindowText(tempstr);
+	My=atof(tempstr);
+	for(i=YelementStart;i<=XelementEnd;i++)
 	{
-		zd=ZNum[i]+k*5*PaiJuGeShu_Y;
-		for(j=1;j<=5*k;j++)
-		{
-			qd=zd;
-			zd=zd-PaiJuGeShu_Y+1;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if(j==PaiJuGeShu_Y-1)
-				break;
-		}
-	}
-	if((ZhuJuGeShu_X-1)%5>=3)
-	{
-		zd=ZNum[i]+ZhuJuGeShu_X*PaiJuGeShu_Y-PaiJuGeShu_Y;
-		for(j=1;j<=PaiJuGeShu_Y-1;j++)
-		{
-			qd=zd;
-			zd=zd-PaiJuGeShu_Y+1;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if(j==ZhuJuGeShu_X-1)
-				break;
-		}
-	}
-	for(k=(ZhuJuGeShu_X-1)%5;k<PaiJuGeShu_Y-1;k+=5)//1代表允许末尾多出段数
-	{
-		zd=ZNum[i]+ZhuJuGeShu_X*PaiJuGeShu_Y-PaiJuGeShu_Y+k;
-		for(j=1;j<=ZhuJuGeShu_X-1;j++)
-		{
-			qd=zd;
-			zd=zd-PaiJuGeShu_Y+1;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if(j+k==PaiJuGeShu_Y-1)
-				break;
-		}
-	}
-}
-//File1.Close();
-//AfxMessageBox("success");
-//return;
-//File1.WriteString(";;横桥向剪刀撑\n");
-
-//////////////////////////////////////////////////////////
-///////////////////////横桥向剪刀撑//////////////////////////////
-for(i=0;i<=(ZhuJuGeShu_X-1-1)/5+1;i++)
-{
-	//int Max=ZhuJuGeShu_X>PaiJuGeShu_Y?ZhuJuGeShu_X:PaiJuGeShu_Y;
-	//int Min=ZhuJuGeShu_X<PaiJuGeShu_Y?ZhuJuGeShu_X:PaiJuGeShu_Y;
-	for(k=0;k<=(PaiJuGeShu_Y-1-1)/5;k++)//1代表允许末尾多出段数
-	{
-		zd=1+2*ZhuJuGeShu_X*PaiJuGeShu_Y+i*5*PaiJuGeShu_Y+k*5;
-		if(i==(ZhuJuGeShu_X-1-1)/5+1)
-			zd=1+2*ZhuJuGeShu_X*PaiJuGeShu_Y+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y+k*5;
-		for(j=1;j<=BuJuGeShu_Z-5;j++)
-		{
-			qd=zd;
-			zd=zd+PaiJuGeShu_Y*ZhuJuGeShu_X*(j==1?2:1)+1;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if((j+5*k)==PaiJuGeShu_Y-1)
-				break;
-		}
-	}
-	for(k=1;k<=(BuJuGeShu_Z-5)/5;k++)//1代表允许末尾多出段数
-	{
-		zd=1+3*ZhuJuGeShu_X*PaiJuGeShu_Y+i*5*PaiJuGeShu_Y+k*ZhuJuGeShu_X*PaiJuGeShu_Y*5;
-		if(i==(ZhuJuGeShu_X-1-1)/5+1)
-			zd=1+3*ZhuJuGeShu_X*PaiJuGeShu_Y+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y+k*ZhuJuGeShu_X*PaiJuGeShu_Y*5;
-		for(j=1;j<=PaiJuGeShu_Y-1;j++)
-		{
-			qd=zd;
-			zd=zd+PaiJuGeShu_Y*ZhuJuGeShu_X+1;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if((j+5*k)==BuJuGeShu_Z-5)
-				break;
-		}
-	}
-	/////////////////////////////0915暂停
-	for(k=1;k<=(PaiJuGeShu_Y-1)/5;k++)//1代表允许末尾多出段数
-	{
-		zd=1+2*ZhuJuGeShu_X*PaiJuGeShu_Y+i*5*PaiJuGeShu_Y+k*5;
-		if(i==(ZhuJuGeShu_X-1-1)/5+1)
-			zd=1+2*ZhuJuGeShu_X*PaiJuGeShu_Y+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y+k*5;
-		for(j=1;j<=5*k;j++)
-		{
-			qd=zd;
-			zd=zd+PaiJuGeShu_Y*ZhuJuGeShu_X*(j==1?2:1)-1;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if(j==BuJuGeShu_Z-5)
-				break;
-		}
-	}
-	if((PaiJuGeShu_Y-1)%5>=3)
-	{
-		zd=2*ZhuJuGeShu_X*PaiJuGeShu_Y+i*5*PaiJuGeShu_Y+PaiJuGeShu_Y;
-		if(i==(ZhuJuGeShu_X-1-1)/5+1)
-			zd=3*ZhuJuGeShu_X*PaiJuGeShu_Y;
-		for(j=1;j<=PaiJuGeShu_Y-1;j++)
-		{
-			qd=zd;
-			zd=zd+PaiJuGeShu_Y*ZhuJuGeShu_X*(j==1?2:1)-1;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if(j==BuJuGeShu_Z-5)
-				break;
-		}
-	}
-	for(k=(PaiJuGeShu_Y-1)%5+3;k<BuJuGeShu_Z-3;k+=5)//1代表允许末尾多出段数
-	{
-		zd=PaiJuGeShu_Y+k*ZhuJuGeShu_X*PaiJuGeShu_Y+i*5*PaiJuGeShu_Y;
-		if(i==(ZhuJuGeShu_X-1-1)/5+1)
-			zd=PaiJuGeShu_Y+k*ZhuJuGeShu_X*PaiJuGeShu_Y+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y;
-		for(j=1;j+k<=BuJuGeShu_Z-2;j++)
-		{
-			qd=zd;
-			zd=zd+PaiJuGeShu_Y*ZhuJuGeShu_X-1;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if(j==PaiJuGeShu_Y-1)
-				break;
-		}
-	}
-}
-
-///////////////////////顺桥向剪刀撑//////////////////////////////
-for(i=0;i<=(PaiJuGeShu_Y-1-1)/5+1;i++)
-{
-	//int Max=PaiJuGeShu_Y>ZhuJuGeShu_X?PaiJuGeShu_Y:ZhuJuGeShu_X;
-	//int Min=PaiJuGeShu_Y<ZhuJuGeShu_X?PaiJuGeShu_Y:ZhuJuGeShu_X;
-	for(k=0;k<=(ZhuJuGeShu_X-1-1)/5;k++)//1代表允许末尾多出段数
-	{
-		zd=1+2*PaiJuGeShu_Y*ZhuJuGeShu_X+i*5+k*5*PaiJuGeShu_Y;
-		if(i==(PaiJuGeShu_Y-1-1)/5+1)
-			zd=1+2*PaiJuGeShu_Y*ZhuJuGeShu_X+PaiJuGeShu_Y-1+k*5*PaiJuGeShu_Y;
-		for(j=1;j<=BuJuGeShu_Z-5;j++)
-		{
-			qd=zd;
-			zd=zd+ZhuJuGeShu_X*PaiJuGeShu_Y*(j==1?2:1)+PaiJuGeShu_Y;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if((j+5*k)==ZhuJuGeShu_X-1)
-				break;
-		}
-	}
-	for(k=1;k<=(BuJuGeShu_Z-5)/5;k++)//1代表允许末尾多出段数
-	{
-		zd=1+3*PaiJuGeShu_Y*ZhuJuGeShu_X+i*5+k*5*PaiJuGeShu_Y*ZhuJuGeShu_X;
-		if(i==(PaiJuGeShu_Y-1-1)/5+1)
-			zd=3*PaiJuGeShu_Y*ZhuJuGeShu_X+PaiJuGeShu_Y+k*ZhuJuGeShu_X*PaiJuGeShu_Y*5;
-		for(j=1;j<=ZhuJuGeShu_X-1;j++)
-		{
-			qd=zd;
-			zd=zd+ZhuJuGeShu_X*PaiJuGeShu_Y+PaiJuGeShu_Y;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if((j+5*k)==BuJuGeShu_Z-5)
-				break;
-		}
-	}
-	/////////////////////////////0915暂停
-	for(k=1;k<=(ZhuJuGeShu_X-1)/5;k++)//1代表允许末尾多出段数
-	{
-		zd=1+2*PaiJuGeShu_Y*ZhuJuGeShu_X+i*5+k*5*PaiJuGeShu_Y;
-		if(i==(PaiJuGeShu_Y-1-1)/5+1)
-			zd=2*PaiJuGeShu_Y*ZhuJuGeShu_X+PaiJuGeShu_Y+k*5*PaiJuGeShu_Y;
-		for(j=1;j<=5*k;j++)
-		{
-			qd=zd;
-			zd=zd+ZhuJuGeShu_X*PaiJuGeShu_Y*(j==1?2:1)-PaiJuGeShu_Y;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if(j==BuJuGeShu_Z-5)
-				break;
-		}
-	}
-	if((ZhuJuGeShu_X-1)%5>=3)
-	{
-		zd=1+2*PaiJuGeShu_Y*ZhuJuGeShu_X+i*5+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y;
-		if(i==(PaiJuGeShu_Y-1-1)/5+1)
-			zd=3*PaiJuGeShu_Y*ZhuJuGeShu_X;
-		for(j=1;j<=ZhuJuGeShu_X-1;j++)
-		{
-			qd=zd;
-			zd=zd+ZhuJuGeShu_X*PaiJuGeShu_Y*(j==1?2:1)-PaiJuGeShu_Y;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if(j==BuJuGeShu_Z-5)
-				break;
-		}
-	}
-	for(k=(ZhuJuGeShu_X-1)%5+3;k<BuJuGeShu_Z-3;k+=5)//1代表允许末尾多出段数
-	{
-		zd=1+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y+k*PaiJuGeShu_Y*ZhuJuGeShu_X+i*5;
-		if(i==(PaiJuGeShu_Y-1-1)/5+1)
-			zd=(ZhuJuGeShu_X-1)*PaiJuGeShu_Y+k*PaiJuGeShu_Y*ZhuJuGeShu_X+PaiJuGeShu_Y;
-		for(j=1;j+k<=BuJuGeShu_Z-2;j++)
-		{
-			qd=zd;
-			zd=zd+ZhuJuGeShu_X*PaiJuGeShu_Y-PaiJuGeShu_Y;
-			dy = dy + 1;
-			str.Format("%d , %s ,    %d,    %d,    %d,    %d,    %d",dy,"BEAM",1,1,qd,zd,0);
-			File1.WriteString(str);
-			File1.WriteString("\n");
-			if(j==ZhuJuGeShu_X-1)
-				break;
-		}
-	}
-}
-*/
-
-
-qy = 1.1 * (GangJinHunNingTu + MoBanFangLeng);
-str.Format("%f",qy);
-
-if (DiYiCiYuYa + DiErCiYuYa + DiSanCiYuYa > 1.4) //Then
-{
-	AfxMessageBox("预压荷载是否过大？");
-}
-//************Lines = Lines & readFile("d:\参数化建模\支架文件\GROUP.mct")**********//
-
-/*str.Format("*GROUP    ; Group; NAME, NODE_LIST, ELEM_LIST, PLANE_TYPE",1,1,qd,zd,0);
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-//*******  Lines = Lines & "横桥向横杆" & "," & 1 & "to" & m1 & vbCrLf  ***********
-//ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z
-m1=(PaiJuGeShu_Y-1)*ZhuJuGeShu_X*(BuJuGeShu_Z-3);
-str.Format("%s ,,   %d   %s   %d","横桥向横杆",1,"to",m1);
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-//************Lines = Lines & "顺桥向横杆" & "," & m1 + 1 & "to" & m2 & vbCrLf *******
-m2=m1+(ZhuJuGeShu_X-1)*PaiJuGeShu_Y*(BuJuGeShu_Z-3);
-str.Format("%s ,,    %d   %s   %d","顺桥向横杆",m1+1,"to",m2);
-File1.WriteString(str);
-File1.WriteString("\n");
-
-//************Lines = Lines & "立杆" & "," & m2 + 1 & "to" & m3 & vbCrLf *************
-m3=m2+ZhuJuGeShu_X*PaiJuGeShu_Y*(BuJuGeShu_Z-1);
-str.Format("%s ,,    %d   %s   %d","立杆",m2+1,"to",m3);
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-//*********** Lines = Lines & "剪刀撑" & "," & m3 + 1 & "to" & dy & vbCrLf **********
-
-str.Format("%s ,,    %d   %s   %d","剪刀撑",m3+1,"to",dy);
-File1.WriteString(str);
-File1.WriteString("\n");*/
-
-
-//'边界组、荷载组定义
-//************* Lines = Lines & readFile("d:\参数化建模\支架文件\BNDR-GROUP.mct") ************
-
-str=_T("*BNDR-GROUP    ; Boundary Group");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NAME");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("地基支撑\n铰接\n横杆-立杆\n剪刀撑-立杆\n剪刀撑-横杆");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*LOAD-GROUP    ; Load Group");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NAME");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("预压第一次");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("预压第二次");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("预压第三次");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("浇筑第一次-腹板");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("浇筑第一次-底板");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("浇筑第二次");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("风荷载");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("支架自重");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("模板方楞等");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("附加构件");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("施工人员机械");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("浇筑及振捣");
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-//'材料特性、截面定义
-//*******  Lines = Lines & readFile("d:\参数化建模\支架文件\MATERIAL.mct") ************
-str=_T("*MATERIAL    ; Material");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iMAT, TYPE, MNAME, SPHEAT, HEATCO, PLAST, TUNIT, bMASS, DAMPRATIO, [DATA1]          ; STEEL, CONC, USER");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iMAT, TYPE, MNAME, SPHEAT, HEATCO, PLAST, TUNIT, bMASS, DAMPRATIO, [DATA2], [DATA2] ; SRC");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA1] : 1, DB, NAME, CODE ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA1] : 2, ELAST, POISN, THERMAL, DEN, MASS");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA1] : 3, Ex, Ey, Ez, Tx, Ty, Tz, Sxy, Sxz, Syz, Pxy, Pxz, Pyz, DEN, MASS   ; Orthotropic");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA2] : 1, DB, NAME, CODE or 2, ELAST, POISN, THERMAL, DEN, MASS");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("    1, STEEL, Q235              , 0, 0, , C, NO, 0.02, 1, GB03(S)    ,            , Q235  ");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-
-str=_T("*MATL-COLOR");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iMAT, W_R, W_G, W_B, HF_R, HF_G, HF_B, HE_R, HE_G, HE_B, bBLEND, FACT");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("    1, 255,   0,   0,    0, 255,   0,    0,   0, 255,  NO, 0.5");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-File1.WriteString("\n");
-
-
-str=_T("*SECTION    ; Section");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, [DATA1], [DATA2]                    ; 1st line - DB/USER");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, BLT, D1, ..., D8, iCEL              ; 1st line - VALUE");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       AREA, ASy, ASz, Ixx, Iyy, Izz                                          ; 2nd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       CyP, CyM, CzP, CzM, QyB, QzB, PERI_OUT, PERI_IN, Cy, Cz                ; 3rd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       Y1, Y2, Y3, Y4, Z1, Z2, Z3, Z4, Zyy, Zzz                               ; 4th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, ELAST, DEN, POIS, POIC, SF          ; 1st line - SRC");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       D1, D2, [SRC]                                                          ; 2nd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, 1, DB, NAME1, NAME2, D1, D2         ; 1st line - COMBINED");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, 2, D11, D12, D13, D14, D15, D21, D22, D23, D24");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET2], bSD, SHAPE, iyVAR, izVAR, STYPE                ; 1st line - TAPERED");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       DB, NAME1, NAME2                                                       ; 2nd line(STYPE=DB)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [DIM1], [DIM2]                                                         ; 2nd line(STYPE=USER)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       D11, D12, D13, D14, D15, D16, D17, D18                                 ; 2nd line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       AREA1, ASy1, ASz1, Ixx1, Iyy1, Izz1                                    ; 3rd line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       CyP1, CyM1, CzP1, CzM1, QyB1, QzB1, PERI_OUT1, PERI_IN1, Cy1, Cz1      ; 4th line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       Y11, Y12, Y13, Y14, Z11, Z12, Z13, Z14, Zyy1, Zyy2                     ; 5th line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       D21, D22, D23, D24, D25, D26, D27, D28                                 ; 6th line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       AREA2, ASy2, ASz2, Ixx2, Iyy2, Izz2                                    ; 7th line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       CyP2, CyM2, CzP2, CzM2, QyB2, QzB2, PERI_OUT2, PERI_IN2, Cy2, Cz2      ; 8th line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       Y21, Y22, Y23, Y24, Z21, Z22, Z23, Z24, Zyy2, Zzz2                     ; 9th line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 2nd line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       ELAST, DEN, POIS, POIC                                                 ; 2nd line(STYPE=PSC-CMPW)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       bSHEARCHK, [SCHK-I], [SCHK-J], [WT-I], [WT-J], WI, WJ, bSYM, bSIDEHOLE ; 3rd line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       bSHEARCHK, bSYM, bHUNCH, [CMPWEB-I], [CMPWEB-J]                        ; 3rd line(STYPE=PSC-CMPW)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       bUSERDEFMESHSIZE, MESHSIZE, bUSERINPSTIFF, [STIFF-I], [STIFF-J]        ; 4th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-A]-i                                                             ; 5th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-B]-i                                                             ; 6th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-C]-i                                                             ; 7th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-D]-i                                                             ; 8th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-A]-j                                                             ; 9th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-B]-j                                                             ; 10th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-C]-j                                                             ; 11th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-D]-j                                                             ; 12th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       GN, CTC, Bc, Tc, Hh, EsEc, DsDc, Ps, Pc, bMULTI, EsEc-L, EsEc-S        ; 2nd line(STYPE=CMP-B/I)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SW_i, Hw_i, tw_i, B_i, Bf1_i, tf1_i, B2_i, Bf2_i, tf2_i                ; 3rd line(STYPE=CMP-B/I)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SW_j, Hw_j, tw_j, B_j, Bf1_j, tf1_j, B2_j, Bf2_j, tf2_j                ; 4th line(STYPE=CMP-B/I)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       N1, N2, Hr, Hr2, tr1, tr2                                              ; 5th line(STYPE=CMP-B)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       GN, CTC, Bc, Tc, Hh, EgdEsb, DgdDsb, Pgd, Psb, bSYM, SW_i, SW_j        ; 2nd line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 3rd line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-A]-i                                                             ; 4th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-B]-i                                                             ; 5th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-C]-i                                                             ; 6th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-D]-i                                                             ; 7th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-A]-j                                                             ; 8th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-B]-j                                                             ; 9th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-C]-j                                                             ; 10th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-D]-j                                                             ; 11th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, STYPE1, STYPE2                             ; 1st line - CONSTRUCT");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SHAPE, ...(same with other type data from shape)                       ; Before (STYPE1)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SHAPE, ...(same with other type data from shape)                       ; After  (STYPE2)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - COMPOSITE-SB");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       Hw, tw, B, Bf1, tf1, B2, Bf2, tf2                                      ; 2nd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       N1, N2, Hr, Hr2, tr1, tr2                                              ; 3rd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SW, GN, CTC, Bc, Tc, Hh, EsEc, DsDc, Ps, Pc, bMulti, Elong, Esh        ; 4th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - COMPOSITE-SI");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       Hw, tw, B, tf1, B2, tf2                                                ; 2nd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SW, GN, CTC, Bc, Tc, Hh, EsEc, DsDc, Ps, Pc, bMulti, Elong, Esh        ; 3rd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - COMPOSITE-CI/CT");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 2nd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-A]                                                               ; 3rd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-B]                                                               ; 4th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-C]                                                               ; 5th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-D]                                                               ; 6th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SW, GN, CTC, Bc, Tc, Hh, EgdEsb, DgdDsb, Pgd, Psb                      ; 7th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - PSC");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 2nd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       bSHEARCHK, [SCHK], [WT], WIDTH, bSYM, bSIDEHOLE                        ; 3rd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       bUSERDEFMESHSIZE, MESHSIZE, bUSERINPSTIFF, [STIFF]                     ; 4th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-A]                                                               ; 5th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-B]                                                               ; 6th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-C]                                                               ; 7th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-D]                                                               ; 8th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA1] : 1, DB, NAME or 2, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA2] : CCSHAPE or iCEL or iN1, iN2");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [SRC]  : 1, DB, NAME1, NAME2 or 2, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, iN1, iN2");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DIM1], [DIM2] : D1, D2, D3, D4, D5, D6, D7, D8");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [OFFSET] : OFFSET, iCENT, iREF, iHORZ, HUSER, iVERT, VUSER");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [OFFSET2]: OFFSET, iCENT, iREF, iHORZ, HUSERI, HUSERJ, iVERT, VUSERI, VUSERJ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [JOINT]  :  8(1CELL, 2CELL), 13(3CELL),  9(PSCM),  8(PSCH), 9(PSCT),  2(PSCB), 0(nCELL),  2(nCEL2)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [SIZE-A] :  6(1CELL, 2CELL), 10(3CELL), 10(PSCM),  6(PSCH), 8(PSCT), 10(PSCB), 5(nCELL), 11(nCEL2)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [SIZE-B] :  6(1CELL, 2CELL), 12(3CELL),  6(PSCM),  6(PSCH), 8(PSCT),  6(PSCB), 8(nCELL), 18(nCEL2)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [SIZE-C] : 10(1CELL, 2CELL), 13(3CELL),  9(PSCM), 10(PSCH), 7(PSCT),  8(PSCB), 0(nCELL), 11(nCEL2)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [SIZE-D] :  8(1CELL, 2CELL), 13(3CELL),  6(PSCM),  7(PSCH), 8(PSCT),  5(PSCB), 0(nCELL), 18(nCEL2)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [STIFF]  : AREA, ASy, ASz, Ixx, Iyy, Izz");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [SCHK]   : bAUTO_Z1, Z1, bAUTO_Z3, Z3");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [WT]     : bAUTO_TOR, TOR, bAUTO_SHR1, SHR1, bAUTO_SHR2, SHR2, bAUTO_SHR3, SHR3");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [CMPWEB] : EFD, LRF, A, B, H, T");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-File1.WriteString("\n");
-CString tempstr="";
-((CEdit*)GetDlgItem(IDE_GangGuanWaiJing))->GetWindowText(tempstr);
-D=atof(tempstr);
-D_Deviation[1]=D;
-D_Deviation_Per[1]=100;
-((CEdit*)GetDlgItem(IDE_GangGuanBiHou))->GetWindowText(tempstr);
-tw=atof(tempstr);
-tw_Deviation[1]=tw;
-tw_Deviation_Per[1]=100;
-int SectionCount=1;
-for(i=1;i<=D_Deviation_Per[0];i++)
-{
-	for(j=1;j<=tw_Deviation_Per[0];j++)
-	{
-		str.Format("    %d, DBUSER    , 钢管截面          , CC, 0, 0, 0, 0, 0, 0, YES, P  , 2, %.3f, %.4f, 0, 0, 0, 0, 0, 0, 0, 0\n\n",SectionCount++,D_Deviation[i],tw_Deviation[j]);
+		str.Format("     %d,  YES, 000110, 0, 0, 0, %.2f, %.2f, 0\n             000110, 0, 0, 0, %.2f, %.2f, 0, 横杆-立杆\n",i,Mx,My,Mx,My);
 		File1.WriteString(str);
 	}
-}
-File1.WriteString("\n");
-File1.WriteString("\n");
-
-str=_T("*SECT-COLOR");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, W_R, W_G, W_B, HF_R, HF_G, HF_B, HE_R, HE_G, HE_B, bBLEND, FACT");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("    1, 255,   0,   0,    0, 255,   0,    0,   0, 255,  NO, 0.5");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-
-str=_T("*DGN-SECT");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, [DATA1], [DATA2]                    ; 1st line - DB/USER");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, BLT, D1, ..., D8, iCEL              ; 1st line - VALUE");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       AREA, ASy, ASz, Ixx, Iyy, Izz                                          ; 2nd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       CyP, CyM, CzP, CzM, QyB, QzB, PERI_OUT, PERI_IN, Cy, Cz                ; 3rd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       Y1, Y2, Y3, Y4, Z1, Z2, Z3, Z4, Zyy, Zzz                               ; 4th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, ELAST, DEN, POIS, POIC, SF          ; 1st line - SRC");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       D1, D2, [SRC]                                                          ; 2nd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, 1, DB, NAME1, NAME2, D1, D2         ; 1st line - COMBINED");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE, 2, D11, D12, D13, D14, D15, D21, D22, D23, D24");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET2], bSD, SHAPE, iyVAR, izVAR, STYPE                ; 1st line - TAPERED");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       DB, NAME1, NAME2                                                       ; 2nd line(STYPE=DB)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [DIM1], [DIM2]                                                         ; 2nd line(STYPE=USER)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       D11, D12, D13, D14, D15, D16, D17, D18                                 ; 2nd line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       AREA1, ASy1, ASz1, Ixx1, Iyy1, Izz1                                    ; 3rd line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       CyP1, CyM1, CzP1, CzM1, QyB1, QzB1, PERI_OUT1, PERI_IN1, Cy1, Cz1      ; 4th line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       Y11, Y12, Y13, Y14, Z11, Z12, Z13, Z14, Zyy1, Zyy2                     ; 5th line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       D21, D22, D23, D24, D25, D26, D27, D28                                 ; 6th line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       AREA2, ASy2, ASz2, Ixx2, Iyy2, Izz2                                    ; 7th line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       CyP2, CyM2, CzP2, CzM2, QyB2, QzB2, PERI_OUT2, PERI_IN2, Cy2, Cz2      ; 8th line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       Y21, Y22, Y23, Y24, Z21, Z22, Z23, Z24, Zyy2, Zzz2                     ; 9th line(STYPE=VALUE)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 2nd line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       ELAST, DEN, POIS, POIC                                                 ; 2nd line(STYPE=PSC-CMPW)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       bSHEARCHK, [SCHK-I], [SCHK-J], [WT-I], [WT-J], WI, WJ, bSYM, bSIDEHOLE ; 3rd line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       bSHEARCHK, bSYM, bHUNCH, [CMPWEB-I], [CMPWEB-J]                        ; 3rd line(STYPE=PSC-CMPW)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       bUSERDEFMESHSIZE, MESHSIZE, bUSERINPSTIFF, [STIFF-I], [STIFF-J]        ; 4th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-A]-i                                                             ; 5th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-B]-i                                                             ; 6th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-C]-i                                                             ; 7th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-D]-i                                                             ; 8th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-A]-j                                                             ; 9th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-B]-j                                                             ; 10th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-C]-j                                                             ; 11th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-D]-j                                                             ; 12th line(STYPE=PSC)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       GN, CTC, Bc, Tc, Hh, EsEc, DsDc, Ps, Pc, bMULTI, EsEc-L, EsEc-S        ; 2nd line(STYPE=CMP-B/I)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SW_i, Hw_i, tw_i, B_i, Bf1_i, tf1_i, B2_i, Bf2_i, tf2_i                ; 3rd line(STYPE=CMP-B/I)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SW_j, Hw_j, tw_j, B_j, Bf1_j, tf1_j, B2_j, Bf2_j, tf2_j                ; 4th line(STYPE=CMP-B/I)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       N1, N2, Hr, Hr2, tr1, tr2                                              ; 5th line(STYPE=CMP-B)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       GN, CTC, Bc, Tc, Hh, EgdEsb, DgdDsb, Pgd, Psb, bSYM, SW_i, SW_j        ; 2nd line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 3rd line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-A]-i                                                             ; 4th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-B]-i                                                             ; 5th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-C]-i                                                             ; 6th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-D]-i                                                             ; 7th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-A]-j                                                             ; 8th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-B]-j                                                             ; 9th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-C]-j                                                             ; 10th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-D]-j                                                             ; 11th line(STYPE=CMP-CI/CT)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, STYPE1, STYPE2                             ; 1st line - CONSTRUCT");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SHAPE, ...(same with other type data from shape)                       ; Before (STYPE1)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SHAPE, ...(same with other type data from shape)                       ; After  (STYPE2)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - COMPOSITE-SB");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       Hw, tw, B, Bf1, tf1, B2, Bf2, tf2                                      ; 2nd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       N1, N2, Hr, Hr2, tr1, tr2                                              ; 3rd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SW, GN, CTC, Bc, Tc, Hh, EsEc, DsDc, Ps, Pc, bMulti, Elong, Esh        ; 4th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - COMPOSITE-SI");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       Hw, tw, B, tf1, B2, tf2                                                ; 2nd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SW, GN, CTC, Bc, Tc, Hh, EsEc, DsDc, Ps, Pc, bMulti, Elong, Esh        ; 3rd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - COMPOSITE-CI/CT");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 2nd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-A]                                                               ; 3rd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-B]                                                               ; 4th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-C]                                                               ; 5th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-D]                                                               ; 6th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       SW, GN, CTC, Bc, Tc, Hh, EgdEsb, DgdDsb, Pgd, Psb                      ; 7th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iSEC, TYPE, SNAME, [OFFSET], bSD, SHAPE                                      ; 1st line - PSC");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       OPT1, OPT2, [JOINT]                                                    ; 2nd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       bSHEARCHK, [SCHK], [WT], WIDTH, bSYM, bSIDEHOLE                        ; 3rd line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       bUSERDEFMESHSIZE, MESHSIZE, bUSERINPSTIFF, [STIFF]                     ; 4th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-A]                                                               ; 5th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-B]                                                               ; 6th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-C]                                                               ; 7th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";       [SIZE-D]                                                               ; 8th line");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA1] : 1, DB, NAME or 2, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA2] : CCSHAPE or iCEL or iN1, iN2");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [SRC]  : 1, DB, NAME1, NAME2 or 2, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, iN1, iN2");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DIM1], [DIM2] : D1, D2, D3, D4, D5, D6, D7, D8");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [OFFSET] : OFFSET, iCENT, iREF, iHORZ, HUSER, iVERT, VUSER");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [OFFSET2]: OFFSET, iCENT, iREF, iHORZ, HUSERI, HUSERJ, iVERT, VUSERI, VUSERJ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [JOINT]  :  8(1CELL, 2CELL), 13(3CELL),  9(PSCM),  8(PSCH), 9(PSCT),  2(PSCB), 0(nCELL),  2(nCEL2)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [SIZE-A] :  6(1CELL, 2CELL), 10(3CELL), 10(PSCM),  6(PSCH), 8(PSCT), 10(PSCB), 5(nCELL), 11(nCEL2)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [SIZE-B] :  6(1CELL, 2CELL), 12(3CELL),  6(PSCM),  6(PSCH), 8(PSCT),  6(PSCB), 8(nCELL), 18(nCEL2)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [SIZE-C] : 10(1CELL, 2CELL), 13(3CELL),  9(PSCM), 10(PSCH), 7(PSCT),  8(PSCB), 0(nCELL), 11(nCEL2)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [SIZE-D] :  8(1CELL, 2CELL), 13(3CELL),  6(PSCM),  7(PSCH), 8(PSCT),  5(PSCB), 0(nCELL), 18(nCEL2)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [STIFF]  : AREA, ASy, ASz, Ixx, Iyy, Izz");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [SCHK]   : bAUTO_Z1, Z1, bAUTO_Z3, Z3");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [WT]     : bAUTO_TOR, TOR, bAUTO_SHR1, SHR1, bAUTO_SHR2, SHR2, bAUTO_SHR3, SHR3");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [CMPWEB] : EFD, LRF, A, B, H, T");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-File1.WriteString("\n");
-
-//str=_T("1, DBUSER    , 钢管截面          , CC, 0, 0, 0, 0, 0, 0, YES, P  , 2, 0.048, 0.0035, 0, 0, 0, 0, 0, 0, 0, 0\n");
-//File1.WriteString(str);
-SectionCount=1;
-for(i=1;i<=D_Deviation_Per[0];i++)
-{
-	for(j=1;j<=tw_Deviation_Per[0];j++)
+	//m3+1 to dy
+	File1.WriteString("\n");
+	((CEdit*)GetDlgItem(IDC_EDIT_TRIM_MX))->GetWindowText(tempstr);
+	Mx=atof(tempstr);
+	((CEdit*)GetDlgItem(IDC_EDIT_TRIM_MY))->GetWindowText(tempstr);
+	My=atof(tempstr);
+	for(i=XZelementStart;i<=YZelementEnd;i++)
 	{
-		str.Format("    %d, DBUSER    , 钢管截面          , CC, 0, 0, 0, 0, 0, 0, YES, P  , 2, %.3f, %.4f, 0, 0, 0, 0, 0, 0, 0, 0\n\n",SectionCount++,D_Deviation[i],tw_Deviation[j]);
+		str.Format("     %d,  YES, 000110, 0, 0, 0, %.2f, %.2f, 0\n             000110, 0, 0, 0, %.2f, %.2f, 0, 剪刀撑-立杆\n",i,Mx,My,Mx,My);
 		File1.WriteString(str);
 	}
-}
+	for(i=XYelementStart;i<=XYelementEnd;i++)
+	{
+		str.Format("     %d,  YES, 000110, 0, 0, 0, %.2f, %.2f, 0\n             000110, 0, 0, 0, %.2f, %.2f, 0, 剪刀撑-横杆\n",i,Mx,My,Mx,My);
+		File1.WriteString(str);
+	}
 
+	File1.WriteString("\n");
 
-
-
-
-
-
-//'荷载工况定义
-//*********** Lines = Lines & readFile("d:\参数化建模\支架文件\STLDCASE.mct")   *************
-str=_T("*STLDCASE    ; Static Load Cases");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; LCNAME, LCTYPE, DESC");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   杆系自重, D , ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   浇筑和振捣混凝土, D , ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   施工人员、材料、设备, D , ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   预压荷载1, D , ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   预压荷载2, D , ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   预压荷载3, D , ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   第一次浇筑, D , ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   第二次浇筑, D , ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   模板、支撑梁, D , ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   防护设施、附加构件, D , ");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   风荷载, D , ");
-File1.WriteString(str);
-File1.WriteString("\n\n\n");
-
-
-
-
-
-//'一般边界条件定义
-//Lines = Lines & readFile("d:\参数化建模\支架文件\CONSTRAINT.mct")
-str=_T("*CONSTRAINT    ; Supports");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NODE_LIST, CONSt(Dx,Dy,Dz,Rx,Ry,Rz),GROUP");
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-//Lines = Lines & "1to" & dc & ",001000,地基" & vbCrLf
-//str.Format("%s  %d  , %s", "1 to" ,dc ,"001000,地基");//田海涛
-dc=ZhuJuGeShu_X*PaiJuGeShu_Y;
-str.Format("1 to  %d  , 111000,地基支撑", dc);
-File1.WriteString(str);
-File1.WriteString("\n\n");
-
-str = _T("*FRAME-RLS    ; Beam End Release\n");
-File1.WriteString(str);
-str = _T("; ELEM_LIST, bVALUE, FLAG-i, Fxi, Fyi, Fzi, Mxi, Myi, Mzi        ; 1st line\n");
-File1.WriteString(str);
-str = _T(";                    FLAG-j, Fxj, Fyj, Fzj, Mxj, Myj, Mzj, GROUP ; 2nd line\n");
-File1.WriteString(str);
-//HorizPoleNum=m2;//表示横向杆件总数
-float Mx=0.0,My=0.0;//田海涛修改
-((CEdit*)GetDlgItem(IDC_EDIT_HENG_MX))->GetWindowText(tempstr);
-Mx=atof(tempstr);
-((CEdit*)GetDlgItem(IDC_EDIT_HENG_MY))->GetWindowText(tempstr);
-My=atof(tempstr);
-for(i=YelementStart;i<=XelementEnd;i++)
-{
-	str.Format("     %d,  YES, 000110, 0, 0, 0, %.2f, %.2f, 0\n             000110, 0, 0, 0, %.2f, %.2f, 0, 横杆-立杆\n",i,Mx,My,Mx,My);
+	//'支架自重定义
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\SELFWEIGHT.mct")
+	str=_T("*USE-STLD, 杆系自重");
 	File1.WriteString(str);
-}
-//m3+1 to dy
-File1.WriteString("\n");
-((CEdit*)GetDlgItem(IDC_EDIT_TRIM_MX))->GetWindowText(tempstr);
-Mx=atof(tempstr);
-((CEdit*)GetDlgItem(IDC_EDIT_TRIM_MY))->GetWindowText(tempstr);
-My=atof(tempstr);
-for(i=XZelementStart;i<=YZelementEnd;i++)
-{
-	str.Format("     %d,  YES, 000110, 0, 0, 0, %.2f, %.2f, 0\n             000110, 0, 0, 0, %.2f, %.2f, 0, 剪刀撑-立杆\n",i,Mx,My,Mx,My);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+
+	str=_T("; *SELFWEIGHT, X, Y, Z, GROUP");
 	File1.WriteString(str);
-}
-for(i=XYelementStart;i<=XYelementEnd;i++)
-{
-	str.Format("     %d,  YES, 000110, 0, 0, 0, %.2f, %.2f, 0\n             000110, 0, 0, 0, %.2f, %.2f, 0, 剪刀撑-横杆\n",i,Mx,My,Mx,My);
+	File1.WriteString("\n");
+	str=_T("*SELFWEIGHT, 0, 0, -1, 支架自重");
 	File1.WriteString(str);
-}
+	File1.WriteString("\n");
+	File1.WriteString("\n");
 
-File1.WriteString("\n");
-
-//'支架自重定义
-//Lines = Lines & readFile("d:\参数化建模\支架文件\SELFWEIGHT.mct")
-str=_T("*USE-STLD, 杆系自重");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-
-str=_T("; *SELFWEIGHT, X, Y, Z, GROUP");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("*SELFWEIGHT, 0, 0, -1, 支架自重");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-
-str=_T("; End of data for load case [杆系自重] -------------------------");
-File1.WriteString(str);
-File1.WriteString("\n");
+	str=_T("; End of data for load case [杆系自重] -------------------------");
+	File1.WriteString(str);
+	File1.WriteString("\n");
 
 
 
 
 
-//'浇筑及振捣混凝土荷载定义
-//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-q5.mct")
-str=_T("*USE-STLD, 浇筑和振捣混凝土");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*CONLOAD    ; Nodal Loads");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
-File1.WriteString(str);
-File1.WriteString("\n");
+	//'浇筑及振捣混凝土荷载定义
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-q5.mct")
+	str=_T("*USE-STLD, 浇筑和振捣混凝土");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*CONLOAD    ; Nodal Loads");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
+	File1.WriteString(str);
+	File1.WriteString("\n");
 
-//	a=ZhuJuGeShu_X-1;
-//	b=PaiJuGeShu_Y-1;
-//	c=BuJuGeShu_Z-3;
+	//	a=ZhuJuGeShu_X-1;
+	//	b=PaiJuGeShu_Y-1;
+	//	c=BuJuGeShu_Z-3;
 
-//qq5 = -JiaoZhuZhenDao/((b - 1) * (a + 1));
-qq5 = -JiaoZhuZhenDao/((PaiJuGeShu_Y - 2) *ZhuJuGeShu_X);
-for (i=1;; i++)
-{
-	if (NodeZong[i].Num==0)
-		break;
+	//qq5 = -JiaoZhuZhenDao/((b - 1) * (a + 1));
+	qq5 = -JiaoZhuZhenDao/((PaiJuGeShu_Y - 2) *ZhuJuGeShu_X);
+	for (i=1;; i++)
+	{
+		if (NodeZong[i].Num==0)
+			break;
 		if (fabs(NodeZong[i].z-maxZ)<0.005)
 		{
-			str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qq5,0,0,0,"浇筑及振捣");
+			str.Format("%d ,%.2f , %.2f , %.2f , %.2f , %.2f , %.2f , %s",NodeZong[i].Num,0.0,0.0,qq5,0.0,0.0,0.0,"浇筑及振捣");
 			File1.WriteString(str);
 			File1.WriteString("\n");
 		}
-}
-/*for (int yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
-{
+	}
+	/*for (int yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+	{
 	for ( u = (BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+2+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
 	{
-		//Lines = Lines & u & ",0,0," & qq5 & ",0,0,0,浇筑及振捣" & vbCrLf
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qq5,0,0,0,"浇筑及振捣");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}*/
-
-//'施工人员材料机械荷载定义
-//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-q4.mct")
-str=_T("; End of data for load case [浇筑和振捣混凝土] -------------------------");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*USE-STLD, 施工人员、材料、设备");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*CONLOAD    ; Nodal Loads");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-//	a=ZhuJuGeShu_X-1;
-//	b=PaiJuGeShu_Y-1;
-//	c=BuJuGeShu_Z-3;
-
-
-qq4 = -RenChaiJi/((PaiJuGeShu_Y-2)*ZhuJuGeShu_X);
-for (i=1;; i++)
-{
-	if (NodeZong[i].Num==0)
-		break;
-	if (fabs(NodeZong[i].z-maxZ)<0.005)
-	{
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qq4,0,0,0,"施工人员机械");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}
-/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
-{
-	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+2+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
-	{
-		//Lines = Lines & u & ",0,0," & qq4 & ",0,0,0,施工人员机械" & vbCrLf
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qq4,0,0,0,"施工人员机械");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}*/
-//'第一次预压荷载定义
-//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-y1.mct")
-str=_T("; End of data for load case [施工人员、材料、设备] -------------------------");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*USE-STLD, 预压荷载1");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*CONLOAD    ; Nodal Loads");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-
-//	a=ZhuJuGeShu_X-1;
-//	b=PaiJuGeShu_Y-1;
-//	c=BuJuGeShu_Z-3;
-
-qy1 = -DiYiCiYuYa * qy / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);//选择的对象不存在!!!
-for (i=1;; i++)
-{
-	if (NodeZong[i].Num==0)
-		break;
-	if (fabs(NodeZong[i].z-maxZ)<0.005)
-	{
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qy1,0,0,0,"预压第一次");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}
-/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
-{
-	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
-	{//u = (c + 2) * dc + 4 + yyy * (b + 1) ;u<= (c + 2) * dc + b - 2 + yyy * (b + 1);u++
-		//Lines = Lines & u & ",0,0," & qy1 & ",0,0,0,预压第一次" & vbCrLf
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qy1,0,0,0,"预压第一次");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}*/
-//'第二次预压荷载定义
-//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-y2.mct")
-str=_T("; End of data for load case [预压荷载1] -------------------------");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*USE-STLD, 预压荷载2");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*CONLOAD    ; Nodal Loads");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-
-qy2 = -DiErCiYuYa * qy / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);//选择的对象不存在!!!
-for (i=1;; i++)
-{
-	if (NodeZong[i].Num==0)
-		break;
-	if (fabs(NodeZong[i].z-maxZ)<0.005)
-	{
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qy2,0,0,0,"预压第二次");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}
-/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
-{
-	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
-	{
-		//Lines = Lines & u & ",0,0," & qy2 & ",0,0,0,预压第二次" & vbCrLf
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qy2,0,0,0,"预压第二次");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}*/
-//'第三次预压荷载定义
-//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-y3.mct")
-str=_T("; End of data for load case [预压荷载2] -------------------------");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*USE-STLD, 预压荷载3");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*CONLOAD    ; Nodal Loads");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-qy3 = -DiSanCiYuYa * qy / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);//选择的对象不存在!!!
-for (i=1;; i++)
-{
-	if (NodeZong[i].Num==0)
-		break;
-	if (fabs(NodeZong[i].z-maxZ)<0.005)
-	{
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qy3,0,0,0,"预压第三次");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}
-/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
-{
-	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
-	{
-		//Lines = Lines & u & ",0,0," & qy3 & ",0,0,0,预压第三次" & vbCrLf
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qy3,0,0,0,"预压第三次");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}*/
-//'第一次浇筑荷载定义
-//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-j1.mct")
-str=_T("; End of data for load case [预压荷载3] -------------------------");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*USE-STLD, 第一次浇筑");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*CONLOAD    ; Nodal Loads");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-
-qj1 = -DiYiCiJiaoZhu * GangJinHunNingTu / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);
-for (i=1;; i++)
-{
-	if (NodeZong[i].Num==0)
-		break;
-	if (fabs(NodeZong[i].z-maxZ)<0.005)
-	{
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qy1,0,0,0,"浇筑第一次-腹板");//此处待添加浇筑第一次-底板
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}
-/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
-{
-	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
-	{
-		//Lines = Lines & u & ",0,0," & qj1 & ",0,0,0,浇筑第一次" & vbCrLf
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qj1,0,0,0,"浇筑第一次");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}*/
-
-//'第二次浇筑荷载定义
-//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-j2.mct")
-str=_T("; End of data for load case [第一次浇筑] -------------------------");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*USE-STLD, 第二次浇筑");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*CONLOAD    ; Nodal Loads");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-
-qj2 = -DiErCiJiaoZhu * GangJinHunNingTu / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);
-for (i=1;; i++)
-{
-	if (NodeZong[i].Num==0)
-		break;
-	if (fabs(NodeZong[i].z-maxZ)<0.005)
-	{
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qy1,0,0,0,"浇筑第二次");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}
-/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
-{
-	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
-	{
-		//Lines = Lines & u & ",0,0," & qj2 & ",0,0,0,浇筑第二次" & vbCrLf
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qj2,0,0,0,"浇筑第二次");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}*/
-
-//Print #2, Lines
-//Lines = ""
-
-//'模板支撑梁荷载定义
-//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-q2.mct")
-str=_T("; End of data for load case [第二次浇筑] -------------------------");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*USE-STLD, 模板、支撑梁");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*CONLOAD    ; Nodal Loads");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-
-
-qq2 = -MoBanFangLeng / ((PaiJuGeShu_Y-2) * ZhuJuGeShu_X);
-for (i=1;; i++)
-{
-	if (NodeZong[i].Num==0)
-		break;
-	if (fabs(NodeZong[i].z-maxZ)<0.005)
-	{
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qq2,0,0,0,"模板方楞等");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}
-/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
-{
-	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+2+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
-	{
-		//Lines = Lines & u & ",0,0," & qq2 & ",0,0,0,模板方楞等" & vbCrLf
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qq2,0,0,0,"模板方楞等");
-		File1.WriteString(str);
-		File1.WriteString("\n");
-	}
-}*/
-//'附加构件等荷载定义
-//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-q3.mct")
-str=_T("; End of data for load case [模板、支撑梁] -------------------------");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*USE-STLD, 防护设施、附加构件");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*CONLOAD    ; Nodal Loads");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
-File1.WriteString(str);
-File1.WriteString("\n");
-
-
-
-qq3 = -FuJiaGouJian / (2*ZhuJuGeShu_X);//选择的对象不存在!!!
-int yyy=0;
-for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
-{
-	u = (BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X + 1 + yyy * PaiJuGeShu_Y;
-	//Lines = Lines & u & ",0,0," & qq3 & ",0,0,0,附加构件" & vbCrLf
-	str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qq3,0,0,0,"附加构件");
+	//Lines = Lines & u & ",0,0," & qq5 & ",0,0,0,浇筑及振捣" & vbCrLf
+	str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qq5,0,0,0,"浇筑及振捣");
 	File1.WriteString(str);
 	File1.WriteString("\n");
-}
+	}
+}*/
 
-for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
-{
-	u = (BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X + PaiJuGeShu_Y + yyy * PaiJuGeShu_Y;
-	//Lines = Lines & u & ",0,0," & qq3 & ",0,0,0,附加构件" & vbCrLf
-	str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qq3,0,0,0,"附加构件");
+	//'施工人员材料机械荷载定义
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-q4.mct")
+	str=_T("; End of data for load case [浇筑和振捣混凝土] -------------------------");
 	File1.WriteString(str);
 	File1.WriteString("\n");
-}
-
-//'风荷载定义
-//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-f.mct")
-str=_T("; End of data for load case [防护设施、附加构件] -------------------------");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*USE-STLD, 风荷载");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*CONLOAD    ; Nodal Loads");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
-File1.WriteString(str);
-File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*USE-STLD, 施工人员、材料、设备");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*CONLOAD    ; Nodal Loads");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
+	File1.WriteString(str);
+	File1.WriteString("\n");
 
 
-//	a=ZhuJuGeShu_X-1;
-//	b=PaiJuGeShu_Y-1;
-//	c=BuJuGeShu_Z-3;
+	//	a=ZhuJuGeShu_X-1;
+	//	b=PaiJuGeShu_Y-1;
+	//	c=BuJuGeShu_Z-3;
 
 
-qq6 = FengHeZai / (3 * ZhuJuGeShu_X);
-for (i=1;; i++)
-{
-	if (NodeZong[i].Num==0)
-		break;
-	if (fabs(NodeZong[i].x-maxX)<0.005)
+	qq4 = -RenChaiJi/((PaiJuGeShu_Y-2)*ZhuJuGeShu_X);
+	for (i=1;; i++)
 	{
-		if(fabs(NodeZong[i].z-0.3-XiaBuTuoChengGaoDu)>0.005)
+		if (NodeZong[i].Num==0)
+			break;
+		if (fabs(NodeZong[i].z-maxZ)<0.005)
 		{
-		str.Format("%d , %d , %d , %f , %d , %d , %d , %s",NodeZong[i].Num,0,0,qq6,0,0,0,"风荷载");
-		File1.WriteString(str);
-		File1.WriteString("\n");
+			str.Format("%d ,%.2f , %.2f , %.2f , %.2f , %.2f , %.2f , %s",NodeZong[i].Num,0.0,0.0,qq4,0.0,0.0,0.0,"施工人员机械");
+			File1.WriteString(str);
+			File1.WriteString("\n");
 		}
 	}
-}
-/*for (int xxx = 0 ;xxx<= 2;xxx++)
-{
+	/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+	{
+	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+2+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
+	{
+	//Lines = Lines & u & ",0,0," & qq4 & ",0,0,0,施工人员机械" & vbCrLf
+	str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qq4,0,0,0,"施工人员机械");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	}
+}*/
+	//'第一次预压荷载定义
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-y1.mct")
+	str=_T("; End of data for load case [施工人员、材料、设备] -------------------------");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*USE-STLD, 预压荷载1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*CONLOAD    ; Nodal Loads");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+
+
+
+	//	a=ZhuJuGeShu_X-1;
+	//	b=PaiJuGeShu_Y-1;
+	//	c=BuJuGeShu_Z-3;
+
+	qy1 = -DiYiCiYuYa * qy / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);//选择的对象不存在!!!
+	for (i=1;; i++)
+	{
+		if (NodeZong[i].Num==0)
+			break;
+		if (fabs(NodeZong[i].z-maxZ)<0.005)
+		{
+			str.Format("%d ,%.2f , %.2f , %.2f , %.2f , %.2f , %.2f , %s",NodeZong[i].Num,0.0,0.0,qy1,0.0,0.0,0.0,"预压第一次");
+			File1.WriteString(str);
+			File1.WriteString("\n");
+		}
+	}
+	/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+	{
+	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
+	{//u = (c + 2) * dc + 4 + yyy * (b + 1) ;u<= (c + 2) * dc + b - 2 + yyy * (b + 1);u++
+	//Lines = Lines & u & ",0,0," & qy1 & ",0,0,0,预压第一次" & vbCrLf
+	str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qy1,0,0,0,"预压第一次");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	}
+}*/
+	//'第二次预压荷载定义
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-y2.mct")
+	str=_T("; End of data for load case [预压荷载1] -------------------------");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*USE-STLD, 预压荷载2");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*CONLOAD    ; Nodal Loads");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+
+
+
+	qy2 = -DiErCiYuYa * qy / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);//选择的对象不存在!!!
+	for (i=1;; i++)
+	{
+		if (NodeZong[i].Num==0)
+			break;
+		if (fabs(NodeZong[i].z-maxZ)<0.005)
+		{
+			str.Format("%d ,%.2f , %.2f , %.2f , %.2f , %.2f , %.2f , %s",NodeZong[i].Num,0.0,0.0,qy2,0.0,0.0,0.0,"预压第二次");
+			File1.WriteString(str);
+			File1.WriteString("\n");
+		}
+	}
+	/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+	{
+	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
+	{
+	//Lines = Lines & u & ",0,0," & qy2 & ",0,0,0,预压第二次" & vbCrLf
+	str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qy2,0,0,0,"预压第二次");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	}
+}*/
+	//'第三次预压荷载定义
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-y3.mct")
+	str=_T("; End of data for load case [预压荷载2] -------------------------");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*USE-STLD, 预压荷载3");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*CONLOAD    ; Nodal Loads");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+
+
+	qy3 = -DiSanCiYuYa * qy / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);//选择的对象不存在!!!
+	for (i=1;; i++)
+	{
+		if (NodeZong[i].Num==0)
+			break;
+		if (fabs(NodeZong[i].z-maxZ)<0.005)
+		{
+			str.Format("%d ,%.2f , %.2f , %.2f , %.2f , %.2f , %.2f , %s",NodeZong[i].Num,0.0,0.0,qy3,0.0,0.0,0.0,"预压第三次");
+			File1.WriteString(str);
+			File1.WriteString("\n");
+		}
+	}
+	/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+	{
+	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
+	{
+	//Lines = Lines & u & ",0,0," & qy3 & ",0,0,0,预压第三次" & vbCrLf
+	str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qy3,0,0,0,"预压第三次");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	}
+}*/
+	//'第一次浇筑荷载定义
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-j1.mct")
+	str=_T("; End of data for load case [预压荷载3] -------------------------");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*USE-STLD, 第一次浇筑");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*CONLOAD    ; Nodal Loads");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+
+
+
+	qj1 = -DiYiCiJiaoZhu * GangJinHunNingTu / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);
+	for (i=1;; i++)
+	{
+		if (NodeZong[i].Num==0)
+			break;
+		if (fabs(NodeZong[i].z-maxZ)<0.005)
+		{
+			str.Format("%d ,%.2f , %.2f , %.2f , %.2f , %.2f , %.2f , %s",NodeZong[i].Num,0.0,0.0,qy1,0.0,0.0,0.0,"浇筑第一次-腹板");//此处待添加浇筑第一次-底板
+			File1.WriteString(str);
+			File1.WriteString("\n");
+		}
+	}
+	/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+	{
+	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
+	{
+	//Lines = Lines & u & ",0,0," & qj1 & ",0,0,0,浇筑第一次" & vbCrLf
+	str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qj1,0,0,0,"浇筑第一次");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	}
+}*/
+
+	//'第二次浇筑荷载定义
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-j2.mct")
+	str=_T("; End of data for load case [第一次浇筑] -------------------------");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*USE-STLD, 第二次浇筑");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*CONLOAD    ; Nodal Loads");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+
+
+
+	qj2 = -DiErCiJiaoZhu * GangJinHunNingTu / ((PaiJuGeShu_Y-6) * ZhuJuGeShu_X);
+	for (i=1;; i++)
+	{
+		if (NodeZong[i].Num==0)
+			break;
+		if (fabs(NodeZong[i].z-maxZ)<0.005)
+		{
+			str.Format("%d ,%.2f , %.2f , %.2f , %.2f , %.2f , %.2f , %s",NodeZong[i].Num,0.0,0.0,qy1,0.0,0.0,0.0,"浇筑第二次");
+			File1.WriteString(str);
+			File1.WriteString("\n");
+		}
+	}
+	/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+	{
+	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+4+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X-2+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
+	{
+	//Lines = Lines & u & ",0,0," & qj2 & ",0,0,0,浇筑第二次" & vbCrLf
+	str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qj2,0,0,0,"浇筑第二次");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	}
+}*/
+
+	//Print #2, Lines
+	//Lines = ""
+
+	//'模板支撑梁荷载定义
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-q2.mct")
+	str=_T("; End of data for load case [第二次浇筑] -------------------------");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*USE-STLD, 模板、支撑梁");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*CONLOAD    ; Nodal Loads");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+
+
+
+
+	qq2 = -MoBanFangLeng / ((PaiJuGeShu_Y-2) * ZhuJuGeShu_X);
+	for (i=1;; i++)
+	{
+		if (NodeZong[i].Num==0)
+			break;
+		if (fabs(NodeZong[i].z-maxZ)<0.005)
+		{
+			str.Format("%d ,%.2f , %.2f , %.2f , %.2f , %.2f , %.2f , %s",NodeZong[i].Num,0.0,0.0,qq2,0.0,0.0,0.0,"模板方楞等");
+			File1.WriteString(str);
+			File1.WriteString("\n");
+		}
+	}
+	/*for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+	{
+	for (u=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+2+yyy*PaiJuGeShu_Y;u<=(BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X+(PaiJuGeShu_Y-1)+yyy*PaiJuGeShu_Y;u++)
+	{
+	//Lines = Lines & u & ",0,0," & qq2 & ",0,0,0,模板方楞等" & vbCrLf
+	str.Format("%d , %d , %d , %f , %d , %d , %d , %s",u,0,0,qq2,0,0,0,"模板方楞等");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	}
+}*/
+	//'附加构件等荷载定义
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-q3.mct")
+	str=_T("; End of data for load case [模板、支撑梁] -------------------------");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*USE-STLD, 防护设施、附加构件");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*CONLOAD    ; Nodal Loads");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+
+
+
+	qq3 = -FuJiaGouJian / (2*ZhuJuGeShu_X);//选择的对象不存在!!!
+	int yyy=0;
 	for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
 	{
-		u = (BuJuGeShu_Z-3)*ZhuJuGeShu_X*PaiJuGeShu_Y + 1 + yyy * PaiJuGeShu_Y + ZhuJuGeShu_X*PaiJuGeShu_Y * xxx;
-		//Lines = Lines & u & ",0," & qq6 & ",0,0,0,0,风荷载" & vbCrLf
-		str.Format("%d , %d , %f , %d , %d , %d , %d , %s",u,0,qq6,0,0,0,0,"风荷载");
+		u = (BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X + 1 + yyy * PaiJuGeShu_Y;
+		//Lines = Lines & u & ",0,0," & qq3 & ",0,0,0,附加构件" & vbCrLf
+		str.Format("%d ,%.2f , %.2f , %.2f , %.2f , %.2f , %.2f , %s",u,0.0,0.0,qq3,0.0,0.0,0.0,"附加构件");
 		File1.WriteString(str);
 		File1.WriteString("\n");
 	}
+
+	for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+	{
+		u = (BuJuGeShu_Z-1)*PaiJuGeShu_Y*ZhuJuGeShu_X + PaiJuGeShu_Y + yyy * PaiJuGeShu_Y;
+		//Lines = Lines & u & ",0,0," & qq3 & ",0,0,0,附加构件" & vbCrLf
+		str.Format("%d ,%.2f , %.2f , %.2f , %.2f , %.2f , %.2f , %s",u,0.0,0.0,qq3,0.0,0.0,0.0,"附加构件");
+		File1.WriteString(str);
+		File1.WriteString("\n");
+	}
+
+	//'风荷载定义
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\USE-STLD-f.mct")
+	str=_T("; End of data for load case [防护设施、附加构件] -------------------------");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*USE-STLD, 风荷载");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*CONLOAD    ; Nodal Loads");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NODE_LIST, FX, FY, FZ, MX, MY, MZ, GROUP");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+
+
+	//	a=ZhuJuGeShu_X-1;
+	//	b=PaiJuGeShu_Y-1;
+	//	c=BuJuGeShu_Z-3;
+
+
+	qq6 = FengHeZai;// (3 * ZhuJuGeShu_X);
+	for (i=1;; i++)
+	{
+		if (NodeZong[i].Num==0)
+			break;
+		if (fabs(NodeZong[i].x-maxX)<0.005)
+		{
+			if(fabs(NodeZong[i].z-0.3-XiaBuTuoChengGaoDu)>0.005)
+			{
+				str.Format("%d , %.2f , %.2f , %.2f , %.2f , %.2f , %.2f , %s\n",NodeZong[i].Num,-qq6,0.0,0.0,0.0,0.0,0.0,"风荷载");
+				File1.WriteString(str);
+				//File1.WriteString("\n");
+			}
+		}
+	}
+	/*for (int xxx = 0 ;xxx<= 2;xxx++)
+	{
+	for (yyy = 0 ;yyy<ZhuJuGeShu_X;yyy++)
+	{
+	u = (BuJuGeShu_Z-3)*ZhuJuGeShu_X*PaiJuGeShu_Y + 1 + yyy * PaiJuGeShu_Y + ZhuJuGeShu_X*PaiJuGeShu_Y * xxx;
+	//Lines = Lines & u & ",0," & qq6 & ",0,0,0,0,风荷载" & vbCrLf
+	str.Format("%d , %d , %f , %d , %d , %d , %d , %s",u,0,qq6,0,0,0,0,"风荷载");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	}
 }*/
-//'荷载组合
-//Lines = Lines & readFile("d:\参数化建模\支架文件\LOADCOMB.mct")
-str=_T("; End of data for load case [风荷载] -------------------------");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
-File1.WriteString("\n");
-str=_T("*LOADCOMB    ; Combinations");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; NAME=NAME, KIND, ACTIVE, bES, iTYPE, DESC, iSERV-TYPE, nLCOMTYPE   ; line 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";      ANAL1, LCNAME1, FACT1, ...                                    ; from line 2");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   NAME=第一次预压, GEN, ACTIVE, 0, 0, , 0, 0");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("        ST, 杆系自重, 1, ST, 预压荷载1, 1, ST, 模板、支撑梁, 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("        ST, 防护设施、附加构件, 1, ST, 风荷载, 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   NAME=第二次预压, GEN, ACTIVE, 0, 0, , 0, 0");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("        ST, 杆系自重, 1, ST, 预压荷载1, 1, ST, 预压荷载2, 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("        ST, 模板、支撑梁, 1, ST, 防护设施、附加构件, 1, ST, 风荷载, 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   NAME=第三次预压, GEN, ACTIVE, 0, 0, , 0, 0");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("        ST, 杆系自重, 1, ST, 预压荷载1, 1, ST, 预压荷载2, 1, ST, 预压荷载3, 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("        ST, 模板、支撑梁, 1, ST, 防护设施、附加构件, 1, ST, 风荷载, 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   NAME=第一次浇筑, GEN, ACTIVE, 0, 0, , 0, 0");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("        ST, 杆系自重, 1, ST, 第一次浇筑, 1, ST, 浇筑和振捣混凝土, 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("        ST, 施工人员、材料、设备, 1, ST, 模板、支撑梁, 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("        ST, 防护设施、附加构件, 1, ST, 风荷载, 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("   NAME=第二次浇筑, GEN, ACTIVE, 0, 0, , 0, 0");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("        ST, 杆系自重, 1, ST, 第一次浇筑, 1, ST, 第二次浇筑, 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("        ST, 浇筑和振捣混凝土, 1, ST, 施工人员、材料、设备, 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("        ST, 模板、支撑梁, 1, ST, 防护设施、附加构件, 1, ST, 风荷载, 1");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
+	//'荷载组合
+	//Lines = Lines & readFile("d:\参数化建模\支架文件\LOADCOMB.mct")
+	str=_T("; End of data for load case [风荷载] -------------------------");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	File1.WriteString("\n");
+	str=_T("*LOADCOMB    ; Combinations");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; NAME=NAME, KIND, ACTIVE, bES, iTYPE, DESC, iSERV-TYPE, nLCOMTYPE   ; line 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";      ANAL1, LCNAME1, FACT1, ...                                    ; from line 2");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   NAME=第一次预压, GEN, ACTIVE, 0, 0, , 0, 0");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("        ST, 杆系自重, 1, ST, 预压荷载1, 1, ST, 模板、支撑梁, 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("        ST, 防护设施、附加构件, 1, ST, 风荷载, 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   NAME=第二次预压, GEN, ACTIVE, 0, 0, , 0, 0");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("        ST, 杆系自重, 1, ST, 预压荷载1, 1, ST, 预压荷载2, 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("        ST, 模板、支撑梁, 1, ST, 防护设施、附加构件, 1, ST, 风荷载, 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   NAME=第三次预压, GEN, ACTIVE, 0, 0, , 0, 0");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("        ST, 杆系自重, 1, ST, 预压荷载1, 1, ST, 预压荷载2, 1, ST, 预压荷载3, 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("        ST, 模板、支撑梁, 1, ST, 防护设施、附加构件, 1, ST, 风荷载, 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   NAME=第一次浇筑, GEN, ACTIVE, 0, 0, , 0, 0");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("        ST, 杆系自重, 1, ST, 第一次浇筑, 1, ST, 浇筑和振捣混凝土, 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("        ST, 施工人员、材料、设备, 1, ST, 模板、支撑梁, 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("        ST, 防护设施、附加构件, 1, ST, 风荷载, 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("   NAME=第二次浇筑, GEN, ACTIVE, 0, 0, , 0, 0");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("        ST, 杆系自重, 1, ST, 第一次浇筑, 1, ST, 第二次浇筑, 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("        ST, 浇筑和振捣混凝土, 1, ST, 施工人员、材料、设备, 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("        ST, 模板、支撑梁, 1, ST, 防护设施、附加构件, 1, ST, 风荷载, 1");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
 
 
-str=_T("*LC-COLOR    ; Diagram Color for Load Case");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; ANAL, LCNAME, iR1(ALL), iG1(ALL), iB1(ALL), iR2(MIN), iG2(MIN), iB2(MIN), iR3(MAX), iG2(MAX), iB2(MAX)");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" ST, 预压荷载1, 0, 192, 192, 0, 128, 57, 255, 255, 87");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" ST, 预压荷载2, 163, 255, 160, 210, 210, 210, 0, 128, 192");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" ST, 杆系自重, 160, 192, 255, 148, 87, 255, 0, 192, 128");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" CB, 第一次预压, 192, 192, 0, 0, 192, 192, 192, 192, 192");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" CB, 第二次预压, 78, 0, 255, 0, 157, 192, 160, 255, 255");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" CB, 第三次预压, 192, 0, 128, 192, 0, 128, 93, 255, 87");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" ST, 预压荷载3, 93, 255, 87, 0, 128, 192, 0, 192, 192");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" ST, 模板、支撑梁, 255, 160, 255, 146, 0, 255, 163, 255, 160");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" ST, 浇筑和振捣混凝土, 0, 192, 128, 0, 128, 192, 0, 192, 128");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" ST, 施工人员、材料、设备, 148, 87, 255, 192, 128, 0, 192, 128, 0");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" CB, 第一次浇筑, 255, 160, 255, 210, 210, 210, 255, 0, 128");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" ST, 第一次浇筑, 163, 160, 255, 93, 255, 87, 192, 192, 192");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" ST, 第二次浇筑, 192, 0, 192, 0, 128, 255, 212, 160, 255");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" ST, 防护设施、附加构件, 0, 128, 57, 0, 192, 128, 0, 192, 128");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" CB, 第二次浇筑, 192, 72, 0, 148, 87, 255, 192, 0, 192");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(" ST, 风荷载, 255, 128, 0, 192, 0, 192, 85, 0, 192");
-File1.WriteString(str);
-File1.WriteString("\n");
-File1.WriteString("\n");
+	str=_T("*LC-COLOR    ; Diagram Color for Load Case");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; ANAL, LCNAME, iR1(ALL), iG1(ALL), iB1(ALL), iR2(MIN), iG2(MIN), iB2(MIN), iR3(MAX), iG2(MAX), iB2(MAX)");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" ST, 预压荷载1, 0, 192, 192, 0, 128, 57, 255, 255, 87");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" ST, 预压荷载2, 163, 255, 160, 210, 210, 210, 0, 128, 192");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" ST, 杆系自重, 160, 192, 255, 148, 87, 255, 0, 192, 128");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" CB, 第一次预压, 192, 192, 0, 0, 192, 192, 192, 192, 192");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" CB, 第二次预压, 78, 0, 255, 0, 157, 192, 160, 255, 255");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" CB, 第三次预压, 192, 0, 128, 192, 0, 128, 93, 255, 87");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" ST, 预压荷载3, 93, 255, 87, 0, 128, 192, 0, 192, 192");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" ST, 模板、支撑梁, 255, 160, 255, 146, 0, 255, 163, 255, 160");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" ST, 浇筑和振捣混凝土, 0, 192, 128, 0, 128, 192, 0, 192, 128");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" ST, 施工人员、材料、设备, 148, 87, 255, 192, 128, 0, 192, 128, 0");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" CB, 第一次浇筑, 255, 160, 255, 210, 210, 210, 255, 0, 128");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" ST, 第一次浇筑, 163, 160, 255, 93, 255, 87, 192, 192, 192");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" ST, 第二次浇筑, 192, 0, 192, 0, 128, 255, 212, 160, 255");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" ST, 防护设施、附加构件, 0, 128, 57, 0, 192, 128, 0, 192, 128");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" CB, 第二次浇筑, 192, 72, 0, 148, 87, 255, 192, 0, 192");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(" ST, 风荷载, 255, 128, 0, 192, 0, 192, 85, 0, 192");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	File1.WriteString("\n");
 
 
-str=_T("*DGN-MATL    ; Modify Steel(Concrete) Material");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iMAT, TYPE, MNAME, [DATA1]                                    ; STEEL");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iMAT, TYPE, MNAME, [DATA2], [R-DATA], FCI, bSERV, SHORT, LONG ; CONC");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iMAT, TYPE, MNAME, [DATA3], [DATA2], [R-DATA]                 ; SRC");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; iMAT, TYPE, MNAME, [DATA5]                                    ; STEEL(None) & KSCE-ASD05");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA1] : 1, DB, CODE, NAME or 2, ELAST, POISN, FU, FY1, FY2, FY3, FY4");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";           FY5, FY6, AFT, AFT2, AFT3, FY, AFV, AFV2, AFV3");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA2] : 1, DB, CODE, NAME or 2, FC");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA3] : 1, DB, CODE, NAME or 2, ELAST, FU, FY1, FY2, FY3, FY4");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";              FY5, FY6, AFT, AFT2, AFT3, FY, AFV, AFV2, AFV3");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA4] : 1, DB, CODE, NAME or 2, FC");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [DATA5] : 3, ELAST, POISN, AL1, AL2, AL3, AL4, AL5, AL6, AL7, AL8, AL9, AL10");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T(";              MIN1, MIN2, MIN3");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("; [R-DATA]: RBCODE, RBMAIN, RBSUB, FY(R), FYS");
-File1.WriteString(str);
-File1.WriteString("\n");
-str=_T("    1, STEEL, Q235              , 1, GB03(S)    ,            ,Q235          ");
-File1.WriteString(str);
-File1.WriteString("\n");
+	str=_T("*DGN-MATL    ; Modify Steel(Concrete) Material");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iMAT, TYPE, MNAME, [DATA1]                                    ; STEEL");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iMAT, TYPE, MNAME, [DATA2], [R-DATA], FCI, bSERV, SHORT, LONG ; CONC");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iMAT, TYPE, MNAME, [DATA3], [DATA2], [R-DATA]                 ; SRC");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; iMAT, TYPE, MNAME, [DATA5]                                    ; STEEL(None) & KSCE-ASD05");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA1] : 1, DB, CODE, NAME or 2, ELAST, POISN, FU, FY1, FY2, FY3, FY4");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";           FY5, FY6, AFT, AFT2, AFT3, FY, AFV, AFV2, AFV3");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA2] : 1, DB, CODE, NAME or 2, FC");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA3] : 1, DB, CODE, NAME or 2, ELAST, FU, FY1, FY2, FY3, FY4");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";              FY5, FY6, AFT, AFT2, AFT3, FY, AFV, AFV2, AFV3");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA4] : 1, DB, CODE, NAME or 2, FC");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [DATA5] : 3, ELAST, POISN, AL1, AL2, AL3, AL4, AL5, AL6, AL7, AL8, AL9, AL10");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T(";              MIN1, MIN2, MIN3");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("; [R-DATA]: RBCODE, RBMAIN, RBSUB, FY(R), FYS");
+	File1.WriteString(str);
+	File1.WriteString("\n");
+	str=_T("    1, STEEL, Q235              , 1, GB03(S)    ,            ,Q235          ");
+	File1.WriteString(str);
+	File1.WriteString("\n");
 
-//Print #2, Lines
-//Lines = ""
+	//Print #2, Lines
+	//Lines = ""
 
-//End Sub
+	//End Sub
 
 
-//num=1;
-delete NodeZong;
-delete Xelement;
-delete Yelement;
-delete Zelement;
-delete SDelement;
-File1.Close();
-AfxMessageBox("success");
-return;
+	//num=1;
+	delete NodeZong;
+	delete Xelement;
+	delete Yelement;
+	delete Zelement;
+	delete SDelement;
+	for(i=0;i<50;i++)
+	{
+		delete XZline[i];
+		delete YZline[i];
+		delete XYline[i];
+		delete XZscielement[i];
+		delete YZscielement[i];
+		delete XYscielement[i];
+		delete XZNode[i];
+		delete YZNode[i];
+		delete XYNode[i];
+	}
+	File1.Close();
+	AfxMessageBox("success");
+	return;
 
-//AfxMessageBox("导出成功！");
+	//AfxMessageBox("导出成功！");
 
 }
 
@@ -7583,6 +6727,12 @@ void CSet::SudoINI()
 	GetPrivateProfileString("初始edit值", "IDE_GangGuanBiHou", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
 	SetDlgItemText(IDE_GangGuanBiHou, tempstr);
 	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDC_EDIT_JDMJJ", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDC_EDIT_JDMJJ, tempstr);
+	tempstr.ReleaseBuffer();
+	GetPrivateProfileString("初始edit值", "IDC_EDIT_JDXJJ", "0",  tempstr.GetBuffer(MAX_PATH),MAX_PATH,strPath);
+	SetDlgItemText(IDC_EDIT_JDXJJ, tempstr);
+	tempstr.ReleaseBuffer();
 
 
 	/*WritePrivateProfileString ("初始edit值", "IDE_ZhuJu_X1", "8@1.2 7@1.6", strPath);
@@ -7630,7 +6780,45 @@ void CSet::JudgeCross(float x1, float y1, float x2, float y2, float a1, float b1
 			res[0]=a1+(y1-b1)*(a1-a2)/(b1-b2);
 		}
 		else
+		{
 			res[0]=(x1*(y1-y2)*(a1-a2)-a1*(b1-b2)*(x1-x2)-y1+b1)/((y1-y2)*(a1-a2)-(b1-b2)*(x1-x2));
-		res[1]=(b1-b2)*(res[0]-a1)/(a1-a2)+b1;
+			res[1]=(b1-b2)*(res[0]-a1)/(a1-a2)+b1;
+		}
 	}
+}
+
+void CSet::SudoGetEditVal()
+{
+	CString str;
+	GetDlgItemText(IDE_SaoDiGanGaoDu,str);
+	SaoDiGanGaoDu=atof(str);
+	GetDlgItemText(IDE_DingCengXuanBi,str);
+	DingCengXuanBiChangDu=atof(str);
+	GetDlgItemText(IDE_XiaTuoChengGaoDu,str);
+	XiaBuTuoChengGaoDu=atof(str);
+ 	GetDlgItemText(IDC_EDIT_JDMJJ,str);
+	JianDaoMianJianJu=atof(str);
+ 	GetDlgItemText(IDC_EDIT_JDXJJ,str);
+	JianDaoXianJianJu=atof(str);
+	GetDlgItemText(IDE_GangJinHunNingTu,str);
+	GangJinHunNingTu=atof(str);
+	GetDlgItemText(IDE_JiaoZhuZhenDao,str);
+	JiaoZhuZhenDao=atof(str);
+	GetDlgItemText(IDE_MoBanFangLeng,str);
+	MoBanFangLeng=atof(str);
+	GetDlgItemText(IDE_FuJiaGouJian,str);
+	FuJiaGouJian=atof(str);
+	GetDlgItemText(IDE_RenChaiJi,str);
+	RenChaiJi=atof(str);
+	GetDlgItemText(IDE_FengHeZai,str);
+	FengHeZai=atof(str);
+	GetDlgItemText(IDE_DiYiCiJiaoZhu,str);
+	DiYiCiJiaoZhu=atof(str);
+	DiErCiJiaoZhu=1-DiYiCiJiaoZhu;
+	GetDlgItemText(IDE_DiYiCiYuYa,str);
+	DiYiCiYuYa=atof(str);
+	GetDlgItemText(IDE_DiErCiYuYa,str);
+	DiErCiYuYa=atof(str);
+	GetDlgItemText(IDE_DiSanCiYuYa,str);
+	DiSanCiYuYa=atof(str);
 }

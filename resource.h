@@ -64,6 +64,8 @@
 #define IDC_BUTTON_CACLU                1044
 #define IDC_PROGRESS1                   1045
 #define IDC_BUTTON1                     1046
+#define IDC_EDIT_JDMJJ                  1047
+#define IDC_EDIT_JDXJJ                  1048
 #define IDE_BiHouZhi                    1049
 #define IDE_BiHouBaiFenBi               1051
 #define IDE_WaiJingZhi                  1052

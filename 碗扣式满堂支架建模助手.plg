@@ -3,31 +3,53 @@
 <pre>
 <h1>Build Log</h1>
 <h3>
---------------------Configuration: 碗扣式满堂支架建模助手 - Win32 Debug--------------------
+--------------------Configuration: 碗扣式满堂支架建模助手 - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSPDF8A.tmp" with contents
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP3548.tmp" with contents
 [
-/nologo /subsystem:windows /incremental:yes /pdb:"Debug/碗扣式满堂支架建模助手.pdb" /debug /machine:I386 /out:"Debug/碗扣式满堂支架建模助手.exe" /pdbtype:sept 
-.\Debug\DanYuan.obj
-.\Debug\element.obj
-.\Debug\excel.obj
-.\Debug\msword.obj
-.\Debug\Node.obj
-.\Debug\PaiJu.obj
-.\Debug\Section.obj
-.\Debug\Set.obj
-.\Debug\StdAfx.obj
-.\Debug\UIThread.obj
-.\Debug\WordOffice.obj
-.\Debug\xSkinButton.obj
-".\Debug\碗扣式满堂支架建模助手.obj"
-".\Debug\碗扣式满堂支架建模助手Dlg.obj"
-".\Debug\碗扣式满堂支架建模助手.res"
+/nologo /subsystem:windows /incremental:no /pdb:"Release/碗扣式满堂支架建模助手.pdb" /machine:I386 /out:"Release/碗扣式满堂支架建模助手.exe" 
+.\Release\DanYuan.obj
+.\Release\element.obj
+.\Release\excel.obj
+.\Release\fline.obj
+.\Release\msword.obj
+.\Release\Node.obj
+.\Release\PaiJu.obj
+.\Release\Section.obj
+.\Release\Set.obj
+.\Release\StdAfx.obj
+.\Release\UIThread.obj
+.\Release\WordOffice.obj
+.\Release\xSkinButton.obj
+".\Release\碗扣式满堂支架建模助手.obj"
+".\Release\碗扣式满堂支架建模助手Dlg.obj"
+".\Release\碗扣式满堂支架建模助手.res"
 ]
-Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSPDF8A.tmp"
+Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP3548.tmp"
 <h3>Output Window</h3>
 Linking...
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP3681.tmp" with contents
+[
+/nologo /o"Release/碗扣式满堂支架建模助手.bsc" 
+.\Release\StdAfx.sbr
+.\Release\DanYuan.sbr
+.\Release\element.sbr
+.\Release\excel.sbr
+.\Release\fline.sbr
+.\Release\msword.sbr
+.\Release\Node.sbr
+.\Release\PaiJu.sbr
+.\Release\Section.sbr
+.\Release\Set.sbr
+.\Release\UIThread.sbr
+.\Release\WordOffice.sbr
+.\Release\xSkinButton.sbr
+".\Release\碗扣式满堂支架建模助手.sbr"
+".\Release\碗扣式满堂支架建模助手Dlg.sbr"]
+Creating command line "bscmake.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP3681.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
 
 
 
