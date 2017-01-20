@@ -1592,7 +1592,7 @@ void CSet::OnOutput()
 			}
 		}
 		float tempfloat=XYline[i][countline-1].xs;
-		if(tempfloat==0.0)
+		if(tempfloat==maxX)
 		{
 			XYline[i][countline].ys=0.0;
 			XYline[i][countline].zs=XZVal[2][i];
@@ -2024,6 +2024,10 @@ void CSet::OnOutput()
 					XYNode[l][temp].z=XZVal[2][l];
 					XYNode[l][temp].y=tempres[1];
 					XYNode[l][temp].Num=num;
+						//CString str = "";
+						//str.Format("%f,%f,%f",XYNode[l][temp].x,XYNode[l][temp].y,XYNode[l][temp].z);
+						//AfxMessageBox(str);
+						//exit(0);
 					num++;
 					JDNode[l]=temp+1;
 					totalcount++;
@@ -3070,10 +3074,15 @@ void CSet::OnOutput()
 			memset(tempNode,0,sizeof(tempNode)/sizeof(tempNode[0])*sizeof(Node));
 			for(j=1;;j++)
 			{
+				//CString str = "";
+				//str.Format("%f,%f,%f",XYNode[l][j].x,XYNode[l][j].y,res);
+				//AfxMessageBox(str);
+				//exit(0);
 				if(XYNode[l][j].Num==0)
 					break;
 				float res=(XYNode[l][j].y-XYline[l][i].ys)*(XYline[l][i].xs-XYline[l][i].xe)/(XYline[l][i].ys-XYline[l][i].ye)+XYline[l][i].xs-XYNode[l][j].x;
-				if(fabs(res)<0.005&&(XYNode[l][j].x-XYline[l][i].xe)*(XYNode[l][j].x-XYline[l][i].xs)<=0.0)
+				//可能是这里res计算式错误
+				if(fabs(res)<0.005&&((XYNode[l][j].x-XYline[l][i].xe)*(XYNode[l][j].x-XYline[l][i].xs))<=0.0)
 				{
 					tempNode[tempcount++]=XYNode[l][j];
 				}
@@ -3090,7 +3099,7 @@ void CSet::OnOutput()
 				else
 					tempmin=tempmaxX;
 				tempmaxX=200.0;
-				for(k=1;k<tempcount;k++)
+				for(k=1;k<tempcount;k++)//此处需要修改，忽略了第一次判断时是否将第一个节点储存
 				{
 					if(tempNode[k].x>tempmin)
 					{
@@ -3113,8 +3122,8 @@ void CSet::OnOutput()
 				XYscielement[l][scicount].ye=tempNode1[j+1].y;
 				XYscielement[l][scicount].xe=tempNode1[j+1].x;
 				XYscielement[l][scicount++].ze=tempNode1[j+1].z;
-				if(fabs(tempNode1[j+1].x-tempNode1[j].x)<0.005)
-					scicount--;
+				//if(fabs(tempNode1[j+1].x-tempNode1[j].x)<0.005)
+				//	scicount--;
 			}
 		}
 	}
